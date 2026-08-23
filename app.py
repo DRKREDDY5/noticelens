@@ -23,8 +23,6 @@ st.set_page_config(
 )
 
 from noticelens.notice_input import extract_pdf_text  # noqa: E402
-from noticelens.phase5 import create_live_core, load_phase5_secrets  # noqa: E402
-from noticelens.phase5_1 import verify_phase51_frozen_inputs  # noqa: E402
 from noticelens.streamlit_ui import (  # noqa: E402
     DEFAULT_ANALYSIS_QUESTION,
     SUGGESTED_QUESTIONS,
@@ -155,6 +153,12 @@ def public_samples() -> tuple[SampleNotice, ...]:
 @st.cache_resource(show_spinner=False)
 def live_core() -> Any:
     """Build the approved read-only RAG core without caching secrets separately."""
+
+    # Keep provider/evaluation modules out of Streamlit's startup import graph.
+    # The production environment uses remote Nebius/Pinecone services and does
+    # not need the optional local tokenizer stack merely to render the app.
+    from noticelens.phase5 import create_live_core, load_phase5_secrets
+    from noticelens.phase5_1 import verify_phase51_frozen_inputs
 
     verify_phase51_frozen_inputs(PROJECT_ROOT)
     snapshot = load_product_snapshot(PROJECT_ROOT)

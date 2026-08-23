@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -352,6 +353,30 @@ class OfflineStreamlitTests(unittest.TestCase):
         self.assertEqual(len(app.chat_input), 0)
         secrets.assert_not_called()
         creator.assert_not_called()
+
+    def test_app_startup_does_not_import_optional_local_model_packages(self) -> None:
+        script = """
+import sys
+from pathlib import Path
+
+root = Path.cwd()
+sys.path.insert(0, str(root / 'src'))
+import app
+
+banned = {'transformers', 'torch', 'torchvision'}
+loaded = sorted(name for name in sys.modules if name.split('.', 1)[0] in banned)
+if loaded:
+    raise SystemExit('optional local model package entered the startup import graph')
+"""
+        completed = subprocess.run(
+            [sys.executable, "-B", "-c", script],
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=False,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
 
     def test_sample_analysis_and_active_chat_use_one_injected_core(self) -> None:
         st.cache_data.clear()
