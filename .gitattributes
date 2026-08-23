@@ -1,6 +1,13 @@
 * text=auto eol=lf
 *.pdf binary
 
+# These two files are pinned by exact byte-frozen SHA-256 hashes (see
+# FROZEN_FILE_HASHES in src/noticelens/phase4b.py) computed against their
+# original CRLF bytes. Exclude them from EOL normalization so every clone
+# (Windows dev machine or Linux cloud deployment) sees identical bytes.
+data/sample_notice_manifest.csv -text
+reports/phase1_quality_report.json -text
+
 # Preserve byte-frozen upstream/evaluation artifacts while excluding their
 # intentional whitespace from Git's release-time whitespace diagnostics.
 data/raw/guidance/*.html -whitespace
