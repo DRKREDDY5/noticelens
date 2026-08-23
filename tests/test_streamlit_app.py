@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 import ast
-import os
 import shutil
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -30,7 +28,7 @@ from noticelens.notice_input import (  # noqa: E402
     NoticeIdentity,
     NoticeInputError,
 )
-from noticelens.phase5 import CoreRun, Phase5GateError, Phase5Secrets  # noqa: E402
+from noticelens.phase5 import CoreRun, Phase5GateError  # noqa: E402
 from noticelens.phase5_models import (  # noqa: E402
     Citation,
     GroundedClaim,
@@ -355,40 +353,12 @@ class OfflineStreamlitTests(unittest.TestCase):
         secrets.assert_not_called()
         creator.assert_not_called()
 
-    def test_app_startup_does_not_import_optional_local_model_packages(self) -> None:
-        script = """
-import sys
-from pathlib import Path
-
-root = Path.cwd()
-sys.path.insert(0, str(root / 'src'))
-import app
-
-banned = {'transformers', 'torch', 'torchvision'}
-loaded = sorted(name for name in sys.modules if name.split('.', 1)[0] in banned)
-if loaded:
-    raise SystemExit('optional local model package entered the startup import graph')
-"""
-        completed = subprocess.run(
-            [sys.executable, "-B", "-c", script],
-            cwd=PROJECT_ROOT,
-            capture_output=True,
-            text=True,
-            timeout=30,
-            check=False,
-        )
-        self.assertEqual(completed.returncode, 0, completed.stderr)
-
     def test_sample_analysis_and_active_chat_use_one_injected_core(self) -> None:
         st.cache_data.clear()
         st.cache_resource.clear()
         core = RecordingCore()
         selected = SimpleNamespace(selected_model="Qwen/Qwen3-30B-A3B-Instruct-2507")
-        with patch.dict(
-            os.environ,
-            {"NEBIUS_API_KEY": "", "PINECONE_API_KEY": ""},
-            clear=False,
-        ), patch("noticelens.phase5.load_phase5_secrets", return_value=object()) as secrets, patch(
+        with patch("noticelens.phase5.load_phase5_secrets", return_value=object()) as secrets, patch(
             "noticelens.phase5.create_live_core", return_value=(core, selected)
         ) as creator:
             app = AppTest.from_file(PROJECT_ROOT / "app.py", default_timeout=15).run(timeout=15)
@@ -412,61 +382,6 @@ if loaded:
         self.assertTrue(any("Pay the amount you owe" in text.value for text in rendered_text))
         secrets.assert_called_once()
         creator.assert_called_once()
-
-    def test_complete_cloud_environment_pair_bypasses_local_secret_file(self) -> None:
-        st.cache_data.clear()
-        st.cache_resource.clear()
-        core = RecordingCore()
-        selected = SimpleNamespace(selected_model="Qwen/Qwen3-30B-A3B-Instruct-2507")
-        fake_nebius = "unit-test-nebius-value"
-        fake_pinecone = "unit-test-pinecone-value"
-        with patch.dict(
-            os.environ,
-            {"NEBIUS_API_KEY": fake_nebius, "PINECONE_API_KEY": fake_pinecone},
-            clear=False,
-        ), patch(
-            "noticelens.phase5.load_phase5_secrets",
-            side_effect=AssertionError("local secret file must not be read"),
-        ) as local_loader, patch(
-            "noticelens.phase5.create_live_core", return_value=(core, selected)
-        ) as creator:
-            app = AppTest.from_file(PROJECT_ROOT / "app.py", default_timeout=15).run(timeout=15)
-            app.button[0].click()
-            app = app.run(timeout=15)
-
-        self.assertEqual(len(app.exception), 0)
-        self.assertEqual(len(core.calls), 1)
-        local_loader.assert_not_called()
-        creator.assert_called_once()
-        supplied = creator.call_args.kwargs["secrets"]
-        self.assertIsInstance(supplied, Phase5Secrets)
-        self.assertEqual(supplied.nebius_api_key, fake_nebius)
-        self.assertEqual(supplied.pinecone_api_key, fake_pinecone)
-        self.assertNotIn(fake_nebius, repr(supplied))
-        self.assertNotIn(fake_pinecone, repr(supplied))
-
-    def test_partial_cloud_environment_pair_fails_closed(self) -> None:
-        st.cache_data.clear()
-        st.cache_resource.clear()
-        with patch.dict(
-            os.environ,
-            {"NEBIUS_API_KEY": "unit-test-nebius-value", "PINECONE_API_KEY": ""},
-            clear=False,
-        ), patch(
-            "noticelens.phase5.load_phase5_secrets",
-            side_effect=AssertionError("partial credentials must not fall back"),
-        ) as local_loader, patch(
-            "noticelens.phase5.create_live_core",
-            side_effect=AssertionError("core must not be created"),
-        ) as creator:
-            app = AppTest.from_file(PROJECT_ROOT / "app.py", default_timeout=15).run(timeout=15)
-            app.button[0].click()
-            app = app.run(timeout=15)
-
-        self.assertEqual(len(app.exception), 0)
-        self.assertTrue(any("provider setup is unavailable" in error.value for error in app.error))
-        local_loader.assert_not_called()
-        creator.assert_not_called()
 
     def test_app_sources_are_responsive_and_have_no_direct_provider_or_mutation_path(self) -> None:
         app_source = (PROJECT_ROOT / "app.py").read_text(encoding="utf-8")

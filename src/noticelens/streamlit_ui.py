@@ -12,17 +12,17 @@ import math
 import tempfile
 from dataclasses import dataclass, replace
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
+from .final_retrieval import FinalRetrievalError
+from .grounded_generation import GenerationGateError
 from .notice_input import (
     MAX_PDF_BYTES,
     ExtractedNotice,
     NoticeInputError,
     extract_pdf_text,
 )
-
-if TYPE_CHECKING:
-    from .phase5 import CoreRun
+from .phase5 import CoreRun, Phase5GateError
 
 
 DEFAULT_ANALYSIS_QUESTION = (
@@ -310,13 +310,6 @@ def safe_error_message(error: BaseException) -> str:
 
     if isinstance(error, NoticeInputError):
         return "This PDF could not be analyzed. Use a valid, unencrypted PDF with a usable text layer."
-
-    # Import core exception types only when classifying a runtime core failure.
-    # This keeps ordinary app startup independent of experiment/tokenizer code.
-    from .final_retrieval import FinalRetrievalError
-    from .grounded_generation import GenerationGateError
-    from .phase5 import Phase5GateError
-
     if isinstance(error, FinalRetrievalError):
         return "Official IRS guidance retrieval is temporarily unavailable. Please try again later."
     if isinstance(error, GenerationGateError):

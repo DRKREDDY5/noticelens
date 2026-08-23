@@ -2,7 +2,7 @@
 name = "noticelens"
 version = "0.5.0"
 description = "Evidence-grounded IRS notice identification and RAG core"
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11"
 dependencies = [
   "langchain-core==1.6.0",
   "langchain-text-splitters==1.1.2",
@@ -13,12 +13,10 @@ dependencies = [
   "pypdf==6.16.1",
   "python-dotenv==1.2.2",
   "streamlit==1.61.1",
+  "transformers==5.15.0",
 ]
 
 [project.optional-dependencies]
-experiment = [
-  "transformers==5.15.0",
-]
 notebook = [
   "matplotlib==3.11.1",
   "ipykernel==7.3.0",
