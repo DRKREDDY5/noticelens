@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import sys
 from html import escape
 from pathlib import Path
@@ -150,6 +151,23 @@ def public_samples() -> tuple[SampleNotice, ...]:
     return load_sample_notices(PROJECT_ROOT)
 
 
+def _runtime_secrets() -> Any:
+    """Use a complete Cloud environment pair or the external local dotenv."""
+
+    from noticelens.phase5 import Phase5GateError, Phase5Secrets, load_phase5_secrets
+
+    nebius_api_key = os.environ.get("NEBIUS_API_KEY", "").strip()
+    pinecone_api_key = os.environ.get("PINECONE_API_KEY", "").strip()
+    if nebius_api_key or pinecone_api_key:
+        if not nebius_api_key or not pinecone_api_key:
+            raise Phase5GateError("The provider credential environment is incomplete")
+        return Phase5Secrets(
+            nebius_api_key=nebius_api_key,
+            pinecone_api_key=pinecone_api_key,
+        )
+    return load_phase5_secrets(project_root=PROJECT_ROOT)
+
+
 @st.cache_resource(show_spinner=False)
 def live_core() -> Any:
     """Build the approved read-only RAG core without caching secrets separately."""
@@ -157,12 +175,12 @@ def live_core() -> Any:
     # Keep provider/evaluation modules out of Streamlit's startup import graph.
     # The production environment uses remote Nebius/Pinecone services and does
     # not need the optional local tokenizer stack merely to render the app.
-    from noticelens.phase5 import create_live_core, load_phase5_secrets
+    from noticelens.phase5 import create_live_core
     from noticelens.phase5_1 import verify_phase51_frozen_inputs
 
     verify_phase51_frozen_inputs(PROJECT_ROOT)
     snapshot = load_product_snapshot(PROJECT_ROOT)
-    secrets = load_phase5_secrets(project_root=PROJECT_ROOT)
+    secrets = _runtime_secrets()
     core, selection = create_live_core(project_root=PROJECT_ROOT, secrets=secrets)
     if selection.selected_model != snapshot.final_config["generation_model"]:
         raise RuntimeError("The live generation model differs from the frozen product configuration")
