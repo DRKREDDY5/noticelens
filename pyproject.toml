@@ -2,7 +2,7 @@
 name = "noticelens"
 version = "0.5.0"
 description = "Evidence-grounded IRS notice identification and RAG core"
-requires-python = ">=3.11,<4.0"
+requires-python = ">=3.11,<3.13"
 dependencies = [
   "langchain-core==1.6.0",
   "langchain-text-splitters==1.1.2",
@@ -13,6 +13,7 @@ dependencies = [
   "pypdf==6.16.1",
   "python-dotenv==1.2.2",
   "streamlit==1.61.1",
+  "torch==2.9.0",
   "transformers==5.15.0",
 ]
 
