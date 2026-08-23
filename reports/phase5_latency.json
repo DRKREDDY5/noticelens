@@ -1,0 +1,463 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-08-22T22:08:42.493769Z",
+  "protocol_frozen_before_execution": {
+    "cold_repetitions": 3,
+    "cold_policy": "new clients, live catalog/schema probe, frozen hash gate, Pinecone namespace verification, then one request",
+    "warmup_repetitions": 2,
+    "warm_measured_repetitions": 20,
+    "warm_policy": "one reused core, sequential concurrency=1, no response cache, three cases cycled",
+    "status_policy": "all scheduled responses remain in the latency denominator; the warm target requires both 20/20 answered responses and nearest-rank p95 strictly below 6 seconds",
+    "case_ids": [
+      "A02",
+      "B04",
+      "C01"
+    ],
+    "p95_method": "nearest_rank",
+    "target_seconds": 6.0
+  },
+  "environment": {
+    "python": "3.11.0",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "generation_model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+    "embedding_model": "Qwen/Qwen3-Embedding-8B"
+  },
+  "cold": {
+    "runs": [
+      {
+        "case_id": "A02",
+        "status": "refused",
+        "initialization_seconds": 3.107584,
+        "pdf_extraction_seconds": 0.319543,
+        "identity_and_fields_seconds": 0.006841,
+        "embedding_seconds": 9.062285,
+        "pinecone_seconds": 0.37447,
+        "retrieval_seconds": 9.436754,
+        "generation_seconds": 8.476663,
+        "validation_and_render_seconds": 0.000455,
+        "request_end_to_end_seconds": 18.26104,
+        "cold_end_to_end_including_initialization_seconds": 21.368624
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 3.316236,
+        "pdf_extraction_seconds": 0.050224,
+        "identity_and_fields_seconds": 0.001343,
+        "embedding_seconds": 1.934381,
+        "pinecone_seconds": 0.129556,
+        "retrieval_seconds": 2.063937,
+        "generation_seconds": 9.078739,
+        "validation_and_render_seconds": 0.000466,
+        "request_end_to_end_seconds": 11.203958,
+        "cold_end_to_end_including_initialization_seconds": 14.520194
+      },
+      {
+        "case_id": "C01",
+        "status": "answered",
+        "initialization_seconds": 3.188883,
+        "pdf_extraction_seconds": 0.599982,
+        "identity_and_fields_seconds": 0.00413,
+        "embedding_seconds": 4.701607,
+        "pinecone_seconds": 0.275969,
+        "retrieval_seconds": 4.977576,
+        "generation_seconds": 6.078572,
+        "validation_and_render_seconds": 0.00063,
+        "request_end_to_end_seconds": 11.681035,
+        "cold_end_to_end_including_initialization_seconds": 14.869918
+      }
+    ],
+    "answered_count": 2,
+    "answered_rate": 0.6666666666666666,
+    "initialization": {
+      "n": 3,
+      "median_seconds": 3.188883,
+      "p95_seconds": 3.316236,
+      "max_seconds": 3.316236
+    },
+    "embedding": {
+      "n": 3,
+      "median_seconds": 4.701607,
+      "p95_seconds": 9.062285,
+      "max_seconds": 9.062285
+    },
+    "pinecone": {
+      "n": 3,
+      "median_seconds": 0.275969,
+      "p95_seconds": 0.37447,
+      "max_seconds": 0.37447
+    },
+    "retrieval": {
+      "n": 3,
+      "median_seconds": 4.977576,
+      "p95_seconds": 9.436754,
+      "max_seconds": 9.436754
+    },
+    "generation": {
+      "n": 3,
+      "median_seconds": 8.476663,
+      "p95_seconds": 9.078739,
+      "max_seconds": 9.078739
+    },
+    "request_end_to_end": {
+      "n": 3,
+      "median_seconds": 11.681035,
+      "p95_seconds": 18.26104,
+      "max_seconds": 18.26104
+    },
+    "end_to_end_including_initialization": {
+      "n": 3,
+      "median_seconds": 14.869918,
+      "p95_seconds": 21.368624,
+      "max_seconds": 21.368624
+    }
+  },
+  "warm": {
+    "warmup_runs": [
+      {
+        "case_id": "A02",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.346923,
+        "identity_and_fields_seconds": 0.006933,
+        "embedding_seconds": 0.999352,
+        "pinecone_seconds": 0.314261,
+        "retrieval_seconds": 1.313613,
+        "generation_seconds": 3.023495,
+        "validation_and_render_seconds": 0.000594,
+        "request_end_to_end_seconds": 4.71103,
+        "cold_end_to_end_including_initialization_seconds": 4.71103
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.043817,
+        "identity_and_fields_seconds": 0.001344,
+        "embedding_seconds": 0.923012,
+        "pinecone_seconds": 0.082533,
+        "retrieval_seconds": 1.005544,
+        "generation_seconds": 8.051323,
+        "validation_and_render_seconds": 0.000493,
+        "request_end_to_end_seconds": 9.112181,
+        "cold_end_to_end_including_initialization_seconds": 9.112181
+      }
+    ],
+    "warmup_answered_count": 2,
+    "runs": [
+      {
+        "case_id": "A02",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.320698,
+        "identity_and_fields_seconds": 0.004621,
+        "embedding_seconds": 0.8243,
+        "pinecone_seconds": 0.464032,
+        "retrieval_seconds": 1.288332,
+        "generation_seconds": 2.974296,
+        "validation_and_render_seconds": 0.000328,
+        "request_end_to_end_seconds": 4.606532,
+        "cold_end_to_end_including_initialization_seconds": 4.606532
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.040483,
+        "identity_and_fields_seconds": 0.001345,
+        "embedding_seconds": 0.677373,
+        "pinecone_seconds": 0.081356,
+        "retrieval_seconds": 0.758729,
+        "generation_seconds": 58.376535,
+        "validation_and_render_seconds": 0.000631,
+        "request_end_to_end_seconds": 59.189719,
+        "cold_end_to_end_including_initialization_seconds": 59.189719
+      },
+      {
+        "case_id": "C01",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.544003,
+        "identity_and_fields_seconds": 0.005676,
+        "embedding_seconds": 0.770849,
+        "pinecone_seconds": 0.35261,
+        "retrieval_seconds": 1.123459,
+        "generation_seconds": 12.027607,
+        "validation_and_render_seconds": 0.000734,
+        "request_end_to_end_seconds": 13.719862,
+        "cold_end_to_end_including_initialization_seconds": 13.719862
+      },
+      {
+        "case_id": "A02",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.318708,
+        "identity_and_fields_seconds": 0.005237,
+        "embedding_seconds": 3.476167,
+        "pinecone_seconds": 0.266981,
+        "retrieval_seconds": 3.743148,
+        "generation_seconds": 4.206893,
+        "validation_and_render_seconds": 0.000206,
+        "request_end_to_end_seconds": 8.29213,
+        "cold_end_to_end_including_initialization_seconds": 8.29213
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.016734,
+        "identity_and_fields_seconds": 0.000778,
+        "embedding_seconds": 0.335962,
+        "pinecone_seconds": 0.105589,
+        "retrieval_seconds": 0.441551,
+        "generation_seconds": 24.626984,
+        "validation_and_render_seconds": 0.000824,
+        "request_end_to_end_seconds": 25.092411,
+        "cold_end_to_end_including_initialization_seconds": 25.092411
+      },
+      {
+        "case_id": "C01",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.412948,
+        "identity_and_fields_seconds": 0.005323,
+        "embedding_seconds": 0.878364,
+        "pinecone_seconds": 0.324907,
+        "retrieval_seconds": 1.203272,
+        "generation_seconds": 11.122684,
+        "validation_and_render_seconds": 0.000486,
+        "request_end_to_end_seconds": 12.760145,
+        "cold_end_to_end_including_initialization_seconds": 12.760145
+      },
+      {
+        "case_id": "A02",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.498501,
+        "identity_and_fields_seconds": 0.004703,
+        "embedding_seconds": 0.671237,
+        "pinecone_seconds": 0.423757,
+        "retrieval_seconds": 1.094994,
+        "generation_seconds": 3.300405,
+        "validation_and_render_seconds": 0.00047,
+        "request_end_to_end_seconds": 4.917008,
+        "cold_end_to_end_including_initialization_seconds": 4.917008
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.041103,
+        "identity_and_fields_seconds": 0.001478,
+        "embedding_seconds": 0.632883,
+        "pinecone_seconds": 0.145339,
+        "retrieval_seconds": 0.778222,
+        "generation_seconds": 10.05662,
+        "validation_and_render_seconds": 0.000668,
+        "request_end_to_end_seconds": 10.888983,
+        "cold_end_to_end_including_initialization_seconds": 10.888983
+      },
+      {
+        "case_id": "C01",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.428048,
+        "identity_and_fields_seconds": 0.006302,
+        "embedding_seconds": 1.035853,
+        "pinecone_seconds": 0.350332,
+        "retrieval_seconds": 1.386185,
+        "generation_seconds": 8.808822,
+        "validation_and_render_seconds": 0.000387,
+        "request_end_to_end_seconds": 10.648913,
+        "cold_end_to_end_including_initialization_seconds": 10.648913
+      },
+      {
+        "case_id": "A02",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.330818,
+        "identity_and_fields_seconds": 0.004871,
+        "embedding_seconds": 0.829811,
+        "pinecone_seconds": 0.303182,
+        "retrieval_seconds": 1.132993,
+        "generation_seconds": 2.614274,
+        "validation_and_render_seconds": 0.000492,
+        "request_end_to_end_seconds": 4.096762,
+        "cold_end_to_end_including_initialization_seconds": 4.096762
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.04635,
+        "identity_and_fields_seconds": 0.002194,
+        "embedding_seconds": 0.393268,
+        "pinecone_seconds": 0.115921,
+        "retrieval_seconds": 0.509189,
+        "generation_seconds": 10.485773,
+        "validation_and_render_seconds": 0.000462,
+        "request_end_to_end_seconds": 11.057313,
+        "cold_end_to_end_including_initialization_seconds": 11.057313
+      },
+      {
+        "case_id": "C01",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.574962,
+        "identity_and_fields_seconds": 0.00437,
+        "embedding_seconds": 0.882543,
+        "pinecone_seconds": 0.538762,
+        "retrieval_seconds": 1.421305,
+        "generation_seconds": 6.480374,
+        "validation_and_render_seconds": 0.000412,
+        "request_end_to_end_seconds": 8.499367,
+        "cold_end_to_end_including_initialization_seconds": 8.499367
+      },
+      {
+        "case_id": "A02",
+        "status": "refused",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.31574,
+        "identity_and_fields_seconds": 0.004743,
+        "embedding_seconds": 0.666276,
+        "pinecone_seconds": 0.342527,
+        "retrieval_seconds": 1.008803,
+        "generation_seconds": 9.200659,
+        "validation_and_render_seconds": 0.000661,
+        "request_end_to_end_seconds": 10.547776,
+        "cold_end_to_end_including_initialization_seconds": 10.547776
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.051963,
+        "identity_and_fields_seconds": 0.002058,
+        "embedding_seconds": 1.201061,
+        "pinecone_seconds": 0.37019,
+        "retrieval_seconds": 1.571251,
+        "generation_seconds": 9.012366,
+        "validation_and_render_seconds": 0.000466,
+        "request_end_to_end_seconds": 10.649411,
+        "cold_end_to_end_including_initialization_seconds": 10.649411
+      },
+      {
+        "case_id": "C01",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.42705,
+        "identity_and_fields_seconds": 0.004177,
+        "embedding_seconds": 1.130052,
+        "pinecone_seconds": 0.78869,
+        "retrieval_seconds": 1.918742,
+        "generation_seconds": 8.590385,
+        "validation_and_render_seconds": 0.00078,
+        "request_end_to_end_seconds": 10.95639,
+        "cold_end_to_end_including_initialization_seconds": 10.95639
+      },
+      {
+        "case_id": "A02",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.335593,
+        "identity_and_fields_seconds": 0.004753,
+        "embedding_seconds": 0.717441,
+        "pinecone_seconds": 0.348803,
+        "retrieval_seconds": 1.066244,
+        "generation_seconds": 3.578122,
+        "validation_and_render_seconds": 0.000534,
+        "request_end_to_end_seconds": 4.999759,
+        "cold_end_to_end_including_initialization_seconds": 4.999759
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.044643,
+        "identity_and_fields_seconds": 0.001343,
+        "embedding_seconds": 0.515926,
+        "pinecone_seconds": 0.320521,
+        "retrieval_seconds": 0.836447,
+        "generation_seconds": 9.641326,
+        "validation_and_render_seconds": 0.000663,
+        "request_end_to_end_seconds": 10.53704,
+        "cold_end_to_end_including_initialization_seconds": 10.53704
+      },
+      {
+        "case_id": "C01",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.565117,
+        "identity_and_fields_seconds": 0.005147,
+        "embedding_seconds": 1.13035,
+        "pinecone_seconds": 0.444115,
+        "retrieval_seconds": 1.574465,
+        "generation_seconds": 5.952694,
+        "validation_and_render_seconds": 0.000498,
+        "request_end_to_end_seconds": 8.117088,
+        "cold_end_to_end_including_initialization_seconds": 8.117088
+      },
+      {
+        "case_id": "A02",
+        "status": "refused",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.24615,
+        "identity_and_fields_seconds": 0.004594,
+        "embedding_seconds": 0.703822,
+        "pinecone_seconds": 0.275289,
+        "retrieval_seconds": 0.979111,
+        "generation_seconds": 9.505754,
+        "validation_and_render_seconds": 0.000445,
+        "request_end_to_end_seconds": 10.752465,
+        "cold_end_to_end_including_initialization_seconds": 10.752465
+      },
+      {
+        "case_id": "B04",
+        "status": "answered",
+        "initialization_seconds": 0.0,
+        "pdf_extraction_seconds": 0.049524,
+        "identity_and_fields_seconds": 0.002057,
+        "embedding_seconds": 1.033807,
+        "pinecone_seconds": 0.275115,
+        "retrieval_seconds": 1.308922,
+        "generation_seconds": 9.786548,
+        "validation_and_render_seconds": 0.000601,
+        "request_end_to_end_seconds": 11.161021,
+        "cold_end_to_end_including_initialization_seconds": 11.161021
+      }
+    ],
+    "answered_count": 18,
+    "answered_rate": 0.9,
+    "embedding": {
+      "n": 20,
+      "median_seconds": 0.797575,
+      "p95_seconds": 1.201061,
+      "max_seconds": 3.476167
+    },
+    "pinecone": {
+      "n": 20,
+      "median_seconds": 0.333717,
+      "p95_seconds": 0.538762,
+      "max_seconds": 0.78869
+    },
+    "retrieval": {
+      "n": 20,
+      "median_seconds": 1.128226,
+      "p95_seconds": 1.918742,
+      "max_seconds": 3.743148
+    },
+    "generation": {
+      "n": 20,
+      "median_seconds": 9.106513,
+      "p95_seconds": 24.626984,
+      "max_seconds": 58.376535
+    },
+    "end_to_end": {
+      "n": 20,
+      "median_seconds": 10.649162,
+      "p95_seconds": 25.092411,
+      "max_seconds": 59.189719
+    }
+  },
+  "warm_end_to_end_p95_target_met": false
+}

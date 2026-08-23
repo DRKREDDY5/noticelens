@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-08-22T17:12:58.996730Z",
+  "inputs": {
+    "corpus_manifest_path": "data/corpus_manifest.csv",
+    "corpus_manifest_sha256": "f3c7c2e257a6f1dc17bf8e55ab745702299f2af2a5faf9623d390778045ea1a1",
+    "processed_guidance_path": "data/processed/guidance",
+    "source_document_count": 50,
+    "source_hashes_verified": 50,
+    "source_hashes": {
+      "irs_cp01": "8ebc2f265f1c3447b5eebc2831944b9d69f1856088527e5c04c475b07155b874",
+      "irs_cp01a": "f45d0a569c3a119e3784d064ac2d228e1b0e0bfa2ce3a99aabcbafd515c8013d",
+      "irs_cp01c": "937975cd0692a574938d869346f14129ae8d78aa3164591103b01d754903b04a",
+      "irs_cp01e": "d5bb24e86bf20708acb880ffea36f7d5de7159dfc67f5eaca711e78e22a7e483",
+      "irs_cp01h": "f0fd79fe28f8ee259649dc075af5016e2ae460003f55eee9a202e31ffadabdda",
+      "irs_cp01s": "6da9e1313728c89e544f1ff42616ab7192a3e7a8c7ef44faf95a37433a055eb5",
+      "irs_cp02": "872f409aaaeaf0656742f006e01a9bb8f8303c66b78df483132218c0fb591c10",
+      "irs_cp03": "ed9f2e2ac56878de1ca2e3412aab2f5a1c7bebf5f5bfc6ae573f08c6af9153c9",
+      "irs_cp05": "c85440743b05d8b537e6e3c48f1e18cf99a60ee8ac8f8e26b73c28e6c646a124",
+      "irs_cp05a": "0a27567c8ebf9964feacbb9389be3647d794ffc08ab1f62baae5c46af8743368",
+      "irs_cp05b": "5c1467194885b16b058da9e058fb5ca79be1fce4df0faeffad96acc591c02f66",
+      "irs_cp06_cp06a": "c8f8404769e890fa96c8d8be7af2600b9675a25f607a9d0709d39032b50ecf76",
+      "irs_cp11": "81533682e49bfe16266619fe75006504854a89cfe00313dd8527fb8fa14063df",
+      "irs_cp12": "25916f2507cf33c5be26f99e3067019db9209ea236bb69885c2cd398e392e260",
+      "irs_cp12g_cp12u": "01bb6834fa4ec05e1ef731fed22de15a13f9db9f66ecfdf17eb3c03a95d0cd74",
+      "irs_cp13": "a0c58d04b87b5335deaa616123fb7f9756953c106835847b4d7e292a367a6573",
+      "irs_cp14": "78ce18b8e47f5a4969c04b7e64a488f62f83ca0f99af653210cf3f7cd16ab979",
+      "irs_cp16": "15787a709727165f5087d4c40dab2dbd0c3186b3ac00a7a287ca8b6c0300ef51",
+      "irs_cp24": "00dc7b34a0fe1f3ea6729365de37000c5893e3622ea8400920182ff79b0369f5",
+      "irs_cp30": "189303de231f9970a47bcc30aa93cc21f0f70242d111cebce00663fdb767b88d",
+      "irs_cp44": "44ef1e156cc1071fa79ad405754be0f1f087e6e48c02318ed287b9613a5814fb",
+      "irs_cp49": "bbb6e6bb6581364d45cb5844eef796be9bf4457d3a01c876f07f508cc2c137de",
+      "irs_cp59": "d4dda5bb840e37abf06a88add9aacd03d0ab3cd65e200aa48714e0caeb8ed182",
+      "irs_cp63": "6a2fa914467f13afe7632e5073543ca6bb518250d88b921cee072a51a5c948be",
+      "irs_cp71a": "3ffcefbe507523e9ae307a75d030ce7e768f4c705031471f94cb1e742aa510f1",
+      "irs_cp90": "785378fbd5ab8d8e8821b3132019cb1e10fb34946063179d5e029a779db935de",
+      "irs_cp101": "882c9e5711c144fb352873f2d3f05e78ee97fcaf024133f5a228d3a9a27e63ec",
+      "irs_cp102": "2ab1d365a273a64d0db017f4a8f0e3b772087a95878cd68c2e2954e5c568938f",
+      "irs_cp103": "232790730a134bb79ee490aeef579c831bcf5d361870a60257be444494fbda16",
+      "irs_cp106": "208644709a29623cc1d298a9be7832633fec0bd6a8d6fcd42901c7d317875902",
+      "irs_cp120": "4f9bc29aca316d71beb64ad00ec82509c9d1339bfc9df6eb52b2ec2c6a500e84",
+      "irs_cp131": "138f6bdad56843a7281d6cb7a3336154e984aed66321a54c6a8b236408a54701",
+      "irs_cp2000_series": "d6f285da4b37bbdbbfce25b81bafe432c2b6dc1733529f7ab1394993312f7c04",
+      "irs_cp2501": "6b55653813b312bd2209d4d098981cae423a24c498fe0590a9a723983b0aaf29",
+      "irs_cp2566": "998c84e9c6652a59572906337a24cd3f3219e4874a7b9561126d691816c62205",
+      "irs_cp2566r": "70465931ff053c13411476ea5164a99e4c999a9bd679f000288fc82bd83fedcc",
+      "irs_cp297": "034b2f7d88fa767adf25229dca93be55cbd932f7d1045405cb58c4df2be3cbb3",
+      "irs_cp303": "b6a03d599e21412f3672a0c704153b61ed3de270d97672b27eb95e3c2233e2dc",
+      "irs_cp3219a": "387c86d375fd31e44dce03c164de9e1199ad9791d01d846b9a7d82492bb9d5e0",
+      "irs_cp3219n": "1ceb71d4c6aa8e6bcbe14e7eb0449f238ceebf2a061516726fef133fc31452da",
+      "irs_cp400_cp401": "c0f4674aef9e11c3260b68017efad07bca7b5fb8f4d90eef74567f6d52472739",
+      "irs_cp501": "e012c5dcd1319d70971b7edf9f5c3b96ab9c7feb210bba20326f338ee41ab860",
+      "irs_cp503": "bbf0357d96786bc78d3ca1d3786687cdbdff1d577f1cb1b7bd9cd7e4fbbea086",
+      "irs_cp504": "24446ec3cdec645c3f00a8ecbb828652f2152c7e92c2ab2b5e8e4130b704d0ea",
+      "irs_cp515": "57b8d1ec626e53517e3d99852b0a434d54e630bddafd14819671007b6ae23f8b",
+      "irs_cp518": "a6ac9cd86d7b062dd6ab56273e2a110c46643e21dfb62b38d02a53f03cfbd7ef",
+      "irs_cp521": "25e739d413f8ec76a6d5f52f31e2c390f5064fd4d5bf34977398e2038a61f68b",
+      "irs_cp523": "48f0034d5b56142183017d2a05fde2f54a87d213eb638b9e789ef0e71210bbb6",
+      "irs_cp540": "e493f92da2b603c958e67d33da2f369aa830d70439c88d8b5fc1fd087f9f84bf",
+      "irs_lt11_1058": "69a8c005afffff70b4fd57866ac86143db6fd0faa98e8ba90f4c156bc8bb3708"
+    },
+    "missing_files": [],
+    "extra_files": []
+  },
+  "chunker": {
+    "chunk_strategy": "fixed_220_40",
+    "tokenizer_name": "Qwen/Qwen3-Embedding-8B",
+    "tokenizer_revision": "7bd6fbe3c54b9ec2b4b1cc3a052720a76fcf0d90",
+    "transformers_version": "5.15.0",
+    "tokenizer_class": "Qwen2Tokenizer",
+    "is_fast": true,
+    "target_tokens": 220,
+    "overlap_tokens": 40,
+    "stride_tokens": 180,
+    "add_special_tokens": false,
+    "heading_boundaries_used": false,
+    "notice_code_boundaries_used": false
+  },
+  "total_chunks": 350,
+  "chunks_per_document": {
+    "min": 3,
+    "median": 7.0,
+    "max": 17
+  },
+  "tokens_per_chunk": {
+    "min": 50,
+    "median": 220.0,
+    "max": 220,
+    "p95": 220.0,
+    "p95_method": "nearest_rank"
+  },
+  "integrity": {
+    "empty_chunks": {
+      "count": 0,
+      "ids": []
+    },
+    "duplicate_chunk_ids": {
+      "count": 0,
+      "ids": []
+    },
+    "missing_doc_ids": {
+      "count": 0,
+      "ids": []
+    },
+    "missing_notice_codes": {
+      "count": 0,
+      "ids": []
+    },
+    "missing_titles": {
+      "count": 0,
+      "ids": []
+    },
+    "zero_chunk_documents": {
+      "count": 0,
+      "doc_ids": []
+    },
+    "overlap_mismatches": 0,
+    "roundtrip_token_mismatches": 0,
+    "max_token_limit_violations": 0
+  },
+  "quality_gate_passed": true
+}

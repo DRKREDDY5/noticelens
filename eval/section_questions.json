@@ -1,0 +1,209 @@
+[
+  {
+    "id": "S01",
+    "question": "I agree that I owe the balance, but I can't pay all of it right now. What option does the page give me?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp14",
+    "expected_notice_code": "CP14",
+    "expected_heading": "What happens if I can't pay or pay the full amount I owe now?",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "What happens if I can't pay or pay the full amount I owe now?"
+    ],
+    "expected_evidence_excerpt": "You can apply online for a payment plan (including installment agreements).",
+    "rationale": "This follow-up asks for the inability-to-pay option documented in the CP14 FAQ, rather than the page's general payment instructions."
+  },
+  {
+    "id": "S02",
+    "question": "I think the changes to my account are wrong. How does the page say I should challenge them?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp501",
+    "expected_notice_code": "CP501",
+    "expected_heading": "What should I do if I disagree with any changes made to my account?",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "What should I do if I disagree with any changes made to my account?"
+    ],
+    "expected_evidence_excerpt": "call us immediately at the toll-free number shown on your notice",
+    "rationale": "The disagreement FAQ gives the specific contact action and supporting-paperwork instruction for disputed account changes."
+  },
+  {
+    "id": "S03",
+    "question": "How soon do I need to pay this second reminder so more penalties and interest don't build up?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp503",
+    "expected_notice_code": "CP503",
+    "expected_heading": "How much time do I have?",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "How much time do I have?"
+    ],
+    "expected_evidence_excerpt": "pay the entire balance by the due date shown on your notice",
+    "rationale": "The timing FAQ, rather than the general action section, directly links the printed due date to avoiding additional penalties and interest."
+  },
+  {
+    "id": "S04",
+    "question": "What collection actions may follow if the taxpayer neither pays nor contacts the IRS?",
+    "language_style": "expert",
+    "expected_doc_id": "irs_cp504",
+    "expected_notice_code": "CP504",
+    "expected_heading": "What happens if I don't pay or contact the IRS?",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "What happens if I don't pay or contact the IRS?"
+    ],
+    "expected_evidence_excerpt": "we can file a Notice of Federal Tax Lien publicly establishing our priority with your creditors",
+    "rationale": "This consequence section contains the lien, state-refund levy, hearing-notice, and property-seizure sequence requested by the formal follow-up."
+  },
+  {
+    "id": "S05",
+    "question": "Can they take money from my paycheck or bank account, or even my car or home?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_lt11_1058",
+    "expected_notice_code": "LT11 / Letter 1058",
+    "expected_heading": "What kinds of property can the IRS levy?",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "What kinds of property can the IRS levy?"
+    ],
+    "expected_evidence_excerpt": "Property can include wages and other income, bank accounts, business assets, personal assets (including your car and home)",
+    "rationale": "The property FAQ enumerates the assets subject to levy and is more specific than the surrounding nonresponse and appeal sections."
+  },
+  {
+    "id": "S06",
+    "question": "The bank information is wrong. What should I send back to explain why I disagree?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp2501",
+    "expected_notice_code": "CP2501",
+    "expected_heading": "If you don’t agree or the information is incorrect",
+    "expected_heading_path": [
+      "What you need to do",
+      "If you don’t agree or the information is incorrect"
+    ],
+    "expected_evidence_excerpt": "A signed statement that explains your disagreement",
+    "rationale": "The disagreement subsection lists the signed response, explanation, documentation, expenses, and amended forms that support a correction."
+  },
+  {
+    "id": "S07",
+    "question": "After responding, which tax records should be reviewed or corrected to prevent the same mismatch from happening again?",
+    "language_style": "expert",
+    "expected_doc_id": "irs_cp2000_series",
+    "expected_notice_code": "CP2000 series",
+    "expected_heading": "Check and correct your records",
+    "expected_heading_path": [
+      "You may want to",
+      "Check and correct your records"
+    ],
+    "expected_evidence_excerpt": "Correct your copy of your tax return. Keep it and the notice for your records.",
+    "rationale": "The records subsection uniquely covers transcripts, correcting the retained return copy, and checking prior years after the response itself."
+  },
+  {
+    "id": "S08",
+    "question": "May the response period be extended, and what limitation still applies to a Tax Court petition?",
+    "language_style": "expert",
+    "expected_doc_id": "irs_cp3219a",
+    "expected_notice_code": "CP3219A",
+    "expected_heading": "Can I get an extension of time to respond? (updated March 7, 2024)",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "Can I get an extension of time to respond? (updated March 7, 2024)"
+    ],
+    "expected_evidence_excerpt": "This won’t extend the time you have to respond or to file a petition within the U.S. Tax Court",
+    "rationale": "This FAQ directly answers the extension question and preserves the non-extendable court deadline, unlike the broader disagreement instructions."
+  },
+  {
+    "id": "S09",
+    "question": "My income came in unevenly during the year. Does the page say that can reduce the estimated-tax penalty?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp30",
+    "expected_notice_code": "CP30",
+    "expected_heading": "Reducing or removing your penalty",
+    "expected_heading_path": [
+      "Reducing or removing your penalty"
+    ],
+    "expected_evidence_excerpt": "Your income is received unevenly during the year.",
+    "rationale": "The penalty-relief section explicitly lists uneven annual income as a possible ground for reduction or removal."
+  },
+  {
+    "id": "S10",
+    "question": "If the taxpayer disputes the proposed termination after trying to correct the default, what appeal route is available?",
+    "language_style": "expert",
+    "expected_doc_id": "irs_cp523",
+    "expected_notice_code": "CP523",
+    "expected_heading": "What if I don't agree with your action or have already taken corrective action?",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "What if I don't agree with your action or have already taken corrective action?"
+    ],
+    "expected_evidence_excerpt": "you have the right to file an appeal and can request a hearing with the IRS Independent Office of Appeals",
+    "rationale": "The dispute/corrective-action FAQ contains the appeal right and reinstatement follow-up, rather than the general 30-day timing section."
+  },
+  {
+    "id": "S11",
+    "question": "I mailed the missing return recently. Does the page say I need to send another copy right away?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp59",
+    "expected_notice_code": "CP59",
+    "expected_heading": "What should I do if I've just filed my tax return?",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "What should I do if I've just filed my tax return?"
+    ],
+    "expected_evidence_excerpt": "You don't have to do anything if you filed your tax return within the last eight weeks.",
+    "rationale": "The just-filed FAQ answers whether another immediate submission is necessary and supplies the eight-week condition."
+  },
+  {
+    "id": "S12",
+    "question": "I never sent the return they're asking for. What do I need to file, and which form should go back with it?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp515",
+    "expected_notice_code": "CP515",
+    "expected_heading": "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)"
+    ],
+    "expected_evidence_excerpt": "File your return as soon as possible and return Form 15103 to let us know why.",
+    "rationale": "The never-filed FAQ gives the paired return and Form 15103 instruction, distinct from the already-filed follow-up immediately below it."
+  },
+  {
+    "id": "S13",
+    "question": "If I ignore this final reminder, what could the IRS do and what might happen to a refund?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp518",
+    "expected_notice_code": "CP518",
+    "expected_heading": "If we don't hear from you",
+    "expected_heading_path": [
+      "If we don't hear from you"
+    ],
+    "expected_evidence_excerpt": "We may determine your tax for you.",
+    "rationale": "The nonresponse section groups the IRS-determined tax, continuing charges, and possible refund delay requested by the question."
+  },
+  {
+    "id": "S14",
+    "question": "I don't agree with the tax they calculated for me. Who should I contact, and what should I have ready?",
+    "language_style": "naive",
+    "expected_doc_id": "irs_cp2566",
+    "expected_notice_code": "CP2566",
+    "expected_heading": "What should I do if I disagree with the notice? (updated Nov. 5, 2024)",
+    "expected_heading_path": [
+      "Frequently asked questions",
+      "What should I do if I disagree with the notice? (updated Nov. 5, 2024)"
+    ],
+    "expected_evidence_excerpt": "Call us at the number listed on your notice. Please have your paperwork ready when you call.",
+    "rationale": "The disagreement FAQ contains the requested contact and preparation steps, while adjacent sections address filing and mailing a return."
+  },
+  {
+    "id": "S15",
+    "question": "What filing window and submission methods does the guidance provide for obtaining Tax Court review?",
+    "language_style": "expert",
+    "expected_doc_id": "irs_cp3219n",
+    "expected_notice_code": "CP3219N",
+    "expected_heading": "If you want to file a petition with the U.S. Tax Court",
+    "expected_heading_path": [
+      "If you want to file a petition with the U.S. Tax Court"
+    ],
+    "expected_evidence_excerpt": "You have 90 days (150 days if outside of the U.S.) from the date of your notice to file a petition",
+    "rationale": "The petition section contains both the statutory filing window and electronic or mailed submission methods requested by the formal follow-up."
+  }
+]

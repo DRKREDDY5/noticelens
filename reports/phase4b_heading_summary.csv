@@ -1,0 +1,10 @@
+scope,language_style,notice_family,n,correct_at_1,section_precision_at_1,reciprocal_rank_sum,section_mrr,hit_at_5_count,section_hit_at_5
+overall,all,all,15,14,0.9333333333333333,14.333333333333332,0.9555555555555555,15,1.0
+language_style,naive,all,10,9,0.9,9.333333333333332,0.9333333333333332,10,1.0
+language_style,expert,all,5,5,1.0,5.0,1.0,5,1.0
+notice_family,all,balance_collection,4,4,1.0,4.0,1.0,4,1.0
+notice_family,all,installment_agreement,1,1,1.0,1.0,1.0,1,1.0
+notice_family,all,levy_cdp,1,1,1.0,1.0,1.0,1,1.0
+notice_family,all,non_filer,5,5,1.0,5.0,1.0,5,1.0
+notice_family,all,penalty_estimated_tax,1,1,1.0,1.0,1.0,1,1.0
+notice_family,all,underreporter_deficiency,3,2,0.6666666666666666,2.333333333333333,0.7777777777777777,3,1.0

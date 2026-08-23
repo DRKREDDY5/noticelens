@@ -1,0 +1,36 @@
+[project]
+name = "noticelens"
+version = "0.5.0"
+description = "Evidence-grounded IRS notice identification and RAG core"
+requires-python = ">=3.11"
+dependencies = [
+  "langchain-core==1.6.0",
+  "langchain-text-splitters==1.1.2",
+  "langgraph==1.2.11",
+  "openai==2.53.0",
+  "pinecone==9.1.0",
+  "pydantic==2.13.4",
+  "pypdf==6.16.1",
+  "python-dotenv==1.2.2",
+  "streamlit==1.61.1",
+  "transformers==5.15.0",
+]
+
+[project.optional-dependencies]
+notebook = [
+  "matplotlib==3.11.1",
+  "ipykernel==7.3.0",
+  "nbformat==5.11.1",
+  "nbclient==0.11.0",
+]
+
+[tool.noticelens]
+phase = 5
+corpus_manifest = "data/corpus_manifest.csv"
+sample_notice_manifest = "data/sample_notice_manifest.csv"
+golden_questions = "eval/golden_questions.json"
+embedding_model = "Qwen/Qwen3-Embedding-8B"
+embedding_dimension = 4096
+chunk_strategy = "heading_aware_220_40"
+pinecone_index = "noticelens-rag"
+pinecone_namespace = "heading-aware-dense"

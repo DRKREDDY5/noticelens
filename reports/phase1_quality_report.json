@@ -1,0 +1,131 @@
+{
+  "acquisition_ledger": "reports/phase1_acquisition_ledger.csv",
+  "artifact_reconciliation": {
+    "missing_processed_guidance": [],
+    "missing_raw_guidance": [],
+    "missing_sample_notices": [],
+    "unexpected_or_stale_processed_guidance": [],
+    "unexpected_or_stale_raw_guidance": [],
+    "unexpected_or_stale_sample_notices": []
+  },
+  "duplicates": {
+    "exact_cleaned_documents": [],
+    "same_body_excluding_title_and_source": []
+  },
+  "generated_at": "2026-08-21T17:47:00.824889+00:00",
+  "guidance": {
+    "available": 50,
+    "cleaner_version": "phase1-html-v2",
+    "cleaning_problems": {},
+    "download_failures": {},
+    "downloaded": 50,
+    "heading_counts": {
+      "faq_questions": 138,
+      "h1_titles": 50,
+      "h2": 256,
+      "h2_h3_total": 486,
+      "h3": 230,
+      "h4": 109
+    },
+    "list_items_preserved": 1029,
+    "manifest_rows": 50,
+    "maximum_cleaned_length": 10983,
+    "median_cleaned_length": 4862.5,
+    "minimum_cleaned_length": 1884,
+    "paragraph_blocks_extracted": 476,
+    "processed_files_written": 50,
+    "source_list_items": 1029,
+    "source_text_token_coverage": {
+      "median": 1.0,
+      "minimum": 1.0
+    },
+    "successfully_cleaned": 50,
+    "tables_preserved": 3,
+    "validated_cached": 0
+  },
+  "mandatory_family_coverage": {
+    "balance_collection": {
+      "covered": true,
+      "missing": [],
+      "present": [
+        "CP14",
+        "CP501",
+        "CP503",
+        "CP504",
+        "LT11"
+      ],
+      "required": [
+        "CP14",
+        "CP501",
+        "CP503",
+        "CP504",
+        "LT11"
+      ]
+    },
+    "installment_agreement": {
+      "covered": true,
+      "missing": [],
+      "present": [
+        "CP521",
+        "CP523"
+      ],
+      "required": [
+        "CP521",
+        "CP523"
+      ]
+    },
+    "non_filer": {
+      "covered": true,
+      "missing": [],
+      "present": [
+        "CP59",
+        "CP515",
+        "CP518",
+        "CP2566",
+        "CP3219N"
+      ],
+      "required": [
+        "CP59",
+        "CP515",
+        "CP518",
+        "CP2566",
+        "CP3219N"
+      ]
+    },
+    "underreporter_deficiency": {
+      "covered": true,
+      "missing": [],
+      "present": [
+        "CP2501",
+        "CP2000",
+        "CP3219A"
+      ],
+      "required": [
+        "CP2501",
+        "CP2000",
+        "CP3219A"
+      ]
+    }
+  },
+  "quality": {
+    "all_guidance_available": true,
+    "all_pages_meaningful_and_heading_preserved": true,
+    "all_sample_pdfs_available": true,
+    "artifacts_reconciled": true,
+    "cleaner_scope": "content inside the IRS article element only; global nav, search, side navigation, and footer excluded",
+    "mandatory_families_complete": true,
+    "meaningful_content_threshold_characters": 500,
+    "no_duplicate_cleaned_documents": true
+  },
+  "quality_gate_passed": true,
+  "run_mode": "network_acquisition",
+  "sample_notices": {
+    "available": 8,
+    "download_failures": {},
+    "downloaded": 8,
+    "kept_outside_permanent_guidance_corpus": true,
+    "manifest_rows": 8,
+    "validated_cached": 0
+  },
+  "source_policy": "URLs read only from the two authoritative manifests"
+}

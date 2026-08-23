@@ -1,0 +1,31 @@
+id,category,language_style,expected_notice_code,expected_doc_id,expected_heading,confusable_with,should_refuse
+A01,exact_notice_identifier,expert,CP14,irs_cp14,What you need to do,[],false
+A02,exact_notice_identifier,expert,CP05A,irs_cp05a,Acceptable documentation includes:,[],false
+A03,exact_notice_identifier,expert,CP2000 series,irs_cp2000_series,Why you received this notice,[],false
+A04,exact_notice_identifier,expert,CP518,irs_cp518,If we don't hear from you,[],false
+A05,exact_notice_identifier,expert,CP523,irs_cp523,What you need to do,[],false
+A06,exact_notice_identifier,expert,LT11 / Letter 1058,irs_lt11_1058,What you need to do,[],false
+B01,everyday_language_semantic,naive,CP01H,irs_cp01h,"How can I get the account unlocked and what documents do I need to submit? (updated Feb. 19, 2026)",[],false
+B02,everyday_language_semantic,naive,CP03,irs_cp03,You may want to,[],false
+B03,everyday_language_semantic,naive,CP30,irs_cp30,Reducing or removing your penalty,[],false
+B04,everyday_language_semantic,naive,CP44,irs_cp44,What you need to do,[],false
+B05,everyday_language_semantic,naive,CP120,irs_cp120,What you need to do,[],false
+B06,everyday_language_semantic,naive,CP400/CP401,irs_cp400_cp401,What letter CP400 and CP401 tells you,[],false
+B07,everyday_language_semantic,naive,CP540,irs_cp540,What you need to do,[],false
+B08,everyday_language_semantic,naive,CP06/CP06A,irs_cp06_cp06a,What you need to do,[],false
+C01,confusable_family,naive,CP503,irs_cp503,What is the notice telling me?,"[""CP14"",""CP501"",""CP504"",""LT11""]",false
+C02,confusable_family,expert,LT11 / Letter 1058,irs_lt11_1058,Can I appeal the balance due?,"[""CP504"",""CP503"",""CP501"",""CP14""]",false
+C03,confusable_family,naive,CP2501,irs_cp2501,If you don’t agree or the information is incorrect,"[""CP2000"",""CP3219A""]",false
+C04,confusable_family,expert,CP3219A,irs_cp3219a,If you want to challenge the proposed change in Tax Court,"[""CP2501"",""CP2000""]",false
+C05,confusable_family,naive,CP523,irs_cp523,How much time do I have?,"[""CP521""]",false
+C06,confusable_family,naive,CP518,irs_cp518,If we don't hear from you,"[""CP59"",""CP515"",""CP2566"",""CP3219N""]",false
+C07,confusable_family,expert,CP2566,irs_cp2566,What you need to do,"[""CP59"",""CP515"",""CP518"",""CP3219N""]",false
+C08,confusable_family,naive,CP3219N,irs_cp3219n,If you want to file a petition with the U.S. Tax Court,"[""CP2566"",""CP518"",""CP515"",""CP59"",""CP3219A""]",false
+D01,section_level_retrieval,expert,CP501,irs_cp501,What happens if I don't pay or respond to this notice?,[],false
+D02,section_level_retrieval,expert,CP2000 series,irs_cp2000_series,Upload,[],false
+D03,section_level_retrieval,naive,CP523,irs_cp523,What if I don't agree with your action or have already taken corrective action?,[],false
+D04,section_level_retrieval,naive,CP59,irs_cp59,"What can happen if I don’t file? (added April 17, 2025)",[],false
+E01,unsupported_refusal,naive,,,,[],true
+E02,unsupported_refusal,naive,,,,[],true
+E03,unsupported_refusal,naive,,,,[],true
+E04,unsupported_refusal,expert,,,,[],true

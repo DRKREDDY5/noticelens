@@ -1,0 +1,16 @@
+question_id,expected_notice,expected_heading,fixed_rank,heading_aware_rank,fixed_correct_at_1,heading_correct_at_1,rank_change,classification
+S01,CP14,What happens if I can't pay or pay the full amount I owe now?,1,1,1,1,0,UNCHANGED
+S02,CP501,What should I do if I disagree with any changes made to my account?,1,1,1,1,0,UNCHANGED
+S03,CP503,How much time do I have?,2,1,0,1,1,IMPROVED
+S04,CP504,What happens if I don't pay or contact the IRS?,1,1,1,1,0,UNCHANGED
+S05,LT11 / Letter 1058,What kinds of property can the IRS levy?,1,1,1,1,0,UNCHANGED
+S06,CP2501,If you don’t agree or the information is incorrect,1,3,1,0,-2,REGRESSED
+S07,CP2000 series,Check and correct your records,5,1,0,1,4,IMPROVED
+S08,CP3219A,"Can I get an extension of time to respond? (updated March 7, 2024)",1,1,1,1,0,UNCHANGED
+S09,CP30,Reducing or removing your penalty,1,1,1,1,0,UNCHANGED
+S10,CP523,What if I don't agree with your action or have already taken corrective action?,1,1,1,1,0,UNCHANGED
+S11,CP59,What should I do if I've just filed my tax return?,3,1,0,1,2,IMPROVED
+S12,CP515,"What should I do if I didn't file my tax return? (updated Mar. 20, 2026)",1,1,1,1,0,UNCHANGED
+S13,CP518,If we don't hear from you,1,1,1,1,0,UNCHANGED
+S14,CP2566,"What should I do if I disagree with the notice? (updated Nov. 5, 2024)",1,1,1,1,0,UNCHANGED
+S15,CP3219N,If you want to file a petition with the U.S. Tax Court,1,1,1,1,0,UNCHANGED

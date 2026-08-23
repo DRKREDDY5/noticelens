@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.pdf binary
+
+# Preserve byte-frozen upstream/evaluation artifacts while excluding their
+# intentional whitespace from Git's release-time whitespace diagnostics.
+data/raw/guidance/*.html -whitespace
+reports/evaluation_plan.md -whitespace
+src/noticelens/final_retrieval.py -whitespace
+scripts/run_phase1.py -whitespace

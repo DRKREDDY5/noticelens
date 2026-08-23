@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-08-22T18:32:28.867681Z",
+  "phase": "4B-heading-aware-chunking",
+  "inputs": {
+    "data/corpus_manifest.csv": "f3c7c2e257a6f1dc17bf8e55ab745702299f2af2a5faf9623d390778045ea1a1",
+    "data/sample_notice_manifest.csv": "0a92688fe008ee7fbc10fb5ec4b41733ecad250a47110335cc65e3d72dc99769",
+    "reports/phase1_acquisition_ledger.csv": "96ab9daf63a043052027f4af76ac7be625d6ceb025d2d81f0c99738e0c1c4cb8",
+    "reports/phase1_quality_report.json": "95aefed07a14fe75acfc4be45cb0335434efff5d55225e1d31481f43d025af3c",
+    "eval/golden_questions.json": "a5e12ae768b8d43250fac99198efba35bd2d7f5db640e3aba1e8d6958920f391",
+    "reports/phase2_eval_manifest.csv": "f73453102fbbe0cc2e18e214e2926b40c252830b9c4eed92792b2d01cca27ea9",
+    "reports/evaluation_plan.md": "5065857f4c568e6915ed186467d0c6e55442df2682ec8e3b9224e4eeb2dce52e",
+    "data/derived/phase3/fixed_220_40_chunks.jsonl": "4752049f3c435d79a83b5950d0882ce2ac61bb57a5e210d398b529306a9ab709",
+    "reports/phase3_chunk_audit.json": "dfe675d414c5e5e1fa0cdd4f25cb30b72cc7e985e03e383057b1e4cd91b95746",
+    "reports/phase3_indexing_stats.json": "329e4c0cfc569d5d13561e16f385ea82a512f8b44c98b6e5cc1806db7a5ffb7b",
+    "reports/phase3_baseline_results.json": "1af861aaa152f0cff7c87f7c3496bd825eb9e300b524aa1b5f0a5f4a4104d338",
+    "reports/phase3_baseline_summary.csv": "f5f5466b67d9912d37f647e1784a369eded30ca4ba77bad15c2b9e79cb2de5e1",
+    "reports/phase3_failure_analysis.md": "a508397e16192c7fb8e447f206018659c300d06cc93e84c6e448b74794255abd",
+    "eval/section_questions.json": "1090c8b41f0b007adfda1eb9882b0237d93416a3ce57857bc4da58a8947aafa8",
+    "reports/phase4_fixed_chunk_section_map.json": "ae919b13f37fbd6ba2a092d369bdfcf899a655f54c0c91ebd83c7b42eaf3f3d4",
+    "reports/phase4_fixed_section_results.json": "e3d86aa5390549da47e6b3dc1bf0ea220baa338b30353b8117d0b4743cc1df36",
+    "reports/phase4_fixed_section_summary.csv": "556e94fa1e957011efe08b34ac08ad94e2e5bb725be6c8c6a19726a7e225c322",
+    "reports/phase4_fixed_section_failures.md": "3022d0baf78c47cb5809c153a52a0efa9ea681afb210ce4a785562e3dbf13ee8",
+    "data/raw/guidance": {
+      "file_count": 50,
+      "tree_sha256": "53265c67d68fb34354ad186b6a7157093cfde6ea00ac491da2dab8618f2a2a65"
+    },
+    "data/raw/sample_notices": {
+      "file_count": 8,
+      "tree_sha256": "b4f901bd79e0d290ff6095ac2cdc2a0d6f3cb818aa5557edd14773809804106b"
+    },
+    "data/processed/guidance": {
+      "file_count": 50,
+      "tree_sha256": "36cf7f0c8a01879062a328dc009d6c6de0f4324f02f95450468b448e391ebac2"
+    },
+    "approved_composite_sha256": "2561f0d6d9b3f781b6f0a77007c36f7c642c50821ee8495a0cb4087b5e701f9c"
+  },
+  "chunker": {
+    "chunk_strategy": "heading_aware_220_40",
+    "tokenizer_name": "Qwen/Qwen3-Embedding-8B",
+    "tokenizer_revision": "7bd6fbe3c54b9ec2b4b1cc3a052720a76fcf0d90",
+    "logical_boundaries": "nonempty H2-H6 section bodies",
+    "document_title_source": "authoritative corpus manifest title",
+    "markdown_h1_manifest_title_mismatch_count": 6,
+    "markdown_h1_manifest_title_mismatch_doc_ids": [
+      "irs_cp12",
+      "irs_cp24",
+      "irs_cp101",
+      "irs_cp106",
+      "irs_cp120",
+      "irs_cp297"
+    ],
+    "content_max_tokens": 220,
+    "oversized_section_overlap_tokens": 40,
+    "oversized_section_stride_tokens": 180,
+    "small_section_merging": false,
+    "structural_prefix": "document title, notice code, full heading path"
+  },
+  "documents_processed": 50,
+  "total_heading_aware_chunks": 580,
+  "chunks_per_document": {
+    "min": 6,
+    "median": 11.0,
+    "max": 27,
+    "by_doc_id": {
+      "irs_cp01": 13,
+      "irs_cp01a": 10,
+      "irs_cp01c": 11,
+      "irs_cp01e": 19,
+      "irs_cp01h": 6,
+      "irs_cp01s": 8,
+      "irs_cp02": 9,
+      "irs_cp03": 9,
+      "irs_cp05": 8,
+      "irs_cp05a": 12,
+      "irs_cp05b": 10,
+      "irs_cp06_cp06a": 15,
+      "irs_cp11": 15,
+      "irs_cp12": 11,
+      "irs_cp12g_cp12u": 9,
+      "irs_cp13": 11,
+      "irs_cp14": 15,
+      "irs_cp16": 14,
+      "irs_cp24": 14,
+      "irs_cp30": 11,
+      "irs_cp44": 7,
+      "irs_cp49": 13,
+      "irs_cp59": 15,
+      "irs_cp63": 11,
+      "irs_cp71a": 12,
+      "irs_cp90": 9,
+      "irs_cp101": 11,
+      "irs_cp102": 12,
+      "irs_cp103": 12,
+      "irs_cp106": 7,
+      "irs_cp120": 8,
+      "irs_cp131": 8,
+      "irs_cp2000_series": 16,
+      "irs_cp2501": 17,
+      "irs_cp2566": 13,
+      "irs_cp2566r": 13,
+      "irs_cp297": 8,
+      "irs_cp303": 6,
+      "irs_cp3219a": 27,
+      "irs_cp3219n": 16,
+      "irs_cp400_cp401": 7,
+      "irs_cp501": 12,
+      "irs_cp503": 11,
+      "irs_cp504": 11,
+      "irs_cp515": 14,
+      "irs_cp518": 14,
+      "irs_cp521": 9,
+      "irs_cp523": 9,
+      "irs_cp540": 11,
+      "irs_lt11_1058": 11
+    }
+  },
+  "content_tokens_per_chunk": {
+    "min": 3,
+    "median": 81.0,
+    "p95": 220.0,
+    "max": 220,
+    "p95_method": "nearest_rank"
+  },
+  "embedding_tokens_per_chunk_including_prefix": {
+    "min": 34,
+    "median": 112.0,
+    "p95": 243.0,
+    "max": 267,
+    "p95_method": "nearest_rank"
+  },
+  "logical_sections": {
+    "h2_h6_heading_count": 595,
+    "nonempty_section_count": 545,
+    "empty_body_heading_count_skipped": 50,
+    "unassigned_useful_pre_h2_content_count": 1,
+    "unassigned_useful_pre_h2_document_ids": [
+      "irs_cp2000_series"
+    ],
+    "terminal_heading_level_counts_for_nonempty_sections": {
+      "H2": 206,
+      "H3": 230,
+      "H4": 109
+    },
+    "oversized_sections_requiring_subchunking": 33,
+    "chunks_emitted_from_oversized_sections": 68
+  },
+  "integrity": {
+    "chunks_with_no_heading_path": {
+      "count": 0,
+      "ids": []
+    },
+    "duplicate_chunk_ids": {
+      "count": 0,
+      "ids": []
+    },
+    "empty_chunks": {
+      "count": 0,
+      "ids": []
+    },
+    "content_chunks_over_220_tokens": {
+      "count": 0,
+      "ids": []
+    },
+    "chunks_crossing_heading_boundaries": {
+      "count": 0,
+      "ids": []
+    },
+    "boundary_proof": "every chunk window is produced from one LogicalSection content token sequence",
+    "source_hash_failures": [],
+    "missing_document_ids": []
+  },
+  "quality_gate_passed": true,
+  "outputs": {
+    "heading_registry_path": "data/derived/phase4b/heading_aware_220_40_chunks.jsonl",
+    "heading_registry_sha256": "3aecf5db7ee5fe857bdb99156c9bb5ba585f2e845aa6697cc4ece8902ac27572"
+  }
+}

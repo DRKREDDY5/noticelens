@@ -1,0 +1,3159 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-08-22T18:53:58.552375Z",
+  "phase": "4B-heading-aware-chunking-experiment",
+  "execution": {
+    "mode": "query_only_recovery_after_completed_namespace_population",
+    "query_only_recovery": true,
+    "initial_attempt_reached_exact_heading_id_parity": true,
+    "initial_attempt_stopped_before_result_reports": true,
+    "initial_attempt_interruption": "post-index query evaluation stopped when one raw Pinecone response did not satisfy the then-strict descending-score-order validator",
+    "initial_indexing_latency_available": false,
+    "recovery_evidence": "The existing heading-aware namespace exactly matched all 580 deterministic local IDs before and after the query-only recovery; no document vectors were embedded or written during this recovery run."
+  },
+  "experiment_contract": {
+    "execution_mode": "query_only_recovery_after_completed_namespace_population",
+    "research_question": "Does respecting IRS heading boundaries improve known-notice section retrieval?",
+    "isolated_variable": "chunking strategy",
+    "treatment_scope": "logical heading boundaries plus deterministic title/code/path prefix",
+    "chunk_strategy": "heading_aware_220_40",
+    "query_policy": "exact frozen question text with exact known notice_code filter only",
+    "provider_order_normalization": "returned matches are ordered by descending Pinecone cosine similarity score with chunk_id as a deterministic tie-break; no second scorer or reranker is used",
+    "top_k": 5,
+    "embedding_model_unchanged": true,
+    "generation_used": false,
+    "bm25_hybrid_reranking_query_rewriting_used": false,
+    "pair_classification_rule": "IMPROVED when fixed correct_at_1=0 and heading correct_at_1=1; REGRESSED when fixed=1 and heading=0; otherwise UNCHANGED",
+    "rank_change_rule": "effective fixed rank minus effective heading rank; a top-5 miss has effective rank 6"
+  },
+  "precommitted_thresholds": {
+    "meaningful_p1_gain_absolute_percentage_points": 10,
+    "minimum_heading_p1_from_fixed_80_percent": 0.9,
+    "minimum_correct_at_1_with_15_questions_to_meet_threshold": 14,
+    "weak_null_fixed_near_ceiling_threshold": 0.95,
+    "weak_null_gain_less_than_percentage_points": 5,
+    "weak_null_condition_applicable": false,
+    "threshold_met": true
+  },
+  "inputs": {
+    "approved_frozen_before": {
+      "data/corpus_manifest.csv": "f3c7c2e257a6f1dc17bf8e55ab745702299f2af2a5faf9623d390778045ea1a1",
+      "data/sample_notice_manifest.csv": "0a92688fe008ee7fbc10fb5ec4b41733ecad250a47110335cc65e3d72dc99769",
+      "reports/phase1_acquisition_ledger.csv": "96ab9daf63a043052027f4af76ac7be625d6ceb025d2d81f0c99738e0c1c4cb8",
+      "reports/phase1_quality_report.json": "95aefed07a14fe75acfc4be45cb0335434efff5d55225e1d31481f43d025af3c",
+      "eval/golden_questions.json": "a5e12ae768b8d43250fac99198efba35bd2d7f5db640e3aba1e8d6958920f391",
+      "reports/phase2_eval_manifest.csv": "f73453102fbbe0cc2e18e214e2926b40c252830b9c4eed92792b2d01cca27ea9",
+      "reports/evaluation_plan.md": "5065857f4c568e6915ed186467d0c6e55442df2682ec8e3b9224e4eeb2dce52e",
+      "data/derived/phase3/fixed_220_40_chunks.jsonl": "4752049f3c435d79a83b5950d0882ce2ac61bb57a5e210d398b529306a9ab709",
+      "reports/phase3_chunk_audit.json": "dfe675d414c5e5e1fa0cdd4f25cb30b72cc7e985e03e383057b1e4cd91b95746",
+      "reports/phase3_indexing_stats.json": "329e4c0cfc569d5d13561e16f385ea82a512f8b44c98b6e5cc1806db7a5ffb7b",
+      "reports/phase3_baseline_results.json": "1af861aaa152f0cff7c87f7c3496bd825eb9e300b524aa1b5f0a5f4a4104d338",
+      "reports/phase3_baseline_summary.csv": "f5f5466b67d9912d37f647e1784a369eded30ca4ba77bad15c2b9e79cb2de5e1",
+      "reports/phase3_failure_analysis.md": "a508397e16192c7fb8e447f206018659c300d06cc93e84c6e448b74794255abd",
+      "eval/section_questions.json": "1090c8b41f0b007adfda1eb9882b0237d93416a3ce57857bc4da58a8947aafa8",
+      "reports/phase4_fixed_chunk_section_map.json": "ae919b13f37fbd6ba2a092d369bdfcf899a655f54c0c91ebd83c7b42eaf3f3d4",
+      "reports/phase4_fixed_section_results.json": "e3d86aa5390549da47e6b3dc1bf0ea220baa338b30353b8117d0b4743cc1df36",
+      "reports/phase4_fixed_section_summary.csv": "556e94fa1e957011efe08b34ac08ad94e2e5bb725be6c8c6a19726a7e225c322",
+      "reports/phase4_fixed_section_failures.md": "3022d0baf78c47cb5809c153a52a0efa9ea681afb210ce4a785562e3dbf13ee8",
+      "data/raw/guidance": {
+        "file_count": 50,
+        "tree_sha256": "53265c67d68fb34354ad186b6a7157093cfde6ea00ac491da2dab8618f2a2a65"
+      },
+      "data/raw/sample_notices": {
+        "file_count": 8,
+        "tree_sha256": "b4f901bd79e0d290ff6095ac2cdc2a0d6f3cb818aa5557edd14773809804106b"
+      },
+      "data/processed/guidance": {
+        "file_count": 50,
+        "tree_sha256": "36cf7f0c8a01879062a328dc009d6c6de0f4324f02f95450468b448e391ebac2"
+      },
+      "approved_composite_sha256": "2561f0d6d9b3f781b6f0a77007c36f7c642c50821ee8495a0cb4087b5e701f9c"
+    },
+    "approved_frozen_after": {
+      "data/corpus_manifest.csv": "f3c7c2e257a6f1dc17bf8e55ab745702299f2af2a5faf9623d390778045ea1a1",
+      "data/sample_notice_manifest.csv": "0a92688fe008ee7fbc10fb5ec4b41733ecad250a47110335cc65e3d72dc99769",
+      "reports/phase1_acquisition_ledger.csv": "96ab9daf63a043052027f4af76ac7be625d6ceb025d2d81f0c99738e0c1c4cb8",
+      "reports/phase1_quality_report.json": "95aefed07a14fe75acfc4be45cb0335434efff5d55225e1d31481f43d025af3c",
+      "eval/golden_questions.json": "a5e12ae768b8d43250fac99198efba35bd2d7f5db640e3aba1e8d6958920f391",
+      "reports/phase2_eval_manifest.csv": "f73453102fbbe0cc2e18e214e2926b40c252830b9c4eed92792b2d01cca27ea9",
+      "reports/evaluation_plan.md": "5065857f4c568e6915ed186467d0c6e55442df2682ec8e3b9224e4eeb2dce52e",
+      "data/derived/phase3/fixed_220_40_chunks.jsonl": "4752049f3c435d79a83b5950d0882ce2ac61bb57a5e210d398b529306a9ab709",
+      "reports/phase3_chunk_audit.json": "dfe675d414c5e5e1fa0cdd4f25cb30b72cc7e985e03e383057b1e4cd91b95746",
+      "reports/phase3_indexing_stats.json": "329e4c0cfc569d5d13561e16f385ea82a512f8b44c98b6e5cc1806db7a5ffb7b",
+      "reports/phase3_baseline_results.json": "1af861aaa152f0cff7c87f7c3496bd825eb9e300b524aa1b5f0a5f4a4104d338",
+      "reports/phase3_baseline_summary.csv": "f5f5466b67d9912d37f647e1784a369eded30ca4ba77bad15c2b9e79cb2de5e1",
+      "reports/phase3_failure_analysis.md": "a508397e16192c7fb8e447f206018659c300d06cc93e84c6e448b74794255abd",
+      "eval/section_questions.json": "1090c8b41f0b007adfda1eb9882b0237d93416a3ce57857bc4da58a8947aafa8",
+      "reports/phase4_fixed_chunk_section_map.json": "ae919b13f37fbd6ba2a092d369bdfcf899a655f54c0c91ebd83c7b42eaf3f3d4",
+      "reports/phase4_fixed_section_results.json": "e3d86aa5390549da47e6b3dc1bf0ea220baa338b30353b8117d0b4743cc1df36",
+      "reports/phase4_fixed_section_summary.csv": "556e94fa1e957011efe08b34ac08ad94e2e5bb725be6c8c6a19726a7e225c322",
+      "reports/phase4_fixed_section_failures.md": "3022d0baf78c47cb5809c153a52a0efa9ea681afb210ce4a785562e3dbf13ee8",
+      "data/raw/guidance": {
+        "file_count": 50,
+        "tree_sha256": "53265c67d68fb34354ad186b6a7157093cfde6ea00ac491da2dab8618f2a2a65"
+      },
+      "data/raw/sample_notices": {
+        "file_count": 8,
+        "tree_sha256": "b4f901bd79e0d290ff6095ac2cdc2a0d6f3cb818aa5557edd14773809804106b"
+      },
+      "data/processed/guidance": {
+        "file_count": 50,
+        "tree_sha256": "36cf7f0c8a01879062a328dc009d6c6de0f4324f02f95450468b448e391ebac2"
+      },
+      "approved_composite_sha256": "2561f0d6d9b3f781b6f0a77007c36f7c642c50821ee8495a0cb4087b5e701f9c"
+    },
+    "section_questions": {
+      "path": "eval/section_questions.json",
+      "sha256": "1090c8b41f0b007adfda1eb9882b0237d93416a3ce57857bc4da58a8947aafa8",
+      "count": 15
+    },
+    "frozen_fixed_results": {
+      "path": "reports/phase4_fixed_section_results.json",
+      "sha256": "e3d86aa5390549da47e6b3dc1bf0ea220baa338b30353b8117d0b4743cc1df36",
+      "metrics": {
+        "section_precision_at_1": 0.8,
+        "section_mrr": 0.8688888888888889,
+        "section_hit_at_5": 1.0,
+        "correct_at_1": 12,
+        "n": 15
+      }
+    },
+    "heading_registry": {
+      "path": "data/derived/phase4b/heading_aware_220_40_chunks.jsonl",
+      "sha256": "3aecf5db7ee5fe857bdb99156c9bb5ba585f2e845aa6697cc4ece8902ac27572",
+      "count": 580
+    },
+    "heading_chunk_audit": {
+      "path": "reports/phase4b_chunk_audit.json",
+      "sha256": "88265f578c3f65b9eae8a42b2ab4c52e1e295f87c1f0f679c5169a427869cc4e",
+      "quality_gate_passed": true
+    }
+  },
+  "embedding": {
+    "provider": "Nebius Token Factory",
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "dimension": 4096,
+    "document_chunk_count": 580,
+    "document_chunks_embedded": 0,
+    "document_chunks_embedded_current_run": 0,
+    "document_vectors_reused": 580,
+    "document_embedding_requests_current_run": 0,
+    "document_embedding_latency": {
+      "request_count": 0,
+      "total_seconds": 0.0,
+      "p50_seconds": 0.0,
+      "p95_seconds": 0.0,
+      "max_seconds": 0.0
+    },
+    "document_embedding_latency_available": false,
+    "question_count_embedded": 15,
+    "question_embedding_latency": {
+      "request_count": 1,
+      "total_seconds": 5.171772,
+      "p50_seconds": 5.171772,
+      "p95_seconds": 5.171772,
+      "max_seconds": 5.171772
+    }
+  },
+  "pinecone": {
+    "index_name": "noticelens-rag",
+    "dimension": 4096,
+    "metric": "cosine",
+    "cloud": "aws",
+    "region": "us-east-1",
+    "baseline_namespace": "baseline-fixed-dense",
+    "heading_namespace": "heading-aware-dense",
+    "baseline_before_count": 350,
+    "baseline_after_index_count": 350,
+    "baseline_after_query_count": 350,
+    "baseline_exact_id_parity": true,
+    "baseline_id_set_sha256": "e218c17fd6e5d98eb7c9c82c1b95e08aa9224d561feebc7ce729f6adab6e741e",
+    "heading_preflight": {
+      "initial": {
+        "existing_vector_count": 580,
+        "exact_expected_id_parity": true,
+        "mutation_allowed": false
+      },
+      "immediately_before_first_write_or_recovery_query": {
+        "existing_vector_count": 580,
+        "exact_expected_id_parity": true,
+        "mutation_allowed": false
+      }
+    },
+    "heading_local_count": 580,
+    "heading_embedded_count": 0,
+    "heading_embedded_count_current_run": 0,
+    "heading_upserted_count": 0,
+    "heading_upserted_count_current_run": 0,
+    "heading_upsert_calls_current_run": 0,
+    "heading_namespace_count": 580,
+    "heading_exact_id_parity": true,
+    "heading_id_set_sha256": "60bbf276bc752bfaf8f1e3ca8904fc88d688ce07e8c32b4224dc1e667b26912e",
+    "upsert_latency": {
+      "request_count": 0,
+      "total_seconds": 0.0,
+      "p50_seconds": 0.0,
+      "p95_seconds": 0.0,
+      "max_seconds": 0.0
+    },
+    "upsert_latency_available": false,
+    "query_latency": {
+      "request_count": 15,
+      "total_seconds": 1.810255,
+      "p50_seconds": 0.097893,
+      "p95_seconds": 0.246287,
+      "max_seconds": 0.246287
+    },
+    "provider_response_reordered_query_count": 0,
+    "index_create_calls": 0,
+    "baseline_upsert_calls": 0,
+    "delete_clear_update_calls": 0
+  },
+  "metrics": {
+    "heading_aware_section_retrieval": {
+      "overall": {
+        "n": 15,
+        "correct_at_1": 14,
+        "section_precision_at_1": 0.9333333333333333,
+        "reciprocal_rank_sum": 14.333333333333332,
+        "section_mrr": 0.9555555555555555,
+        "hit_at_5_count": 15,
+        "section_hit_at_5": 1.0
+      },
+      "by_language_style": {
+        "naive": {
+          "n": 10,
+          "correct_at_1": 9,
+          "section_precision_at_1": 0.9,
+          "reciprocal_rank_sum": 9.333333333333332,
+          "section_mrr": 0.9333333333333332,
+          "hit_at_5_count": 10,
+          "section_hit_at_5": 1.0
+        },
+        "expert": {
+          "n": 5,
+          "correct_at_1": 5,
+          "section_precision_at_1": 1.0,
+          "reciprocal_rank_sum": 5.0,
+          "section_mrr": 1.0,
+          "hit_at_5_count": 5,
+          "section_hit_at_5": 1.0
+        }
+      },
+      "by_notice_family": {
+        "balance_collection": {
+          "n": 4,
+          "correct_at_1": 4,
+          "section_precision_at_1": 1.0,
+          "reciprocal_rank_sum": 4.0,
+          "section_mrr": 1.0,
+          "hit_at_5_count": 4,
+          "section_hit_at_5": 1.0
+        },
+        "installment_agreement": {
+          "n": 1,
+          "correct_at_1": 1,
+          "section_precision_at_1": 1.0,
+          "reciprocal_rank_sum": 1.0,
+          "section_mrr": 1.0,
+          "hit_at_5_count": 1,
+          "section_hit_at_5": 1.0
+        },
+        "levy_cdp": {
+          "n": 1,
+          "correct_at_1": 1,
+          "section_precision_at_1": 1.0,
+          "reciprocal_rank_sum": 1.0,
+          "section_mrr": 1.0,
+          "hit_at_5_count": 1,
+          "section_hit_at_5": 1.0
+        },
+        "non_filer": {
+          "n": 5,
+          "correct_at_1": 5,
+          "section_precision_at_1": 1.0,
+          "reciprocal_rank_sum": 5.0,
+          "section_mrr": 1.0,
+          "hit_at_5_count": 5,
+          "section_hit_at_5": 1.0
+        },
+        "penalty_estimated_tax": {
+          "n": 1,
+          "correct_at_1": 1,
+          "section_precision_at_1": 1.0,
+          "reciprocal_rank_sum": 1.0,
+          "section_mrr": 1.0,
+          "hit_at_5_count": 1,
+          "section_hit_at_5": 1.0
+        },
+        "underreporter_deficiency": {
+          "n": 3,
+          "correct_at_1": 2,
+          "section_precision_at_1": 0.6666666666666666,
+          "reciprocal_rank_sum": 2.333333333333333,
+          "section_mrr": 0.7777777777777777,
+          "hit_at_5_count": 3,
+          "section_hit_at_5": 1.0
+        }
+      }
+    }
+  },
+  "direct_comparison": {
+    "fixed": {
+      "section_precision_at_1": 0.8,
+      "section_mrr": 0.8688888888888889,
+      "section_hit_at_5": 1.0,
+      "correct_at_1": 12,
+      "n": 15
+    },
+    "heading_aware": {
+      "n": 15,
+      "correct_at_1": 14,
+      "section_precision_at_1": 0.9333333333333333,
+      "reciprocal_rank_sum": 14.333333333333332,
+      "section_mrr": 0.9555555555555555,
+      "hit_at_5_count": 15,
+      "section_hit_at_5": 1.0
+    },
+    "absolute_p1_improvement_percentage_points": 13.33333333333333,
+    "mrr_improvement": 0.08666666666666656,
+    "hit_at_5_change": 0.0,
+    "classification_counts": {
+      "improved": 3,
+      "unchanged": 11,
+      "regressed": 1
+    },
+    "heading_p1_failure_ids": [
+      "S06"
+    ],
+    "new_regression_ids": [
+      "S06"
+    ],
+    "retain_heading_aware_based_on_precommitted_evidence": true
+  },
+  "paired_comparison": [
+    {
+      "question_id": "S01",
+      "question": "I agree that I owe the balance, but I can't pay all of it right now. What option does the page give me?",
+      "expected_notice": "CP14",
+      "expected_heading": "What happens if I can't pay or pay the full amount I owe now?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What happens if I can't pay or pay the full amount I owe now?"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "make your payment listed on the CP14 Notice. You do not need to contact us to get this extra time to pay; it is automatic. For more information visit [IRS.gov/disastertaxrelief](https://www.irs.gov/newsroom/tax-relief-in-disaster-situations) to locate your specific state and county by disaster area. #### What happens if I can't pay or pay the full amount I o",
+      "heading_aware_top_1_preview": "Understanding your CP14 notice Notice: CP14 Section: Frequently asked questions > What happens if I can't pay or pay the full amount I owe now? You can apply online for a [payment plan](https://www.irs.gov/payments/online-payment-agreement-application) (including installment agreements).",
+      "fixed_top_1_paths": [
+        [
+          "Frequently asked questions",
+          "What if I live in a disaster area? (added July 11, 2023)"
+        ],
+        [
+          "Frequently asked questions",
+          "What happens if I can't pay or pay the full amount I owe now?"
+        ],
+        [
+          "Frequently asked questions",
+          "Temporarily delay collection"
+        ],
+        [
+          "Frequently asked questions",
+          "What should I do if I disagree with the notice?"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "What happens if I can't pay or pay the full amount I owe now?"
+      ]
+    },
+    {
+      "question_id": "S02",
+      "question": "I think the changes to my account are wrong. How does the page say I should challenge them?",
+      "expected_notice": "CP501",
+      "expected_heading": "What should I do if I disagree with any changes made to my account?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What should I do if I disagree with any changes made to my account?"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "part of the notice to make sure we correctly credit your account. If you can't pay the whole amount now, you may qualify for a payment plan (including installment agreements) by applying online through our [online payment agreement application](https://www.irs.gov/payments/online-payment-agreement-application). Or you can mail us a [Form 9465, Installment Ag",
+      "heading_aware_top_1_preview": "Understanding your CP501 notice Notice: CP501 Section: Frequently asked questions > What should I do if I disagree with any changes made to my account? If you disagree with the changes, call us immediately at the toll-free number shown on your notice. Please have your supporting paperwork (such as cancelled checks, amended return, etc.) ready when you call.",
+      "fixed_top_1_paths": [
+        [
+          "Frequently asked questions",
+          "What do I have to do?"
+        ],
+        [
+          "Frequently asked questions",
+          "What should I do if I disagree with any changes made to my account?"
+        ],
+        [
+          "Frequently asked questions",
+          "What happens if I don't pay or respond to this notice?"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "What should I do if I disagree with any changes made to my account?"
+      ]
+    },
+    {
+      "question_id": "S03",
+      "question": "How soon do I need to pay this second reminder so more penalties and interest don't build up?",
+      "expected_notice": "CP503",
+      "expected_heading": "How much time do I have?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "How much time do I have?"
+      ],
+      "fixed_rank": 2,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 0,
+      "heading_correct_at_1": 1,
+      "rank_change": 1,
+      "classification": "IMPROVED",
+      "fixed_top_1_preview": "information](https://www.irs.gov/payments/online-account-for-individuals) pertaining to your tax account. - Learn more about your [payment options](https://www.irs.gov/payments) and how to make a [payment arrangement](https://www.irs.gov/payments/payment-plans-installment-agreements). - [Request an appeal](https://www.irs.gov/appeals/preparing-a-request-for-",
+      "heading_aware_top_1_preview": "Understanding your CP503 notice Notice: CP503 Section: Frequently asked questions > How much time do I have? You must pay the entire balance by the due date shown on your notice to avoid additional penalties and interest.",
+      "fixed_top_1_paths": [
+        [
+          "You may want to"
+        ],
+        [
+          "Frequently asked questions"
+        ],
+        [
+          "Frequently asked questions",
+          "What is the notice telling me?"
+        ],
+        [
+          "Frequently asked questions",
+          "What do I have to do?"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "How much time do I have?"
+      ]
+    },
+    {
+      "question_id": "S04",
+      "question": "What collection actions may follow if the taxpayer neither pays nor contacts the IRS?",
+      "expected_notice": "CP504",
+      "expected_heading": "What happens if I don't pay or contact the IRS?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What happens if I don't pay or contact the IRS?"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "for a payment plan online by using the [Online payment agreement tool](https://www.irs.gov/payments/online-payment-agreement-application) which is the fastest way to get an installment agreement approved. ### What happens if I don't pay or contact the IRS? If you don't pay the amount due immediately or make payment arrangements, we can file a Notice of Feder",
+      "heading_aware_top_1_preview": "Understanding your CP504 notice Notice: CP504 Section: Frequently asked questions > What happens if I don't pay or contact the IRS? If you don't pay the amount due immediately or make payment arrangements, we can file a Notice of Federal Tax Lien publicly establishing our priority with your creditors. If the tax lien is in place, you may find it difficult to",
+      "fixed_top_1_paths": [
+        [
+          "Frequently asked questions",
+          "What do I have to do?"
+        ],
+        [
+          "Frequently asked questions",
+          "What happens if I don't pay or contact the IRS?"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "What happens if I don't pay or contact the IRS?"
+      ]
+    },
+    {
+      "question_id": "S05",
+      "question": "Can they take money from my paycheck or bank account, or even my car or home?",
+      "expected_notice": "LT11 / Letter 1058",
+      "expected_heading": "What kinds of property can the IRS levy?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What kinds of property can the IRS levy?"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "your current assets and any assets you acquire after we file the lien; it can affect your ability to get credit. You may also be subject to the Fixing America’s Surface Transportation (FAST) Act legislation, which generally prohibits the State Department from issuing or renewing a passport to a taxpayer with seriously delinquent tax debt. Additional informat",
+      "heading_aware_top_1_preview": "Understanding your LT11 notice or letter 1058 Notice: LT11 / Letter 1058 Section: Frequently asked questions > What kinds of property can the IRS levy? Property can include wages and other income, bank accounts, business assets, personal assets (including your car and home), Alaska Permanent Fund Dividends and state tax refunds, and Social Security benefits.",
+      "fixed_top_1_paths": [
+        [
+          "Frequently asked questions",
+          "What happens if I don’t respond to this notice of letter or don’t pay?"
+        ],
+        [
+          "Frequently asked questions",
+          "What kinds of property can the IRS levy?"
+        ],
+        [
+          "Frequently asked questions",
+          "Can I appeal the balance due?"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "What kinds of property can the IRS levy?"
+      ]
+    },
+    {
+      "question_id": "S06",
+      "question": "The bank information is wrong. What should I send back to explain why I disagree?",
+      "expected_notice": "CP2501",
+      "expected_heading": "If you don’t agree or the information is incorrect",
+      "expected_heading_path": [
+        "What you need to do",
+        "If you don’t agree or the information is incorrect"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 3,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 0,
+      "rank_change": -2,
+      "classification": "REGRESSED",
+      "fixed_top_1_preview": "# Understanding your CP2501 notice Source: https://www.irs.gov/individuals/understanding-your-cp2501-notice ## Why you received this notice The income or payment information we received from third parties, such as employers or financial institutions, doesn't match the information you reported on your tax return. This difference may increase or decrease your ",
+      "heading_aware_top_1_preview": "Understanding your CP2501 notice Notice: CP2501 Section: Why you received this notice The income or payment information we received from third parties, such as employers or financial institutions, doesn't match the information you reported on your tax return. This difference may increase or decrease your tax or may not change it at all. The notice explains p",
+      "fixed_top_1_paths": [
+        [
+          "Why you received this notice"
+        ],
+        [
+          "What you need to do"
+        ],
+        [
+          "What you need to do",
+          "If you agree with the information"
+        ],
+        [
+          "What you need to do",
+          "If you don’t agree or the information is incorrect"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Why you received this notice"
+      ]
+    },
+    {
+      "question_id": "S07",
+      "question": "After responding, which tax records should be reviewed or corrected to prevent the same mismatch from happening again?",
+      "expected_notice": "CP2000 series",
+      "expected_heading": "Check and correct your records",
+      "expected_heading_path": [
+        "You may want to",
+        "Check and correct your records"
+      ],
+      "fixed_rank": 5,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 0,
+      "heading_correct_at_1": 1,
+      "rank_change": 4,
+      "classification": "IMPROVED",
+      "fixed_top_1_preview": "# Understanding your CP2000 series notice Source: https://www.irs.gov/individuals/understanding-your-cp2000-series-notice The CP2000 notice series includes: CP2000, CP2000A, CP2000B, CP2000C, CP2000D and CP2000E. Learn what your notice is about and what to do. ## Why you received this notice The income or payment information we received from third parties, s",
+      "heading_aware_top_1_preview": "Understanding your CP2000 series notice Notice: CP2000 series Section: You may want to > Check and correct your records - [Get a transcript](https://www.irs.gov/individuals/get-transcript) of your original tax return, if needed. - Correct your copy of your tax return. Keep it and the notice for your records. - Check your tax returns from prior years. If they",
+      "fixed_top_1_paths": [
+        [
+          "Why you received this notice"
+        ],
+        [
+          "What you need to do"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "You may want to",
+        "Check and correct your records"
+      ]
+    },
+    {
+      "question_id": "S08",
+      "question": "May the response period be extended, and what limitation still applies to a Tax Court petition?",
+      "expected_notice": "CP3219A",
+      "expected_heading": "Can I get an extension of time to respond? (updated March 7, 2024)",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "Can I get an extension of time to respond? (updated March 7, 2024)"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "www.irs.gov/pub/irs-pdf/f14039.pdf). ## Frequently asked questions ### Can I get an extension of time to respond? (updated March 7, 2024) No. But if you have additional information you want us to consider, reply as soon as possible. We can work with you to resolve your issues during the 90-day period. This won’t extend the time you have to respond or to file",
+      "heading_aware_top_1_preview": "Understanding your CP3219A notice Notice: CP3219A Section: Frequently asked questions > Can I get an extension of time to respond? (updated March 7, 2024) No. But if you have additional information you want us to consider, reply as soon as possible. We can work with you to resolve your issues during the 90-day period. This won’t extend the time you have to r",
+      "fixed_top_1_paths": [
+        [
+          "You may want to",
+          "Get help"
+        ],
+        [
+          "Frequently asked questions"
+        ],
+        [
+          "Frequently asked questions",
+          "Can I get an extension of time to respond? (updated March 7, 2024)"
+        ],
+        [
+          "Frequently asked questions",
+          "Do I need to file a petition with the U.S. Tax Court? (updated March 7, 2024)"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "Can I get an extension of time to respond? (updated March 7, 2024)"
+      ]
+    },
+    {
+      "question_id": "S09",
+      "question": "My income came in unevenly during the year. Does the page say that can reduce the estimated-tax penalty?",
+      "expected_notice": "CP30",
+      "expected_heading": "Reducing or removing your penalty",
+      "expected_heading_path": [
+        "Reducing or removing your penalty"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "’re owed a refund, or you have no balance, you don’t have to do anything at this time. ## Reducing or removing your penalty You may be able to have your penalty removed or reduced if any of the following apply: - You or your spouse (if you file a joint return) retired in the past 2 years after reaching age 62 or became disabled and you had reasonable cause. ",
+      "heading_aware_top_1_preview": "Understanding your CP30 notice Notice: CP30 Section: Reducing or removing your penalty You may be able to have your penalty removed or reduced if any of the following apply: - You or your spouse (if you file a joint return) retired in the past 2 years after reaching age 62 or became disabled and you had reasonable cause. - You had most of your income tax wit",
+      "fixed_top_1_paths": [
+        [
+          "What you need to do"
+        ],
+        [
+          "Reducing or removing your penalty"
+        ],
+        [
+          "Frequently asked questions"
+        ],
+        [
+          "Frequently asked questions",
+          "How do I know if enough is being withheld from my income?"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Reducing or removing your penalty"
+      ]
+    },
+    {
+      "question_id": "S10",
+      "question": "If the taxpayer disputes the proposed termination after trying to correct the default, what appeal route is available?",
+      "expected_notice": "CP523",
+      "expected_heading": "What if I don't agree with your action or have already taken corrective action?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What if I don't agree with your action or have already taken corrective action?"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "number printed at the top of the notice. If after talking with us you still do not agree, you have the right to file an appeal and can request a hearing with the IRS Independent Office of Appeals. If you have already taken corrective action, you should still call us to make sure we have a record of your action so that we can reinstate your installment agreem",
+      "heading_aware_top_1_preview": "Understanding your CP523 notice Notice: CP523 Section: Frequently asked questions > What if I don't agree with your action or have already taken corrective action? If you don't agree with our reason for terminating your installment agreement, contact us at the number printed at the top of the notice. If after talking with us you still do not agree, you have ",
+      "fixed_top_1_paths": [
+        [
+          "Frequently asked questions",
+          "What if I don't agree with your action or have already taken corrective action?"
+        ],
+        [
+          "Frequently asked questions",
+          "What if I don't agree with your action or have already taken corrective action?",
+          "Reference tools"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "What if I don't agree with your action or have already taken corrective action?"
+      ]
+    },
+    {
+      "question_id": "S11",
+      "question": "I mailed the missing return recently. Does the page say I need to send another copy right away?",
+      "expected_notice": "CP59",
+      "expected_heading": "What should I do if I've just filed my tax return?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What should I do if I've just filed my tax return?"
+      ],
+      "fixed_rank": 3,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 0,
+      "heading_correct_at_1": 1,
+      "rank_change": 2,
+      "classification": "IMPROVED",
+      "fixed_top_1_preview": "# Understanding your CP59 notice Source: https://www.irs.gov/individuals/understanding-your-cp59-notice ## What this notice is about We have no record that you filed your prior year personal tax return. ## What you need to do File your personal tax return immediately or explain to us why you don't need to file. Note: If you received an IRS-issued identity pr",
+      "heading_aware_top_1_preview": "Understanding your CP59 notice Notice: CP59 Section: Frequently asked questions > What should I do if I've just filed my tax return? You don't have to do anything if you filed your tax return within the last eight weeks.",
+      "fixed_top_1_paths": [
+        [
+          "What this notice is about"
+        ],
+        [
+          "What you need to do"
+        ],
+        [
+          "You may want to"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "What should I do if I've just filed my tax return?"
+      ]
+    },
+    {
+      "question_id": "S12",
+      "question": "I never sent the return they're asking for. What do I need to file, and which form should go back with it?",
+      "expected_notice": "CP515",
+      "expected_heading": "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": ") Return the Form 15103 to let us know why. #### What should I do if I didn't file my tax return? (updated Mar. 20, 2026) File your return as soon as possible and return Form 15103 to let us know why. #### What should I do if I just filed, or it's been more than 8 weeks since I filed my return? (updated Mar. 20, 2026) Complete Form 15103. Make sure the name,",
+      "heading_aware_top_1_preview": "Understanding your CP515 notice Notice: CP515 Section: Frequently asked questions > What should I do if I didn't file my tax return? (updated Mar. 20, 2026) File your return as soon as possible and return Form 15103 to let us know why.",
+      "fixed_top_1_paths": [
+        [
+          "Frequently asked questions",
+          "What should I do if I disagree with the notice? (updated Nov. 4, 2024)"
+        ],
+        [
+          "Frequently asked questions",
+          "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)"
+        ],
+        [
+          "Frequently asked questions",
+          "What should I do if I just filed, or it's been more than 8 weeks since I filed my return? (updated Mar. 20, 2026)"
+        ],
+        [
+          "Frequently asked questions",
+          "What happens if I can’t pay the full amount I owe when I file my return? (updated Mar. 20, 2026)"
+        ],
+        [
+          "Tips for next year"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)"
+      ]
+    },
+    {
+      "question_id": "S13",
+      "question": "If I ignore this final reminder, what could the IRS do and what might happen to a refund?",
+      "expected_notice": "CP518",
+      "expected_heading": "If we don't hear from you",
+      "expected_heading_path": [
+        "If we don't hear from you"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "5103.pdf) to explain: - Why you don't have to file. Return the completed Form 15103 and tax return, if applicable to the address on your notice. You can fax it to the number in the notice using either a fax machine or online fax service. Protect yourself when sending digital data by understanding the fax service’s privacy and security policies. If you’re onl",
+      "heading_aware_top_1_preview": "Understanding your CP518 notice Notice: CP518 Section: If we don't hear from you - We may determine your tax for you. - Penalty and interest may continue to accrue. - If you are owed a refund, it may be delayed because of this unfiled return.",
+      "fixed_top_1_paths": [
+        [
+          "What you need to do"
+        ],
+        [
+          "If we don't hear from you"
+        ],
+        [
+          "You may want to"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "If we don't hear from you"
+      ]
+    },
+    {
+      "question_id": "S14",
+      "question": "I don't agree with the tax they calculated for me. Who should I contact, and what should I have ready?",
+      "expected_notice": "CP2566",
+      "expected_heading": "What should I do if I disagree with the notice? (updated Nov. 5, 2024)",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What should I do if I disagree with the notice? (updated Nov. 5, 2024)"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "help. - Learn more about your [payment options](https://www.irs.gov/payments) if you owe additional taxes on your return. ## Frequently asked questions ### What should I do if I disagree with the notice? (updated Nov. 5, 2024) Call us at the number listed on your notice. Please have your paperwork ready when you call. ### Where do I send my return? (updated ",
+      "heading_aware_top_1_preview": "Understanding your CP2566 notice Notice: CP2566 Section: Frequently asked questions > What should I do if I disagree with the notice? (updated Nov. 5, 2024) Call us at the number listed on your notice. Please have your paperwork ready when you call.",
+      "fixed_top_1_paths": [
+        [
+          "You may want to"
+        ],
+        [
+          "Frequently asked questions"
+        ],
+        [
+          "Frequently asked questions",
+          "What should I do if I disagree with the notice? (updated Nov. 5, 2024)"
+        ],
+        [
+          "Frequently asked questions",
+          "Where do I send my return? (updated Nov. 5, 2024)"
+        ],
+        [
+          "Frequently asked questions",
+          "What should I do if I've just filed my tax return?"
+        ],
+        [
+          "Frequently asked questions",
+          "What should I do if I didn't file my tax return or it's been more than eight weeks since I filed it? (updated Nov. 5, 2024)"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "Frequently asked questions",
+        "What should I do if I disagree with the notice? (updated Nov. 5, 2024)"
+      ]
+    },
+    {
+      "question_id": "S15",
+      "question": "What filing window and submission methods does the guidance provide for obtaining Tax Court review?",
+      "expected_notice": "CP3219N",
+      "expected_heading": "If you want to file a petition with the U.S. Tax Court",
+      "expected_heading_path": [
+        "If you want to file a petition with the U.S. Tax Court"
+      ],
+      "fixed_rank": 1,
+      "heading_aware_rank": 1,
+      "fixed_correct_at_1": 1,
+      "heading_correct_at_1": 1,
+      "rank_change": 0,
+      "classification": "UNCHANGED",
+      "fixed_top_1_preview": "in full or explore alternative payment options. - If you disagree with our proposed assessment: file your tax return by the date shown on your notice. Learn more about options for [filing past due returns](https://www.irs.gov/businesses/small-businesses-self-employed/filing-past-due-tax-returns). If you think you don’t have to file, call us at the number lis",
+      "heading_aware_top_1_preview": "Understanding your CP3219N notice Notice: CP3219N Section: If you want to file a petition with the U.S. Tax Court You have 90 days (150 days if outside of the U.S.) from the date of your notice to file a petition with the U.S. Tax Court. - The [U.S. Tax Court](https://www.ustaxcourt.gov/) encourages petitioners to electronically file petitions. You can eFile",
+      "fixed_top_1_paths": [
+        [
+          "What you need to do"
+        ],
+        [
+          "If you want to file a petition with the U.S. Tax Court"
+        ]
+      ],
+      "heading_aware_top_1_path": [
+        "If you want to file a petition with the U.S. Tax Court"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "id": "S01",
+      "question": "I agree that I owe the balance, but I can't pay all of it right now. What option does the page give me?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp14",
+      "expected_notice_code": "CP14",
+      "expected_heading": "What happens if I can't pay or pay the full amount I owe now?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What happens if I can't pay or pay the full amount I owe now?"
+      ],
+      "expected_evidence_excerpt": "You can apply online for a payment plan (including installment agreements).",
+      "rationale": "This follow-up asks for the inability-to-pay option documented in the CP14 FAQ, rather than the page's general payment instructions.",
+      "notice_family": "balance_collection",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP14"
+        }
+      },
+      "eligible_chunk_count": 15,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp14__heading_aware_220_40__s0007__c0000__a297496ae4f8c471b6d210ef8d82fbfb11bf8fed3f02cc0d6351e47a00710a1d",
+          "doc_id": "irs_cp14",
+          "retrieved_notice_code": "CP14",
+          "title": "Understanding your CP14 notice",
+          "heading": "What happens if I can't pay or pay the full amount I owe now?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What happens if I can't pay or pay the full amount I owe now?"
+          ],
+          "section_index": 7,
+          "subchunk_index": 0,
+          "similarity_score": 0.684474945,
+          "text_preview": "Understanding your CP14 notice Notice: CP14 Section: Frequently asked questions > What happens if I can't pay or pay the full amount I owe now? You can apply online for a [payment plan](https://www.irs.gov/payments/online-payment-agreement-application) (including installment agreements).",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What happens if I can't pay or pay the full amount I owe now?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp14__heading_aware_220_40__s0004__c0000__5e06ac65b4db049f0ae32d49d768e0c6bd2f4e248f66b88aedbf5b4f8841c6cc",
+          "doc_id": "irs_cp14",
+          "retrieved_notice_code": "CP14",
+          "title": "Understanding your CP14 notice",
+          "heading": "You may want to",
+          "heading_path": [
+            "You may want to"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.664272308,
+          "text_preview": "Understanding your CP14 notice Notice: CP14 Section: You may want to - Learn more about how to make a [payment plan](https://www.irs.gov/payments/payment-plans-installment-agreements). - Learn more about how to submit an [Offer in compromise](https://www.irs.gov/payments/offer-in-compromise).",
+          "attributed_heading_paths": [
+            [
+              "You may want to"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp14__heading_aware_220_40__s0011__c0000__771777a004be3d5e1618fa517a58c1e027714e8958b758b196f961ab8c63d189",
+          "doc_id": "irs_cp14",
+          "retrieved_notice_code": "CP14",
+          "title": "Understanding your CP14 notice",
+          "heading": "Will I receive a penalty if I can't pay the full amount?",
+          "heading_path": [
+            "Frequently asked questions",
+            "Will I receive a penalty if I can't pay the full amount?"
+          ],
+          "section_index": 11,
+          "subchunk_index": 0,
+          "similarity_score": 0.6039505,
+          "text_preview": "Understanding your CP14 notice Notice: CP14 Section: Frequently asked questions > Will I receive a penalty if I can't pay the full amount? Yes, you'll receive a late payment penalty. You can call us at the number on your notice if you can't pay the full amount or you can apply online for a payment plan (including installment agreements). Contact us by your p",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "Will I receive a penalty if I can't pay the full amount?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp14__heading_aware_220_40__s0000__c0000__e62d091273fc72b1a184ff7f7c1a92ac83c9030375204757e8c3f754c6bdc3c8",
+          "doc_id": "irs_cp14",
+          "retrieved_notice_code": "CP14",
+          "title": "Understanding your CP14 notice",
+          "heading": "Get help online",
+          "heading_path": [
+            "Get help online"
+          ],
+          "section_index": 0,
+          "subchunk_index": 0,
+          "similarity_score": 0.60306555,
+          "text_preview": "Understanding your CP14 notice Notice: CP14 Section: Get help online Save time online. You can resolve a debt and manage your account without calling. If you need to call, consider contacting us Wednesday through Friday when wait times are shorter. [Get help with tax debt](https://www.irs.gov/payments/get-help-with-tax-debt)",
+          "attributed_heading_paths": [
+            [
+              "Get help online"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp14__heading_aware_220_40__s0003__c0000__38ed276eb7da44082a5dc9fcfb47f2cd20df2a567d0c9e59ab3b0d5f6e3890b1",
+          "doc_id": "irs_cp14",
+          "retrieved_notice_code": "CP14",
+          "title": "Understanding your CP14 notice",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 3,
+          "subchunk_index": 0,
+          "similarity_score": 0.567375183,
+          "text_preview": "Understanding your CP14 notice Notice: CP14 Section: What you need to do - Read your notice carefully. It will explain how much you owe and how to pay it. - Pay the amount you owe by the due date on the notice. - Make a payment plan if you can't pay the full amount you owe. - Contact us if you disagree.",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.114988
+    },
+    {
+      "id": "S02",
+      "question": "I think the changes to my account are wrong. How does the page say I should challenge them?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp501",
+      "expected_notice_code": "CP501",
+      "expected_heading": "What should I do if I disagree with any changes made to my account?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What should I do if I disagree with any changes made to my account?"
+      ],
+      "expected_evidence_excerpt": "call us immediately at the toll-free number shown on your notice",
+      "rationale": "The disagreement FAQ gives the specific contact action and supporting-paperwork instruction for disputed account changes.",
+      "notice_family": "balance_collection",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP501"
+        }
+      },
+      "eligible_chunk_count": 12,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp501__heading_aware_220_40__s0006__c0000__12c531847adcfdd0febcb8f1e4d97fb859f6ea69fe5a37e5aab0b08eee4f75a9",
+          "doc_id": "irs_cp501",
+          "retrieved_notice_code": "CP501",
+          "title": "Understanding your CP501 notice",
+          "heading": "What should I do if I disagree with any changes made to my account?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I disagree with any changes made to my account?"
+          ],
+          "section_index": 6,
+          "subchunk_index": 0,
+          "similarity_score": 0.636764526,
+          "text_preview": "Understanding your CP501 notice Notice: CP501 Section: Frequently asked questions > What should I do if I disagree with any changes made to my account? If you disagree with the changes, call us immediately at the toll-free number shown on your notice. Please have your supporting paperwork (such as cancelled checks, amended return, etc.) ready when you call.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I disagree with any changes made to my account?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp501__heading_aware_220_40__s0010__c0000__31e9d185861bbd686bfe1b99f007f42c7b904c3fe7f7334651255034a1440b8d",
+          "doc_id": "irs_cp501",
+          "retrieved_notice_code": "CP501",
+          "title": "Understanding your CP501 notice",
+          "heading": "What if I need to make a correction to my tax return?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What if I need to make a correction to my tax return?"
+          ],
+          "section_index": 10,
+          "subchunk_index": 0,
+          "similarity_score": 0.522468567,
+          "text_preview": "Understanding your CP501 notice Notice: CP501 Section: Frequently asked questions > What if I need to make a correction to my tax return? You'll need to file [Form 1040-X, Amended U.S. Individual Income Tax Return PDF](https://www.irs.gov/pub/irs-pdf/f1040x.pdf).",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What if I need to make a correction to my tax return?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp501__heading_aware_220_40__s0003__c0000__9ab05558f13bcdb1339eee68f0a86acddad5429ce49062e2469a2e9d3319c72f",
+          "doc_id": "irs_cp501",
+          "retrieved_notice_code": "CP501",
+          "title": "Understanding your CP501 notice",
+          "heading": "View this notice and manage your communication preference online",
+          "heading_path": [
+            "View this notice and manage your communication preference online"
+          ],
+          "section_index": 3,
+          "subchunk_index": 0,
+          "similarity_score": 0.48928833,
+          "text_preview": "Understanding your CP501 notice Notice: CP501 Section: View this notice and manage your communication preference online Sign in to your [Online Account](https://www.irs.gov/payments/online-account-for-individuals) to: - View and download this notice - Go paperless for certain notices - Get email notifications for new notices",
+          "attributed_heading_paths": [
+            [
+              "View this notice and manage your communication preference online"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp501__heading_aware_220_40__s0001__c0000__324ea23b323dfb45606c37f090c13862d2fcecc2bbd6bc5c2a95454e60f4dcf5",
+          "doc_id": "irs_cp501",
+          "retrieved_notice_code": "CP501",
+          "title": "Understanding your CP501 notice",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 1,
+          "subchunk_index": 0,
+          "similarity_score": 0.47662738,
+          "text_preview": "Understanding your CP501 notice Notice: CP501 Section: What you need to do - Read your notice carefully. It explains how much you owe, when your payment is due, and your payment options. - [Pay the amount you owe](https://www.irs.gov/payments) by the due date shown on the notice. - [Make a payment plan](https://www.irs.gov/payments/online-payment-agreement-a",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp501__heading_aware_220_40__s0002__c0000__e86a91ee7e3e41a8140aeef7e6e19254f91edff1082aee3ada6cecfd26b9f899",
+          "doc_id": "irs_cp501",
+          "retrieved_notice_code": "CP501",
+          "title": "Understanding your CP501 notice",
+          "heading": "You may want to",
+          "heading_path": [
+            "You may want to"
+          ],
+          "section_index": 2,
+          "subchunk_index": 0,
+          "similarity_score": 0.463066131,
+          "text_preview": "Understanding your CP501 notice Notice: CP501 Section: You may want to [Request an appeal](https://www.irs.gov/appeals/preparing-a-request-for-appeals) under the Collection Appeals Program (CAP) before collection action takes place by following the instructions on your notice.",
+          "attributed_heading_paths": [
+            [
+              "You may want to"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.088039
+    },
+    {
+      "id": "S03",
+      "question": "How soon do I need to pay this second reminder so more penalties and interest don't build up?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp503",
+      "expected_notice_code": "CP503",
+      "expected_heading": "How much time do I have?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "How much time do I have?"
+      ],
+      "expected_evidence_excerpt": "pay the entire balance by the due date shown on your notice",
+      "rationale": "The timing FAQ, rather than the general action section, directly links the printed due date to avoiding additional penalties and interest.",
+      "notice_family": "balance_collection",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP503"
+        }
+      },
+      "eligible_chunk_count": 11,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp503__heading_aware_220_40__s0006__c0000__32083266d885c37129723c6290398bf7e5223a3d7f4bdd593b67704704f3e159",
+          "doc_id": "irs_cp503",
+          "retrieved_notice_code": "CP503",
+          "title": "Understanding your CP503 notice",
+          "heading": "How much time do I have?",
+          "heading_path": [
+            "Frequently asked questions",
+            "How much time do I have?"
+          ],
+          "section_index": 6,
+          "subchunk_index": 0,
+          "similarity_score": 0.642021179,
+          "text_preview": "Understanding your CP503 notice Notice: CP503 Section: Frequently asked questions > How much time do I have? You must pay the entire balance by the due date shown on your notice to avoid additional penalties and interest.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "How much time do I have?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp503__heading_aware_220_40__s0004__c0000__e3fb23f9a20e6a36d090df0741444b0a8360e265082bb6963700faa0836c3ba4",
+          "doc_id": "irs_cp503",
+          "retrieved_notice_code": "CP503",
+          "title": "Understanding your CP503 notice",
+          "heading": "What is the notice telling me?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What is the notice telling me?"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.599342346,
+          "text_preview": "Understanding your CP503 notice Notice: CP503 Section: Frequently asked questions > What is the notice telling me? This notice is your second reminder that you still owe a balance on one of your tax accounts. You received this notice because we haven’t received your payment or a response to previous notice(s) requesting you pay this balance.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What is the notice telling me?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp503__heading_aware_220_40__s0001__c0000__7339a5f7270f3044fb70d525b582e604db0ebe655100f61811a818347a4a7ea3",
+          "doc_id": "irs_cp503",
+          "retrieved_notice_code": "CP503",
+          "title": "Understanding your CP503 notice",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 1,
+          "subchunk_index": 0,
+          "similarity_score": 0.593612671,
+          "text_preview": "Understanding your CP503 notice Notice: CP503 Section: What you need to do - Read your notice carefully. It explains how much you owe, when your payment is due, and your payment options. - [Pay the amount you owe](https://www.irs.gov/payments) by the due date shown on the notice. - [Make a payment plan](https://www.irs.gov/payments/online-payment-agreement-a",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp503__heading_aware_220_40__s0002__c0000__c815da2ff2e31f81a6f949a6c815862388acbb407fc92e8670f0295ef3306ba8",
+          "doc_id": "irs_cp503",
+          "retrieved_notice_code": "CP503",
+          "title": "Understanding your CP503 notice",
+          "heading": "You may want to",
+          "heading_path": [
+            "You may want to"
+          ],
+          "section_index": 2,
+          "subchunk_index": 0,
+          "similarity_score": 0.577919066,
+          "text_preview": "Understanding your CP503 notice Notice: CP503 Section: You may want to - [View information](https://www.irs.gov/payments/online-account-for-individuals) pertaining to your tax account. - Learn more about your [payment options](https://www.irs.gov/payments) and how to make a [payment arrangement](https://www.irs.gov/payments/payment-plans-installment-agreemen",
+          "attributed_heading_paths": [
+            [
+              "You may want to"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp503__heading_aware_220_40__s0005__c0000__9f278ebb0a12c5cdda1f89ce54c952c96c014d97e030f0d9e95c6fd5089c9445",
+          "doc_id": "irs_cp503",
+          "retrieved_notice_code": "CP503",
+          "title": "Understanding your CP503 notice",
+          "heading": "What do I have to do?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What do I have to do?"
+          ],
+          "section_index": 5,
+          "subchunk_index": 0,
+          "similarity_score": 0.575775206,
+          "text_preview": "Understanding your CP503 notice Notice: CP503 Section: Frequently asked questions > What do I have to do? Pay the amount you owe by the due date shown on the notice. You can quickly and easily pay your balance online or mail us your payment in the envelope we sent you. Please include the bottom part of the notice to make sure we correctly credit your account",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What do I have to do?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.087719
+    },
+    {
+      "id": "S04",
+      "question": "What collection actions may follow if the taxpayer neither pays nor contacts the IRS?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_cp504",
+      "expected_notice_code": "CP504",
+      "expected_heading": "What happens if I don't pay or contact the IRS?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What happens if I don't pay or contact the IRS?"
+      ],
+      "expected_evidence_excerpt": "we can file a Notice of Federal Tax Lien publicly establishing our priority with your creditors",
+      "rationale": "This consequence section contains the lien, state-refund levy, hearing-notice, and property-seizure sequence requested by the formal follow-up.",
+      "notice_family": "balance_collection",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP504"
+        }
+      },
+      "eligible_chunk_count": 11,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp504__heading_aware_220_40__s0006__c0000__4edc1b85a03cc098f12d2298f1bdbbf8ee173a47e3588b9a72499385a921d2c0",
+          "doc_id": "irs_cp504",
+          "retrieved_notice_code": "CP504",
+          "title": "Understanding your CP504 notice",
+          "heading": "What happens if I don't pay or contact the IRS?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What happens if I don't pay or contact the IRS?"
+          ],
+          "section_index": 6,
+          "subchunk_index": 0,
+          "similarity_score": 0.68283844,
+          "text_preview": "Understanding your CP504 notice Notice: CP504 Section: Frequently asked questions > What happens if I don't pay or contact the IRS? If you don't pay the amount due immediately or make payment arrangements, we can file a Notice of Federal Tax Lien publicly establishing our priority with your creditors. If the tax lien is in place, you may find it difficult to",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What happens if I don't pay or contact the IRS?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp504__heading_aware_220_40__s0002__c0000__9aefb638f370906f29acd66b6e0939d661175fcaab3d02e90bc3b068e8c43de6",
+          "doc_id": "irs_cp504",
+          "retrieved_notice_code": "CP504",
+          "title": "Understanding your CP504 notice",
+          "heading": "You may want to",
+          "heading_path": [
+            "You may want to"
+          ],
+          "section_index": 2,
+          "subchunk_index": 0,
+          "similarity_score": 0.609516144,
+          "text_preview": "Understanding your CP504 notice Notice: CP504 Section: You may want to - [View information](https://www.irs.gov/payments/online-account-for-individuals) pertaining to your tax account. - Learn more about your [payment options](https://www.irs.gov/payments) and how to make a [payment arrangement](https://www.irs.gov/payments/payment-plans-installment-agreemen",
+          "attributed_heading_paths": [
+            [
+              "You may want to"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp504__heading_aware_220_40__s0009__c0000__178e45eb5a6eb5d1d21dca4ab7704293daf81bd82520d9fafe4a0f78ff60673d",
+          "doc_id": "irs_cp504",
+          "retrieved_notice_code": "CP504",
+          "title": "Understanding your CP504 notice",
+          "heading": "Reference tools",
+          "heading_path": [
+            "Frequently asked questions",
+            "What if I don't agree or have already taken corrective action?",
+            "Reference tools"
+          ],
+          "section_index": 9,
+          "subchunk_index": 0,
+          "similarity_score": 0.599205,
+          "text_preview": "Understanding your CP504 notice Notice: CP504 Section: Frequently asked questions > What if I don't agree or have already taken corrective action? > Reference tools - [Publication 1, Your Rights as a Taxpayer PDF](https://www.irs.gov/pub/irs-pdf/p1.pdf) - [Publication 594, The IRS Collection Process PDF](https://www.irs.gov/pub/irs-pdf/p594.pdf) - [Form 9465",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What if I don't agree or have already taken corrective action?",
+              "Reference tools"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp504__heading_aware_220_40__s0004__c0000__c028a6a63c28cf9ea7ff12985036ff9080bddbc35deb17cf1e24ee8e978859b9",
+          "doc_id": "irs_cp504",
+          "retrieved_notice_code": "CP504",
+          "title": "Understanding your CP504 notice",
+          "heading": "What is the notice telling me?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What is the notice telling me?"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.589179933,
+          "text_preview": "Understanding your CP504 notice Notice: CP504 Section: Frequently asked questions > What is the notice telling me? This notice is your Notice of Intent to Levy as required by Internal Revenue Code section 6331 (d). It is your final reminder telling you that we intend to levy your wages, bank accounts, or your state tax refund because you still have an unpaid",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What is the notice telling me?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp504__heading_aware_220_40__s0010__c0000__51d04cc601c65e9009fc9d8325e06a7775ef7dc8ec5043b1505f08a011bd10b6",
+          "doc_id": "irs_cp504",
+          "retrieved_notice_code": "CP504",
+          "title": "Understanding your CP504 notice",
+          "heading": "Need help?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What if I don't agree or have already taken corrective action?",
+            "Need help?"
+          ],
+          "section_index": 10,
+          "subchunk_index": 0,
+          "similarity_score": 0.569156647,
+          "text_preview": "Understanding your CP504 notice Notice: CP504 Section: Frequently asked questions > What if I don't agree or have already taken corrective action? > Need help? - [You can authorize someone](https://www.irs.gov/forms-pubs/about-form-2848) to contact the IRS on your behalf. - See if you qualify for help from a [Low Income Taxpayer Clinic](https://taxpayeradvoc",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What if I don't agree or have already taken corrective action?",
+              "Need help?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.083133
+    },
+    {
+      "id": "S05",
+      "question": "Can they take money from my paycheck or bank account, or even my car or home?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_lt11_1058",
+      "expected_notice_code": "LT11 / Letter 1058",
+      "expected_heading": "What kinds of property can the IRS levy?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What kinds of property can the IRS levy?"
+      ],
+      "expected_evidence_excerpt": "Property can include wages and other income, bank accounts, business assets, personal assets (including your car and home)",
+      "rationale": "The property FAQ enumerates the assets subject to levy and is more specific than the surrounding nonresponse and appeal sections.",
+      "notice_family": "levy_cdp",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "LT11 / Letter 1058"
+        }
+      },
+      "eligible_chunk_count": 11,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_lt11_1058__heading_aware_220_40__s0005__c0000__085e01e4edb81be8f233b51236c7f1b98649e110fcb7c2c3886a41907eb49b00",
+          "doc_id": "irs_lt11_1058",
+          "retrieved_notice_code": "LT11 / Letter 1058",
+          "title": "Understanding your LT11 notice or letter 1058",
+          "heading": "What kinds of property can the IRS levy?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What kinds of property can the IRS levy?"
+          ],
+          "section_index": 5,
+          "subchunk_index": 0,
+          "similarity_score": 0.590236723,
+          "text_preview": "Understanding your LT11 notice or letter 1058 Notice: LT11 / Letter 1058 Section: Frequently asked questions > What kinds of property can the IRS levy? Property can include wages and other income, bank accounts, business assets, personal assets (including your car and home), Alaska Permanent Fund Dividends and state tax refunds, and Social Security benefits.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What kinds of property can the IRS levy?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_lt11_1058__heading_aware_220_40__s0000__c0000__b5c40631d7c31804c3a84fe9fe860967bec4d11e2a307c387b305f39381e77a0",
+          "doc_id": "irs_lt11_1058",
+          "retrieved_notice_code": "LT11 / Letter 1058",
+          "title": "Understanding your LT11 notice or letter 1058",
+          "heading": "What this notice or letter is about",
+          "heading_path": [
+            "What this notice or letter is about"
+          ],
+          "section_index": 0,
+          "subchunk_index": 0,
+          "similarity_score": 0.510524869,
+          "text_preview": "Understanding your LT11 notice or letter 1058 Notice: LT11 / Letter 1058 Section: What this notice or letter is about We haven’t received your payment for overdue taxes. We intend to seize your property or rights to property. You must contact us immediately.",
+          "attributed_heading_paths": [
+            [
+              "What this notice or letter is about"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_lt11_1058__heading_aware_220_40__s0004__c0000__87de7334793c6b0ac9138a4627c2594ab667296a207511bc4250f2a6c30aaf7e",
+          "doc_id": "irs_lt11_1058",
+          "retrieved_notice_code": "LT11 / Letter 1058",
+          "title": "Understanding your LT11 notice or letter 1058",
+          "heading": "What happens if I don’t respond to this notice of letter or don’t pay?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What happens if I don’t respond to this notice of letter or don’t pay?"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.505333066,
+          "text_preview": "Understanding your LT11 notice or letter 1058 Notice: LT11 / Letter 1058 Section: Frequently asked questions > What happens if I don’t respond to this notice of letter or don’t pay? We can attach a levy to your wages or bank accounts up to the amount owed. We may also file a Notice of Federal Tax Lien. A lien is a public notice to your creditors that the gov",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What happens if I don’t respond to this notice of letter or don’t pay?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_lt11_1058__heading_aware_220_40__s0001__c0000__bfc6c6d429af5ad6ecf45c13cc023738e79411dc8f7c39d90ca56cd956ab812d",
+          "doc_id": "irs_lt11_1058",
+          "retrieved_notice_code": "LT11 / Letter 1058",
+          "title": "Understanding your LT11 notice or letter 1058",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 1,
+          "subchunk_index": 0,
+          "similarity_score": 0.460815489,
+          "text_preview": "Understanding your LT11 notice or letter 1058 Notice: LT11 / Letter 1058 Section: What you need to do - Pay your unpaid balance: When you pay your balance in full, we’ll stop adding interest and applicable penalties. You can quickly and easily, [pay your balance online](https://www.irs.gov/payments). Visit your [Online Account](https://www.irs.gov/payments/o",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_lt11_1058__heading_aware_220_40__s0001__c0001__0438a094dd843bb8a2b041c40b8925d145665d33e10badacdc51759925f1e10e",
+          "doc_id": "irs_lt11_1058",
+          "retrieved_notice_code": "LT11 / Letter 1058",
+          "title": "Understanding your LT11 notice or letter 1058",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 1,
+          "subchunk_index": 1,
+          "similarity_score": 0.418014586,
+          "text_preview": "Understanding your LT11 notice or letter 1058 Notice: LT11 / Letter 1058 Section: What you need to do the [Online Payment Agreement tool](https://www.irs.gov/payments/online-payment-agreement-application), which is the fastest way to get an installment agreement approved. If you can’t apply online, call us at the number on your notice or letter, or mail in a",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.087179
+    },
+    {
+      "id": "S06",
+      "question": "The bank information is wrong. What should I send back to explain why I disagree?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp2501",
+      "expected_notice_code": "CP2501",
+      "expected_heading": "If you don’t agree or the information is incorrect",
+      "expected_heading_path": [
+        "What you need to do",
+        "If you don’t agree or the information is incorrect"
+      ],
+      "expected_evidence_excerpt": "A signed statement that explains your disagreement",
+      "rationale": "The disagreement subsection lists the signed response, explanation, documentation, expenses, and amended forms that support a correction.",
+      "notice_family": "underreporter_deficiency",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP2501"
+        }
+      },
+      "eligible_chunk_count": 17,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp2501__heading_aware_220_40__s0000__c0000__a6dc194e62985380d30a615b040e6aed047aefa61d13355949a5cadf2aa9d859",
+          "doc_id": "irs_cp2501",
+          "retrieved_notice_code": "CP2501",
+          "title": "Understanding your CP2501 notice",
+          "heading": "Why you received this notice",
+          "heading_path": [
+            "Why you received this notice"
+          ],
+          "section_index": 0,
+          "subchunk_index": 0,
+          "similarity_score": 0.577060759,
+          "text_preview": "Understanding your CP2501 notice Notice: CP2501 Section: Why you received this notice The income or payment information we received from third parties, such as employers or financial institutions, doesn't match the information you reported on your tax return. This difference may increase or decrease your tax or may not change it at all. The notice explains p",
+          "attributed_heading_paths": [
+            [
+              "Why you received this notice"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp2501__heading_aware_220_40__s0009__c0000__c9c06b3dd31a97b729f3b59fcb333a170b2d1f824eadb6a0eb6aeb65ab6fd705",
+          "doc_id": "irs_cp2501",
+          "retrieved_notice_code": "CP2501",
+          "title": "Understanding your CP2501 notice",
+          "heading": "Check and correct your records",
+          "heading_path": [
+            "You may want to",
+            "Check and correct your records"
+          ],
+          "section_index": 9,
+          "subchunk_index": 0,
+          "similarity_score": 0.568065643,
+          "text_preview": "Understanding your CP2501 notice Notice: CP2501 Section: You may want to > Check and correct your records - [Get a transcript](https://www.irs.gov/individuals/get-transcript) of your tax return, if needed. - Correct your copy of your tax return. Keep it and the notice for your records. - Check your tax returns from prior years. If they have the same issue, [",
+          "attributed_heading_paths": [
+            [
+              "You may want to",
+              "Check and correct your records"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp2501__heading_aware_220_40__s0003__c0000__f1b1f719a2e6a613a1c2bde8ab060aa15659371ab1a7a312678ec4d1bdd93d16",
+          "doc_id": "irs_cp2501",
+          "retrieved_notice_code": "CP2501",
+          "title": "Understanding your CP2501 notice",
+          "heading": "If you don’t agree or the information is incorrect",
+          "heading_path": [
+            "What you need to do",
+            "If you don’t agree or the information is incorrect"
+          ],
+          "section_index": 3,
+          "subchunk_index": 0,
+          "similarity_score": 0.534770966,
+          "text_preview": "Understanding your CP2501 notice Notice: CP2501 Section: What you need to do > If you don’t agree or the information is incorrect [Reply to us](https://www.irs.gov/individuals/understanding-your-cp2501-notice#reply) with a signed response form. Include: - A signed statement that explains your disagreement - Documentation supporting your claim - Expenses rela",
+          "attributed_heading_paths": [
+            [
+              "What you need to do",
+              "If you don’t agree or the information is incorrect"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp2501__heading_aware_220_40__s0004__c0000__0cf5f7d5fe2f69ac9108dec82e9100b173c6f64d5061c1158496bd1ac507413c",
+          "doc_id": "irs_cp2501",
+          "retrieved_notice_code": "CP2501",
+          "title": "Understanding your CP2501 notice",
+          "heading": "How to reply",
+          "heading_path": [
+            "How to reply"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.512477934,
+          "text_preview": "Understanding your CP2501 notice Notice: CP2501 Section: How to reply You can reply to your notice with one of these options:",
+          "attributed_heading_paths": [
+            [
+              "How to reply"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp2501__heading_aware_220_40__s0007__c0000__431ad1a6814b5618c604a2414dea5113a9a9643f65b8451322fef3b6a378edf8",
+          "doc_id": "irs_cp2501",
+          "retrieved_notice_code": "CP2501",
+          "title": "Understanding your CP2501 notice",
+          "heading": "Mail",
+          "heading_path": [
+            "How to reply",
+            "Mail"
+          ],
+          "section_index": 7,
+          "subchunk_index": 0,
+          "similarity_score": 0.505497,
+          "text_preview": "Understanding your CP2501 notice Notice: CP2501 Section: How to reply > Mail Send it to the address on the top left corner of the first page of the notice.",
+          "attributed_heading_paths": [
+            [
+              "How to reply",
+              "Mail"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 0,
+        "reciprocal_rank": 0.3333333333333333,
+        "hit_at_5": 1,
+        "first_correct_rank": 3
+      },
+      "query_latency_seconds": 0.093138
+    },
+    {
+      "id": "S07",
+      "question": "After responding, which tax records should be reviewed or corrected to prevent the same mismatch from happening again?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_cp2000_series",
+      "expected_notice_code": "CP2000 series",
+      "expected_heading": "Check and correct your records",
+      "expected_heading_path": [
+        "You may want to",
+        "Check and correct your records"
+      ],
+      "expected_evidence_excerpt": "Correct your copy of your tax return. Keep it and the notice for your records.",
+      "rationale": "The records subsection uniquely covers transcripts, correcting the retained return copy, and checking prior years after the response itself.",
+      "notice_family": "underreporter_deficiency",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP2000 series"
+        }
+      },
+      "eligible_chunk_count": 16,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp2000_series__heading_aware_220_40__s0007__c0000__684d93ec9ea29887eff87273fba755d0c0cc7960dff4b9b73f196c9d2377d2ae",
+          "doc_id": "irs_cp2000_series",
+          "retrieved_notice_code": "CP2000 series",
+          "title": "Understanding your CP2000 series notice",
+          "heading": "Check and correct your records",
+          "heading_path": [
+            "You may want to",
+            "Check and correct your records"
+          ],
+          "section_index": 7,
+          "subchunk_index": 0,
+          "similarity_score": 0.693641722,
+          "text_preview": "Understanding your CP2000 series notice Notice: CP2000 series Section: You may want to > Check and correct your records - [Get a transcript](https://www.irs.gov/individuals/get-transcript) of your original tax return, if needed. - Correct your copy of your tax return. Keep it and the notice for your records. - Check your tax returns from prior years. If they",
+          "attributed_heading_paths": [
+            [
+              "You may want to",
+              "Check and correct your records"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp2000_series__heading_aware_220_40__s0001__c0000__1121ab07cf2c12b76de0e8ac36ec0935b78da39e47783149cb9abe561f422793",
+          "doc_id": "irs_cp2000_series",
+          "retrieved_notice_code": "CP2000 series",
+          "title": "Understanding your CP2000 series notice",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 1,
+          "subchunk_index": 0,
+          "similarity_score": 0.645744383,
+          "text_preview": "Understanding your CP2000 series notice Notice: CP2000 series Section: What you need to do Review the entire notice and follow the instructions to resolve this issue. [Reply to the notice](https://www.irs.gov/individuals/understanding-your-cp2000-series-notice#reply) by the date listed. - If a response form is included in your notice, complete and sign it. S",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp2000_series__heading_aware_220_40__s0011__c0000__9eecb83baeb924989b0d14081f837d2a9aaea6de4396abb8002fbefe569f4393",
+          "doc_id": "irs_cp2000_series",
+          "retrieved_notice_code": "CP2000 series",
+          "title": "Understanding your CP2000 series notice",
+          "heading": "Tips for next year",
+          "heading_path": [
+            "Tips for next year"
+          ],
+          "section_index": 11,
+          "subchunk_index": 0,
+          "similarity_score": 0.643924773,
+          "text_preview": "Understanding your CP2000 series notice Notice: CP2000 series Section: Tips for next year To file an accurate return: - Keep complete records. - Check Forms W-2s, 1098s, 1099s, etc. you get from employers, banks, payment apps or online marketplaces to make sure they're correct. - Wait until you get all your [income documents](https://www.irs.gov/filing/gathe",
+          "attributed_heading_paths": [
+            [
+              "Tips for next year"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp2000_series__heading_aware_220_40__s0000__c0000__8d8f9c759572ef9dc80625f5b6585f01909b1dfa315071bcaa360c7d0f540d31",
+          "doc_id": "irs_cp2000_series",
+          "retrieved_notice_code": "CP2000 series",
+          "title": "Understanding your CP2000 series notice",
+          "heading": "Why you received this notice",
+          "heading_path": [
+            "Why you received this notice"
+          ],
+          "section_index": 0,
+          "subchunk_index": 0,
+          "similarity_score": 0.594863951,
+          "text_preview": "Understanding your CP2000 series notice Notice: CP2000 series Section: Why you received this notice The income or payment information we received from third parties, such as employers or financial institutions, doesn't match what you reported on your tax return. This difference may increase or decrease your tax or may not change it at all. The notice explain",
+          "attributed_heading_paths": [
+            [
+              "Why you received this notice"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp2000_series__heading_aware_220_40__s0010__c0000__7870111975e73fbfdc8c9d3652a977b28f5d4c65e54d73accd97d5f060cdac2f",
+          "doc_id": "irs_cp2000_series",
+          "retrieved_notice_code": "CP2000 series",
+          "title": "Understanding your CP2000 series notice",
+          "heading": "Get help",
+          "heading_path": [
+            "You may want to",
+            "Get help"
+          ],
+          "section_index": 10,
+          "subchunk_index": 0,
+          "similarity_score": 0.593280852,
+          "text_preview": "Understanding your CP2000 series notice Notice: CP2000 series Section: You may want to > Get help - Allow someone to contact us for you about this notice - Complete the Authorization section on the response form. - Allow someone (like a tax professional) to contact us on your behalf about this or any other matter you authorize - Send us a [Form 2848, Power o",
+          "attributed_heading_paths": [
+            [
+              "You may want to",
+              "Get help"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.123772
+    },
+    {
+      "id": "S08",
+      "question": "May the response period be extended, and what limitation still applies to a Tax Court petition?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_cp3219a",
+      "expected_notice_code": "CP3219A",
+      "expected_heading": "Can I get an extension of time to respond? (updated March 7, 2024)",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "Can I get an extension of time to respond? (updated March 7, 2024)"
+      ],
+      "expected_evidence_excerpt": "This won’t extend the time you have to respond or to file a petition within the U.S. Tax Court",
+      "rationale": "This FAQ directly answers the extension question and preserves the non-extendable court deadline, unlike the broader disagreement instructions.",
+      "notice_family": "underreporter_deficiency",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP3219A"
+        }
+      },
+      "eligible_chunk_count": 27,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp3219a__heading_aware_220_40__s0017__c0000__c30267972a23c7f918299813b224a0eaa18e6ef90c188ebe408c0647ad5c151d",
+          "doc_id": "irs_cp3219a",
+          "retrieved_notice_code": "CP3219A",
+          "title": "Understanding your CP3219A notice",
+          "heading": "Can I get an extension of time to respond? (updated March 7, 2024)",
+          "heading_path": [
+            "Frequently asked questions",
+            "Can I get an extension of time to respond? (updated March 7, 2024)"
+          ],
+          "section_index": 17,
+          "subchunk_index": 0,
+          "similarity_score": 0.742412627,
+          "text_preview": "Understanding your CP3219A notice Notice: CP3219A Section: Frequently asked questions > Can I get an extension of time to respond? (updated March 7, 2024) No. But if you have additional information you want us to consider, reply as soon as possible. We can work with you to resolve your issues during the 90-day period. This won’t extend the time you have to r",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "Can I get an extension of time to respond? (updated March 7, 2024)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp3219a__heading_aware_220_40__s0006__c0000__f24f36beb95415d584a07981e7d0de856cb8d32f0377751ee20b8d949ac18e20",
+          "doc_id": "irs_cp3219a",
+          "retrieved_notice_code": "CP3219A",
+          "title": "Understanding your CP3219A notice",
+          "heading": "If you want to challenge the proposed change in Tax Court",
+          "heading_path": [
+            "What you need to do",
+            "If you don’t agree",
+            "If you want to challenge the proposed change in Tax Court"
+          ],
+          "section_index": 6,
+          "subchunk_index": 0,
+          "similarity_score": 0.652488768,
+          "text_preview": "Understanding your CP3219A notice Notice: CP3219A Section: What you need to do > If you don’t agree > If you want to challenge the proposed change in Tax Court Follow the notice instructions to file a petition with the [U.S. Tax Court](https://www.ustaxcourt.gov/). File your petition by the date listed on the notice. The Tax Court can’t consider your case if",
+          "attributed_heading_paths": [
+            [
+              "What you need to do",
+              "If you don’t agree",
+              "If you want to challenge the proposed change in Tax Court"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp3219a__heading_aware_220_40__s0018__c0000__ae59fb2d9443f0f899953f75f03327fcdd79051a3f699923316d8f29f2708cf1",
+          "doc_id": "irs_cp3219a",
+          "retrieved_notice_code": "CP3219A",
+          "title": "Understanding your CP3219A notice",
+          "heading": "Do I need to file a petition with the U.S. Tax Court? (updated March 7, 2024)",
+          "heading_path": [
+            "Frequently asked questions",
+            "Do I need to file a petition with the U.S. Tax Court? (updated March 7, 2024)"
+          ],
+          "section_index": 18,
+          "subchunk_index": 0,
+          "similarity_score": 0.650783598,
+          "text_preview": "Understanding your CP3219A notice Notice: CP3219A Section: Frequently asked questions > Do I need to file a petition with the U.S. Tax Court? (updated March 7, 2024) No, you may be able to resolve your dispute with the IRS. If you have additional information, you'd like us to consider, reply to us with Form 5564 and provide any documentation along with a sig",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "Do I need to file a petition with the U.S. Tax Court? (updated March 7, 2024)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp3219a__heading_aware_220_40__s0003__c0000__aae703b01d3666a284e650cd28e329752415db72220d3aff05dbd20fadc9b96c",
+          "doc_id": "irs_cp3219a",
+          "retrieved_notice_code": "CP3219A",
+          "title": "Understanding your CP3219A notice",
+          "heading": "If you don’t agree",
+          "heading_path": [
+            "What you need to do",
+            "If you don’t agree"
+          ],
+          "section_index": 3,
+          "subchunk_index": 0,
+          "similarity_score": 0.632404327,
+          "text_preview": "Understanding your CP3219A notice Notice: CP3219A Section: What you need to do > If you don’t agree [Reply to us](https://www.irs.gov/individuals/understanding-your-cp3219a-notice#reply) right away. We’ll work with you to resolve your issue during the 90-day response period. You also have the right to file a petition with the U.S. Tax Court if you feel you n",
+          "attributed_heading_paths": [
+            [
+              "What you need to do",
+              "If you don’t agree"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp3219a__heading_aware_220_40__s0004__c0000__6005655045d1612002561bc62693de5df0aea0424824e3cf7861341d5a916c00",
+          "doc_id": "irs_cp3219a",
+          "retrieved_notice_code": "CP3219A",
+          "title": "Understanding your CP3219A notice",
+          "heading": "If you have additional information or if what you reported is incorrect",
+          "heading_path": [
+            "What you need to do",
+            "If you don’t agree",
+            "If you have additional information or if what you reported is incorrect"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.605587065,
+          "text_preview": "Understanding your CP3219A notice Notice: CP3219A Section: What you need to do > If you don’t agree > If you have additional information or if what you reported is incorrect [Reply to us](https://www.irs.gov/individuals/understanding-your-cp3219a-notice#reply) as soon as possible with the information you want us to consider. We can’t extend the time you have",
+          "attributed_heading_paths": [
+            [
+              "What you need to do",
+              "If you don’t agree",
+              "If you have additional information or if what you reported is incorrect"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.12355
+    },
+    {
+      "id": "S09",
+      "question": "My income came in unevenly during the year. Does the page say that can reduce the estimated-tax penalty?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp30",
+      "expected_notice_code": "CP30",
+      "expected_heading": "Reducing or removing your penalty",
+      "expected_heading_path": [
+        "Reducing or removing your penalty"
+      ],
+      "expected_evidence_excerpt": "Your income is received unevenly during the year.",
+      "rationale": "The penalty-relief section explicitly lists uneven annual income as a possible ground for reduction or removal.",
+      "notice_family": "penalty_estimated_tax",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP30"
+        }
+      },
+      "eligible_chunk_count": 11,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp30__heading_aware_220_40__s0002__c0000__7be3bc64d7cd390291ffd6a1d992c0266e184ca5bc237f2fa910f80aba39bb63",
+          "doc_id": "irs_cp30",
+          "retrieved_notice_code": "CP30",
+          "title": "Understanding your CP30 notice",
+          "heading": "Reducing or removing your penalty",
+          "heading_path": [
+            "Reducing or removing your penalty"
+          ],
+          "section_index": 2,
+          "subchunk_index": 0,
+          "similarity_score": 0.63426584,
+          "text_preview": "Understanding your CP30 notice Notice: CP30 Section: Reducing or removing your penalty You may be able to have your penalty removed or reduced if any of the following apply: - You or your spouse (if you file a joint return) retired in the past 2 years after reaching age 62 or became disabled and you had reasonable cause. - You had most of your income tax wit",
+          "attributed_heading_paths": [
+            [
+              "Reducing or removing your penalty"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp30__heading_aware_220_40__s0008__c0000__9dbcfce37a9b736dd0b70a49bd0f4889730faab31a82209d93a41abdef01e0e2",
+          "doc_id": "irs_cp30",
+          "retrieved_notice_code": "CP30",
+          "title": "Understanding your CP30 notice",
+          "heading": "Tips for next year",
+          "heading_path": [
+            "Tips for next year"
+          ],
+          "section_index": 8,
+          "subchunk_index": 0,
+          "similarity_score": 0.524490297,
+          "text_preview": "Understanding your CP30 notice Notice: CP30 Section: Tips for next year Make timely estimated tax payments, if necessary, to ensure that you pre-pay enough tax through a combination of withholding and estimated tax payments. See the worksheet in [Form 1040-ES, Estimated Tax for Individuals](https://www.irs.gov/forms-pubs/about-form-1040-es), for more details",
+          "attributed_heading_paths": [
+            [
+              "Tips for next year"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp30__heading_aware_220_40__s0004__c0000__a631b1a4a832ce9789fd8f4a559c4d27c2dda61046c3d300c11d9b0e21c465ed",
+          "doc_id": "irs_cp30",
+          "retrieved_notice_code": "CP30",
+          "title": "Understanding your CP30 notice",
+          "heading": "How do I know if enough is being withheld from my income?",
+          "heading_path": [
+            "Frequently asked questions",
+            "How do I know if enough is being withheld from my income?"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.519103944,
+          "text_preview": "Understanding your CP30 notice Notice: CP30 Section: Frequently asked questions > How do I know if enough is being withheld from my income? The IRS [Tax Withholding Estimator](https://www.irs.gov/individuals/tax-withholding-estimator) can help you determine if you have the right amount of tax is being withheld. Checking your withholding can help protect agai",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "How do I know if enough is being withheld from my income?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp30__heading_aware_220_40__s0005__c0000__4b1564689d16611e2e15a7c20b8bc565d65740619b0f1992fa5a238ea77e68c8",
+          "doc_id": "irs_cp30",
+          "retrieved_notice_code": "CP30",
+          "title": "Understanding your CP30 notice",
+          "heading": "How much am I required to pre-pay in order to avoid a penalty?",
+          "heading_path": [
+            "Frequently asked questions",
+            "How much am I required to pre-pay in order to avoid a penalty?"
+          ],
+          "section_index": 5,
+          "subchunk_index": 0,
+          "similarity_score": 0.516750336,
+          "text_preview": "Understanding your CP30 notice Notice: CP30 Section: Frequently asked questions > How much am I required to pre-pay in order to avoid a penalty? Generally, most taxpayers will avoid this penalty if they owe less than $1,000 in tax after filing their return or if they paid at least 90% of the tax for the current year, or 100% of the tax shown on the return fo",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "How much am I required to pre-pay in order to avoid a penalty?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp30__heading_aware_220_40__s0005__c0001__d6534f31692fe349a21ecf42f9bf799d8bd94eca57d923c9f7ee3dcb6023f113",
+          "doc_id": "irs_cp30",
+          "retrieved_notice_code": "CP30",
+          "title": "Understanding your CP30 notice",
+          "heading": "How much am I required to pre-pay in order to avoid a penalty?",
+          "heading_path": [
+            "Frequently asked questions",
+            "How much am I required to pre-pay in order to avoid a penalty?"
+          ],
+          "section_index": 5,
+          "subchunk_index": 1,
+          "similarity_score": 0.509742677,
+          "text_preview": "Understanding your CP30 notice Notice: CP30 Section: Frequently asked questions > How much am I required to pre-pay in order to avoid a penalty? their tax, or 100% of the tax shown on the return for the prior year, whichever is less. See Farmers and Fishermen in [About Publication 505, Tax Withholding and Estimated Tax](https://www.irs.gov/forms-pubs/about-p",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "How much am I required to pre-pay in order to avoid a penalty?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.085429
+    },
+    {
+      "id": "S10",
+      "question": "If the taxpayer disputes the proposed termination after trying to correct the default, what appeal route is available?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_cp523",
+      "expected_notice_code": "CP523",
+      "expected_heading": "What if I don't agree with your action or have already taken corrective action?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What if I don't agree with your action or have already taken corrective action?"
+      ],
+      "expected_evidence_excerpt": "you have the right to file an appeal and can request a hearing with the IRS Independent Office of Appeals",
+      "rationale": "The dispute/corrective-action FAQ contains the appeal right and reinstatement follow-up, rather than the general 30-day timing section.",
+      "notice_family": "installment_agreement",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP523"
+        }
+      },
+      "eligible_chunk_count": 9,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp523__heading_aware_220_40__s0007__c0000__53c3d9edcec260b13a9319c42cc84a44d3e5aa262da1417f7dcb8cb23fc4bef5",
+          "doc_id": "irs_cp523",
+          "retrieved_notice_code": "CP523",
+          "title": "Understanding your CP523 notice",
+          "heading": "What if I don't agree with your action or have already taken corrective action?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What if I don't agree with your action or have already taken corrective action?"
+          ],
+          "section_index": 7,
+          "subchunk_index": 0,
+          "similarity_score": 0.666473389,
+          "text_preview": "Understanding your CP523 notice Notice: CP523 Section: Frequently asked questions > What if I don't agree with your action or have already taken corrective action? If you don't agree with our reason for terminating your installment agreement, contact us at the number printed at the top of the notice. If after talking with us you still do not agree, you have ",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What if I don't agree with your action or have already taken corrective action?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4",
+          "doc_id": "irs_cp523",
+          "retrieved_notice_code": "CP523",
+          "title": "Understanding your CP523 notice",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 1,
+          "subchunk_index": 0,
+          "similarity_score": 0.574497223,
+          "text_preview": "Understanding your CP523 notice Notice: CP523 Section: What you need to do - Make your payment before your termination date to prevent your installment agreement from being terminated. Go to the [payments](https://www.irs.gov/payments) page to make your payment or find out more about your payment options. - Contact the IRS right away to see if you can reinst",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp523__heading_aware_220_40__s0009__c0000__6d5b78707adad78082969f3720a9a19ef4f6b4e32eb1fdcf821a81d9d6a82542",
+          "doc_id": "irs_cp523",
+          "retrieved_notice_code": "CP523",
+          "title": "Understanding your CP523 notice",
+          "heading": "Need help?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What if I don't agree with your action or have already taken corrective action?",
+            "Need help?"
+          ],
+          "section_index": 9,
+          "subchunk_index": 0,
+          "similarity_score": 0.526512206,
+          "text_preview": "Understanding your CP523 notice Notice: CP523 Section: Frequently asked questions > What if I don't agree with your action or have already taken corrective action? > Need help? - [You can authorize someone](https://www.irs.gov/forms-pubs/about-form-2848) to contact the IRS on your behalf. - See if you qualify for help from a [Low Income Taxpayer Clinic](http",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What if I don't agree with your action or have already taken corrective action?",
+              "Need help?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp523__heading_aware_220_40__s0008__c0000__083806e6326caccf02c90769e2923fab810d70ece3fb1dad9a7776e4eefa3b9d",
+          "doc_id": "irs_cp523",
+          "retrieved_notice_code": "CP523",
+          "title": "Understanding your CP523 notice",
+          "heading": "Reference tools",
+          "heading_path": [
+            "Frequently asked questions",
+            "What if I don't agree with your action or have already taken corrective action?",
+            "Reference tools"
+          ],
+          "section_index": 8,
+          "subchunk_index": 0,
+          "similarity_score": 0.520916,
+          "text_preview": "Understanding your CP523 notice Notice: CP523 Section: Frequently asked questions > What if I don't agree with your action or have already taken corrective action? > Reference tools - [Publication 1, Your Rights as a Taxpayer PDF](https://www.irs.gov/pub/irs-pdf/p1.pdf) - [Publication 1660, Collection Appeal Rights PDF](https://www.irs.gov/pub/irs-pdf/p1660.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What if I don't agree with your action or have already taken corrective action?",
+              "Reference tools"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp523__heading_aware_220_40__s0003__c0000__1edc58adcfcc110bc2994bb96759f53b0f276897d53dba702cab64e46980c56d",
+          "doc_id": "irs_cp523",
+          "retrieved_notice_code": "CP523",
+          "title": "Understanding your CP523 notice",
+          "heading": "What is the notice telling me?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What is the notice telling me?"
+          ],
+          "section_index": 3,
+          "subchunk_index": 0,
+          "similarity_score": 0.47562021,
+          "text_preview": "Understanding your CP523 notice Notice: CP523 Section: Frequently asked questions > What is the notice telling me? This notice is telling you that we intend to terminate your installment agreement and seize (levy) your wages and/or bank accounts if you take no action. The notice tells you why we are taking this action. This notice also explains the denial or",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What is the notice telling me?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.175666
+    },
+    {
+      "id": "S11",
+      "question": "I mailed the missing return recently. Does the page say I need to send another copy right away?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp59",
+      "expected_notice_code": "CP59",
+      "expected_heading": "What should I do if I've just filed my tax return?",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What should I do if I've just filed my tax return?"
+      ],
+      "expected_evidence_excerpt": "You don't have to do anything if you filed your tax return within the last eight weeks.",
+      "rationale": "The just-filed FAQ answers whether another immediate submission is necessary and supplies the eight-week condition.",
+      "notice_family": "non_filer",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP59"
+        }
+      },
+      "eligible_chunk_count": 15,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp59__heading_aware_220_40__s0006__c0000__4466e8a0021f1db929b7593fb487ae44823d92e590c573bac994373a66fecbda",
+          "doc_id": "irs_cp59",
+          "retrieved_notice_code": "CP59",
+          "title": "Understanding your CP59 notice",
+          "heading": "What should I do if I've just filed my tax return?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I've just filed my tax return?"
+          ],
+          "section_index": 6,
+          "subchunk_index": 0,
+          "similarity_score": 0.577003539,
+          "text_preview": "Understanding your CP59 notice Notice: CP59 Section: Frequently asked questions > What should I do if I've just filed my tax return? You don't have to do anything if you filed your tax return within the last eight weeks.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I've just filed my tax return?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp59__heading_aware_220_40__s0007__c0000__77b821fb1cdabc12d660107ce736759240ae725db1ae0de93a755f66b9686c7d",
+          "doc_id": "irs_cp59",
+          "retrieved_notice_code": "CP59",
+          "title": "Understanding your CP59 notice",
+          "heading": "What should I do if I didn't file my tax return, or it's been more than eight weeks since I filed it? (updated April 17, 2025)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I didn't file my tax return, or it's been more than eight weeks since I filed it? (updated April 17, 2025)"
+          ],
+          "section_index": 7,
+          "subchunk_index": 0,
+          "similarity_score": 0.561775208,
+          "text_preview": "Understanding your CP59 notice Notice: CP59 Section: Frequently asked questions > What should I do if I didn't file my tax return, or it's been more than eight weeks since I filed it? (updated April 17, 2025) We show that we didn’t receive your tax return. Check the name, Social Security Number (or Taxpayer Identification Number), and tax year on your notice",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I didn't file my tax return, or it's been more than eight weeks since I filed it? (updated April 17, 2025)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp59__heading_aware_220_40__s0000__c0000__5133b3130ee6a572f8f630f1ef08c63ff4b3521de702fd34824f7500d9fad296",
+          "doc_id": "irs_cp59",
+          "retrieved_notice_code": "CP59",
+          "title": "Understanding your CP59 notice",
+          "heading": "What this notice is about",
+          "heading_path": [
+            "What this notice is about"
+          ],
+          "section_index": 0,
+          "subchunk_index": 0,
+          "similarity_score": 0.554756224,
+          "text_preview": "Understanding your CP59 notice Notice: CP59 Section: What this notice is about We have no record that you filed your prior year personal tax return.",
+          "attributed_heading_paths": [
+            [
+              "What this notice is about"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp59__heading_aware_220_40__s0004__c0000__42ec81bf173d4a9323cd8105f0ae0341e49ac9f47cb70f148e06b8a862929635",
+          "doc_id": "irs_cp59",
+          "retrieved_notice_code": "CP59",
+          "title": "Understanding your CP59 notice",
+          "heading": "What should I do if I disagree with the notice? (updated April 17, 2025)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I disagree with the notice? (updated April 17, 2025)"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.541755676,
+          "text_preview": "Understanding your CP59 notice Notice: CP59 Section: Frequently asked questions > What should I do if I disagree with the notice? (updated April 17, 2025) Complete and mail or fax us [Form 15103, Form 1040 Return Delinquency PDF](https://www.irs.gov/pub/irs-pdf/f15103.pdf), if you believe we made a mistake. You can also upload and submit this using your [IRS",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I disagree with the notice? (updated April 17, 2025)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp59__heading_aware_220_40__s0011__c0000__8a03456aa1bca55252f33ece57f46ccf9c8526c9c9d3f4cb799c80d9a1e556dc",
+          "doc_id": "irs_cp59",
+          "retrieved_notice_code": "CP59",
+          "title": "Understanding your CP59 notice",
+          "heading": "Tips for next year",
+          "heading_path": [
+            "Tips for next year"
+          ],
+          "section_index": 11,
+          "subchunk_index": 0,
+          "similarity_score": 0.520278931,
+          "text_preview": "Understanding your CP59 notice Notice: CP59 Section: Tips for next year - Submit your tax return by the deadline. - Consider filing online electronically which can help you avoid mistakes and find credits and deductions that you may qualify for. In many cases you can file for free. [Learn more about e-file](https://www.irs.gov/filing/individuals/how-to-file)",
+          "attributed_heading_paths": [
+            [
+              "Tips for next year"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.087701
+    },
+    {
+      "id": "S12",
+      "question": "I never sent the return they're asking for. What do I need to file, and which form should go back with it?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp515",
+      "expected_notice_code": "CP515",
+      "expected_heading": "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)"
+      ],
+      "expected_evidence_excerpt": "File your return as soon as possible and return Form 15103 to let us know why.",
+      "rationale": "The never-filed FAQ gives the paired return and Form 15103 instruction, distinct from the already-filed follow-up immediately below it.",
+      "notice_family": "non_filer",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP515"
+        }
+      },
+      "eligible_chunk_count": 14,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp515__heading_aware_220_40__s0005__c0000__ffd72008855d1b1d0fcd94d198f1991a0ced2362a0a520804432ee201c0c4e3b",
+          "doc_id": "irs_cp515",
+          "retrieved_notice_code": "CP515",
+          "title": "Understanding your CP515 notice",
+          "heading": "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)"
+          ],
+          "section_index": 5,
+          "subchunk_index": 0,
+          "similarity_score": 0.624263644,
+          "text_preview": "Understanding your CP515 notice Notice: CP515 Section: Frequently asked questions > What should I do if I didn't file my tax return? (updated Mar. 20, 2026) File your return as soon as possible and return Form 15103 to let us know why.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I didn't file my tax return? (updated Mar. 20, 2026)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp515__heading_aware_220_40__s0002__c0000__ec855c7c2776c44435f9f6ab5c2e82581e3eaddd7130d4b48a7c29fe6c7d63c6",
+          "doc_id": "irs_cp515",
+          "retrieved_notice_code": "CP515",
+          "title": "Understanding your CP515 notice",
+          "heading": "You may want to",
+          "heading_path": [
+            "You may want to"
+          ],
+          "section_index": 2,
+          "subchunk_index": 0,
+          "similarity_score": 0.594718933,
+          "text_preview": "Understanding your CP515 notice Notice: CP515 Section: You may want to - See what [documents and income information](https://www.irs.gov/filing/gather-your-documents) you may need to file your return. - Learn what happens when you don't file a tax return by reviewing: - [Frequently asked questions for past due return filers](https://www.irs.gov/businesses/sm",
+          "attributed_heading_paths": [
+            [
+              "You may want to"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp515__heading_aware_220_40__s0001__c0000__559ad0b799a8f5ae2034a792659b7e4800e56f9d0198c513cadcf4b596fe25b9",
+          "doc_id": "irs_cp515",
+          "retrieved_notice_code": "CP515",
+          "title": "Understanding your CP515 notice",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 1,
+          "subchunk_index": 0,
+          "similarity_score": 0.575378358,
+          "text_preview": "Understanding your CP515 notice Notice: CP515 Section: What you need to do - Respond to the notice by: - Filing your tax return immediately with the completed [Form 15103, Form 1040 Return Delinquency PDF](https://www.irs.gov/pub/irs-pdf/f15103.pdf) to explain: - Why you are filing late; or - That you’ve already filed. - We accept returns electronically for ",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp515__heading_aware_220_40__s0006__c0000__d5ff3b6e243d0ccabf555f3db69a4b8ceb29f52c29560b44ac91f358e9857244",
+          "doc_id": "irs_cp515",
+          "retrieved_notice_code": "CP515",
+          "title": "Understanding your CP515 notice",
+          "heading": "What should I do if I just filed, or it's been more than 8 weeks since I filed my return? (updated Mar. 20, 2026)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I just filed, or it's been more than 8 weeks since I filed my return? (updated Mar. 20, 2026)"
+          ],
+          "section_index": 6,
+          "subchunk_index": 0,
+          "similarity_score": 0.56729883,
+          "text_preview": "Understanding your CP515 notice Notice: CP515 Section: Frequently asked questions > What should I do if I just filed, or it's been more than 8 weeks since I filed my return? (updated Mar. 20, 2026) Complete Form 15103. Make sure the name, Social Security number (SSN) and tax year on your notice match on the return. Send us a signed and dated copy of the tax ",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I just filed, or it's been more than 8 weeks since I filed my return? (updated Mar. 20, 2026)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp515__heading_aware_220_40__s0000__c0000__663ddd607a990bd770869cd974974db4e0595e8e2daec821a277cd8535aaae4a",
+          "doc_id": "irs_cp515",
+          "retrieved_notice_code": "CP515",
+          "title": "Understanding your CP515 notice",
+          "heading": "What this notice is about",
+          "heading_path": [
+            "What this notice is about"
+          ],
+          "section_index": 0,
+          "subchunk_index": 0,
+          "similarity_score": 0.563259065,
+          "text_preview": "Understanding your CP515 notice Notice: CP515 Section: What this notice is about This notice is a reminder that we have no record that you filed your prior tax returns. We have reason to believe you need to file a return.",
+          "attributed_heading_paths": [
+            [
+              "What this notice is about"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.246287
+    },
+    {
+      "id": "S13",
+      "question": "If I ignore this final reminder, what could the IRS do and what might happen to a refund?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp518",
+      "expected_notice_code": "CP518",
+      "expected_heading": "If we don't hear from you",
+      "expected_heading_path": [
+        "If we don't hear from you"
+      ],
+      "expected_evidence_excerpt": "We may determine your tax for you.",
+      "rationale": "The nonresponse section groups the IRS-determined tax, continuing charges, and possible refund delay requested by the question.",
+      "notice_family": "non_filer",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP518"
+        }
+      },
+      "eligible_chunk_count": 14,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp518__heading_aware_220_40__s0002__c0000__65a8451e01e056025aaf6b40584dc15b496bfcfad294983ab66046034fd7fb46",
+          "doc_id": "irs_cp518",
+          "retrieved_notice_code": "CP518",
+          "title": "Understanding your CP518 notice",
+          "heading": "If we don't hear from you",
+          "heading_path": [
+            "If we don't hear from you"
+          ],
+          "section_index": 2,
+          "subchunk_index": 0,
+          "similarity_score": 0.649177551,
+          "text_preview": "Understanding your CP518 notice Notice: CP518 Section: If we don't hear from you - We may determine your tax for you. - Penalty and interest may continue to accrue. - If you are owed a refund, it may be delayed because of this unfiled return.",
+          "attributed_heading_paths": [
+            [
+              "If we don't hear from you"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp518__heading_aware_220_40__s0003__c0000__74082fd013e328b33228e732b167ab507ab66b35c0bf0d4716c93f181295a072",
+          "doc_id": "irs_cp518",
+          "retrieved_notice_code": "CP518",
+          "title": "Understanding your CP518 notice",
+          "heading": "You may want to",
+          "heading_path": [
+            "You may want to"
+          ],
+          "section_index": 3,
+          "subchunk_index": 0,
+          "similarity_score": 0.552272797,
+          "text_preview": "Understanding your CP518 notice Notice: CP518 Section: You may want to - Review what happens when you don't file a tax return by reviewing the following: - [Filing past due returns](https://www.irs.gov/businesses/small-businesses-self-employed/filing-past-due-tax-returns) - [Collection process for taxpayers filing and/or paying late](https://www.irs.gov/busi",
+          "attributed_heading_paths": [
+            [
+              "You may want to"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp518__heading_aware_220_40__s0008__c0000__b9ea275dd66d3c5487a742a95f6f21dd740b6082693052101db1ed3bdcac83d9",
+          "doc_id": "irs_cp518",
+          "retrieved_notice_code": "CP518",
+          "title": "Understanding your CP518 notice",
+          "heading": "What happens if I can't pay the full amount I owe when I file my return? (updated March 25, 2026)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What happens if I can't pay the full amount I owe when I file my return? (updated March 25, 2026)"
+          ],
+          "section_index": 8,
+          "subchunk_index": 0,
+          "similarity_score": 0.547470093,
+          "text_preview": "Understanding your CP518 notice Notice: CP518 Section: Frequently asked questions > What happens if I can't pay the full amount I owe when I file my return? (updated March 25, 2026) File your return anyway. You can request a [payment plan](https://www.irs.gov/payments) to pay your balance over time.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What happens if I can't pay the full amount I owe when I file my return? (updated March 25, 2026)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp518__heading_aware_220_40__s0000__c0000__417dd5e0b639eedd265dca2e6d1c37db290fc7f5565139a7ee844f3cb49d90f6",
+          "doc_id": "irs_cp518",
+          "retrieved_notice_code": "CP518",
+          "title": "Understanding your CP518 notice",
+          "heading": "What this notice is about",
+          "heading_path": [
+            "What this notice is about"
+          ],
+          "section_index": 0,
+          "subchunk_index": 0,
+          "similarity_score": 0.527412415,
+          "text_preview": "Understanding your CP518 notice Notice: CP518 Section: What this notice is about This is your final reminder; we still don’t have a record that you filed your prior year tax returns.",
+          "attributed_heading_paths": [
+            [
+              "What this notice is about"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp518__heading_aware_220_40__s0006__c0000__461aea7ab30237be7dcc05e57e127c62489ede3549f7246b1ef8e5248bf9cb69",
+          "doc_id": "irs_cp518",
+          "retrieved_notice_code": "CP518",
+          "title": "Understanding your CP518 notice",
+          "heading": "What should I do if I've just filed my tax return? (updated March 25, 2026)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I've just filed my tax return? (updated March 25, 2026)"
+          ],
+          "section_index": 6,
+          "subchunk_index": 0,
+          "similarity_score": 0.519973695,
+          "text_preview": "Understanding your CP518 notice Notice: CP518 Section: Frequently asked questions > What should I do if I've just filed my tax return? (updated March 25, 2026) You don't have to do anything if you filed your tax return within the last 8 weeks.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I've just filed my tax return? (updated March 25, 2026)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.152967
+    },
+    {
+      "id": "S14",
+      "question": "I don't agree with the tax they calculated for me. Who should I contact, and what should I have ready?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp2566",
+      "expected_notice_code": "CP2566",
+      "expected_heading": "What should I do if I disagree with the notice? (updated Nov. 5, 2024)",
+      "expected_heading_path": [
+        "Frequently asked questions",
+        "What should I do if I disagree with the notice? (updated Nov. 5, 2024)"
+      ],
+      "expected_evidence_excerpt": "Call us at the number listed on your notice. Please have your paperwork ready when you call.",
+      "rationale": "The disagreement FAQ contains the requested contact and preparation steps, while adjacent sections address filing and mailing a return.",
+      "notice_family": "non_filer",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP2566"
+        }
+      },
+      "eligible_chunk_count": 13,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp2566__heading_aware_220_40__s0004__c0000__ab258bd40d4ec8c79ceb07ebbadc19bdd7ac48628fb848e311e40e60a3401764",
+          "doc_id": "irs_cp2566",
+          "retrieved_notice_code": "CP2566",
+          "title": "Understanding your CP2566 notice",
+          "heading": "What should I do if I disagree with the notice? (updated Nov. 5, 2024)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I disagree with the notice? (updated Nov. 5, 2024)"
+          ],
+          "section_index": 4,
+          "subchunk_index": 0,
+          "similarity_score": 0.545555174,
+          "text_preview": "Understanding your CP2566 notice Notice: CP2566 Section: Frequently asked questions > What should I do if I disagree with the notice? (updated Nov. 5, 2024) Call us at the number listed on your notice. Please have your paperwork ready when you call.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I disagree with the notice? (updated Nov. 5, 2024)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp2566__heading_aware_220_40__s0011__c0000__06033a9e8b641d58fa9f91544576a9ae96067fe53b21b77799266b92c4fe28dd",
+          "doc_id": "irs_cp2566",
+          "retrieved_notice_code": "CP2566",
+          "title": "Understanding your CP2566 notice",
+          "heading": "Need help?",
+          "heading_path": [
+            "Tips for next year",
+            "Need help?"
+          ],
+          "section_index": 11,
+          "subchunk_index": 0,
+          "similarity_score": 0.542488158,
+          "text_preview": "Understanding your CP2566 notice Notice: CP2566 Section: Tips for next year > Need help? - [You can authorize someone](https://www.irs.gov/businesses/small-businesses-self-employed/power-of-attorney-and-other-authorizations) to represent you before the IRS or inspect and/or receive confidential tax information. - You may be eligible for free help from the [T",
+          "attributed_heading_paths": [
+            [
+              "Tips for next year",
+              "Need help?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp2566__heading_aware_220_40__s0001__c0000__2fc6d90e3495a1d7b250e477ae939a7df8b86b58adac25439ab588f617bfd545",
+          "doc_id": "irs_cp2566",
+          "retrieved_notice_code": "CP2566",
+          "title": "Understanding your CP2566 notice",
+          "heading": "What you need to do",
+          "heading_path": [
+            "What you need to do"
+          ],
+          "section_index": 1,
+          "subchunk_index": 0,
+          "similarity_score": 0.506462157,
+          "text_preview": "Understanding your CP2566 notice Notice: CP2566 Section: What you need to do Respond by the date shown on your notice—you can either file your return or accept and pay our proposed amount due. - If you choose to file your tax return: you can file electronically using an e-file provider if your return is from the past 2 years. Otherwise, complete your return ",
+          "attributed_heading_paths": [
+            [
+              "What you need to do"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp2566__heading_aware_220_40__s0002__c0001__49c8cdaa53f4f3d889619b43e87b49d2261d1799aeebb180c4c617bce36d67ae",
+          "doc_id": "irs_cp2566",
+          "retrieved_notice_code": "CP2566",
+          "title": "Understanding your CP2566 notice",
+          "heading": "You may want to",
+          "heading_path": [
+            "You may want to"
+          ],
+          "section_index": 2,
+          "subchunk_index": 1,
+          "similarity_score": 0.495849669,
+          "text_preview": "Understanding your CP2566 notice Notice: CP2566 Section: You may want to to see that you have enough money withheld from your paycheck to pay your taxes. The [Tax Withholding Estimator](https://www.irs.gov/individuals/tax-withholding-estimator) can help. - Learn more about your [payment options](https://www.irs.gov/payments) if you owe additional taxes on yo",
+          "attributed_heading_paths": [
+            [
+              "You may want to"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp2566__heading_aware_220_40__s0008__c0000__d582845a8c5f59322bcde557350c24220c88e011c7a1290911de60276e52f86e",
+          "doc_id": "irs_cp2566",
+          "retrieved_notice_code": "CP2566",
+          "title": "Understanding your CP2566 notice",
+          "heading": "What happens if I can't pay the full amount I owe when I file my return? (updated Nov. 5, 2024)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What happens if I can't pay the full amount I owe when I file my return? (updated Nov. 5, 2024)"
+          ],
+          "section_index": 8,
+          "subchunk_index": 0,
+          "similarity_score": 0.489616424,
+          "text_preview": "Understanding your CP2566 notice Notice: CP2566 Section: Frequently asked questions > What happens if I can't pay the full amount I owe when I file my return? (updated Nov. 5, 2024) You can set up a [payment plan](https://www.irs.gov/payments/online-payment-agreement-application) with us when you can't pay the full amount you owe.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What happens if I can't pay the full amount I owe when I file my return? (updated Nov. 5, 2024)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.097893
+    },
+    {
+      "id": "S15",
+      "question": "What filing window and submission methods does the guidance provide for obtaining Tax Court review?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_cp3219n",
+      "expected_notice_code": "CP3219N",
+      "expected_heading": "If you want to file a petition with the U.S. Tax Court",
+      "expected_heading_path": [
+        "If you want to file a petition with the U.S. Tax Court"
+      ],
+      "expected_evidence_excerpt": "You have 90 days (150 days if outside of the U.S.) from the date of your notice to file a petition",
+      "rationale": "The petition section contains both the statutory filing window and electronic or mailed submission methods requested by the formal follow-up.",
+      "notice_family": "non_filer",
+      "retrieval_filter": {
+        "notice_code": {
+          "$eq": "CP3219N"
+        }
+      },
+      "eligible_chunk_count": 16,
+      "returned_chunk_count": 5,
+      "ranks": [
+        {
+          "rank": 1,
+          "chunk_id": "irs_cp3219n__heading_aware_220_40__s0002__c0000__43d0455f4135ad2638f95bbe5ee6b80534debf9c7f5f461afa18a7649373ebbe",
+          "doc_id": "irs_cp3219n",
+          "retrieved_notice_code": "CP3219N",
+          "title": "Understanding your CP3219N notice",
+          "heading": "If you want to file a petition with the U.S. Tax Court",
+          "heading_path": [
+            "If you want to file a petition with the U.S. Tax Court"
+          ],
+          "section_index": 2,
+          "subchunk_index": 0,
+          "similarity_score": 0.628717244,
+          "text_preview": "Understanding your CP3219N notice Notice: CP3219N Section: If you want to file a petition with the U.S. Tax Court You have 90 days (150 days if outside of the U.S.) from the date of your notice to file a petition with the U.S. Tax Court. - The [U.S. Tax Court](https://www.ustaxcourt.gov/) encourages petitioners to electronically file petitions. You can eFile",
+          "attributed_heading_paths": [
+            [
+              "If you want to file a petition with the U.S. Tax Court"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 2,
+          "chunk_id": "irs_cp3219n__heading_aware_220_40__s0002__c0001__86119e625ba59567a2f45da1cb0a9acc0732985121319536de2026879be72af2",
+          "doc_id": "irs_cp3219n",
+          "retrieved_notice_code": "CP3219N",
+          "title": "Understanding your CP3219N notice",
+          "heading": "If you want to file a petition with the U.S. Tax Court",
+          "heading_path": [
+            "If you want to file a petition with the U.S. Tax Court"
+          ],
+          "section_index": 2,
+          "subchunk_index": 1,
+          "similarity_score": 0.598796785,
+          "text_preview": "Understanding your CP3219N notice Notice: CP3219N Section: If you want to file a petition with the U.S. Tax Court - United States Tax Court<br>400 Second Street, NW<br>Washington, DC 20217 The Tax Court has simplified procedures for taxpayers whose amount in dispute, including applicable penalties, is $50,000 or less per tax year. You can find these [simplif",
+          "attributed_heading_paths": [
+            [
+              "If you want to file a petition with the U.S. Tax Court"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": true,
+          "correct": true
+        },
+        {
+          "rank": 3,
+          "chunk_id": "irs_cp3219n__heading_aware_220_40__s0008__c0000__2237c77fc31abba13724beae6f814e25a70ab11b5620b1ff068cf9439744ef1f",
+          "doc_id": "irs_cp3219n",
+          "retrieved_notice_code": "CP3219N",
+          "title": "Understanding your CP3219N notice",
+          "heading": "What should I do if I've just filed my tax return?",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I've just filed my tax return?"
+          ],
+          "section_index": 8,
+          "subchunk_index": 0,
+          "similarity_score": 0.566158175,
+          "text_preview": "Understanding your CP3219N notice Notice: CP3219N Section: Frequently asked questions > What should I do if I've just filed my tax return? You don't have to do anything if you filed your tax return(s) within the last twelve weeks, but your time for filing a petition with the Tax Court is not extended by filing a return.",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I've just filed my tax return?"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 4,
+          "chunk_id": "irs_cp3219n__heading_aware_220_40__s0012__c0000__1a2d7f002cfbb57e2b8cde3c43815e4eb2db4d3309f2f0b4068f83a08f09525f",
+          "doc_id": "irs_cp3219n",
+          "retrieved_notice_code": "CP3219N",
+          "title": "Understanding your CP3219N notice",
+          "heading": "Tips for next year",
+          "heading_path": [
+            "Tips for next year"
+          ],
+          "section_index": 12,
+          "subchunk_index": 0,
+          "similarity_score": 0.532157838,
+          "text_preview": "Understanding your CP3219N notice Notice: CP3219N Section: Tips for next year File your return on time. Consider filing your taxes electronically. Filing online can help you avoid mistakes and find credits and deductions that you may qualify for. In many cases you can file for free. [Learn more about e-file](https://www.irs.gov/filing/individuals/how-to-file",
+          "attributed_heading_paths": [
+            [
+              "Tips for next year"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        },
+        {
+          "rank": 5,
+          "chunk_id": "irs_cp3219n__heading_aware_220_40__s0009__c0000__182854c4a996f0c656a0ac146ada7473c1f21e752605c9ebc334315024dc9a51",
+          "doc_id": "irs_cp3219n",
+          "retrieved_notice_code": "CP3219N",
+          "title": "Understanding your CP3219N notice",
+          "heading": "What should I do if I didn't file my tax return or it's been more than twelve weeks since I filed it? (updated Nov. 5, 2024)",
+          "heading_path": [
+            "Frequently asked questions",
+            "What should I do if I didn't file my tax return or it's been more than twelve weeks since I filed it? (updated Nov. 5, 2024)"
+          ],
+          "section_index": 9,
+          "subchunk_index": 0,
+          "similarity_score": 0.531045914,
+          "text_preview": "Understanding your CP3219N notice Notice: CP3219N Section: Frequently asked questions > What should I do if I didn't file my tax return or it's been more than twelve weeks since I filed it? (updated Nov. 5, 2024) You may be able to file your past due return electronically if the tax period for which you’re filing is from the past 2 years. Otherwise, mail us ",
+          "attributed_heading_paths": [
+            [
+              "Frequently asked questions",
+              "What should I do if I didn't file my tax return or it's been more than twelve weeks since I filed it? (updated Nov. 5, 2024)"
+            ]
+          ],
+          "notice_match": true,
+          "section_match": false,
+          "correct": false
+        }
+      ],
+      "section_score": {
+        "precision_at_1": 1,
+        "reciprocal_rank": 1.0,
+        "hit_at_5": 1,
+        "first_correct_rank": 1
+      },
+      "query_latency_seconds": 0.162795
+    }
+  ],
+  "quality_gate_passed": true
+}

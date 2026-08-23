@@ -1,0 +1,7 @@
+scope,category,language_style,question_count,p1_correct,precision_at_1,reciprocal_rank_sum,mrr,hit5_correct,hit_at_5
+overall_document,all,all,22,22,1.000000,22.000000,1.000000,22,1.000000
+category,A,all,6,6,1.000000,6.000000,1.000000,6,1.000000
+category,B,all,8,8,1.000000,8.000000,1.000000,8,1.000000
+category,C,all,8,8,1.000000,8.000000,1.000000,8,1.000000
+language_style,all,naive,13,13,1.000000,13.000000,1.000000,13,1.000000
+language_style,all,expert,9,9,1.000000,9.000000,1.000000,9,1.000000

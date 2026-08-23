@@ -1,0 +1,1892 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-08-22T22:03:24.134312Z",
+  "frozen_golden_sha256": "a5e12ae768b8d43250fac99198efba35bd2d7f5db640e3aba1e8d6958920f391",
+  "subset_selection": {
+    "rule": "all frozen answerable questions whose expected notice has an existing official sample PDF",
+    "selected_before_generation": true,
+    "question_ids": [
+      "A02",
+      "A05",
+      "A06",
+      "B04",
+      "C01",
+      "C02",
+      "C05",
+      "D01",
+      "D03",
+      "D04"
+    ],
+    "question_count": 10,
+    "expert_count": 5,
+    "naive_count": 5
+  },
+  "method": {
+    "citation_support_audit": "atomic final claims are app-rendered exact excerpts from cited frozen IRS chunks or deterministic notice-field source text; support is verified by exact normalized containment",
+    "expected_answer_facts_included_for_review": true,
+    "auxiliary": "same selected structured-output model judges every claim against only its attached evidence",
+    "human_evidence_review_completed": false,
+    "formal_faithfulness_status": "pending_human_review",
+    "human_review_limitation": "the frozen Phase 2 metric requires expected_answer_facts plus human evidence review; citation support and the auxiliary judge are reported separately and are not relabelled as formal faithfulness"
+  },
+  "results": {
+    "answerable_questions": 10,
+    "answered_questions": 9,
+    "answerable_response_rate": 0.9,
+    "atomic_claims": 21,
+    "deterministically_supported_claims": 21,
+    "citation_support_rate": 1.0,
+    "formal_faithfulness": null,
+    "formal_faithfulness_status": "pending_human_review",
+    "frozen_faithfulness_target": 0.95,
+    "frozen_faithfulness_target_met": null,
+    "auxiliary_judge_supported_claims": 21,
+    "auxiliary_judge_evaluated_claims": 21,
+    "auxiliary_judge_coverage": 1.0,
+    "auxiliary_judge_support_rate": 1.0,
+    "auxiliary_judge_seconds": 16.892469,
+    "auxiliary_judge_failures": []
+  },
+  "questions": [
+    {
+      "question_id": "A02",
+      "question": "For CP05A, which supporting records does the IRS accept to verify income and withholding?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_cp05a",
+      "expected_notice_code": "CP05A",
+      "expected_answer_facts": [
+        "At least three pay statements or check stubs are accepted, including the year-end statement or stub.",
+        "An employer letter should include the employer's name, address, telephone number and fax number.",
+        "A statement of benefits for retirement income is also accepted."
+      ],
+      "sample_filename": "cp05a_english.pdf",
+      "detected_notice_code": "CP05A",
+      "retrieval_notice_code": "CP05A",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "CP05A",
+        "answer": "IRS guidance says: - Copies of at least 3 pay statements or check stubs, including the end of the year statement/check stub. (Don’t send a copy of Form W-2, Wage and Tax Statement.).",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "IRS guidance says: - Copies of at least 3 pay statements or check stubs, including the end of the year statement/check stub. (Don’t send a copy of Form W-2, Wage and Tax Statement.).",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "CP05A",
+            "source_title": "Understanding your CP05A notice",
+            "heading": "Acceptable documentation includes:",
+            "heading_path": [
+              "What you need to do",
+              "Acceptable documentation includes:"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp05a-notice",
+            "chunk_id": "irs_cp05a__heading_aware_220_40__s0003__c0000__8eed0376a4fd3db2e513eafd69ef3e78f069550a24a8ada52ec456fb6862353a"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "CP05A",
+            "confidence": 0.99,
+            "source_text": "Notice CP05A"
+          },
+          "notice_date": {
+            "value": "March 7, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date March 7, 2019"
+          },
+          "due_or_response_date": {
+            "value": "April 21, 2019",
+            "confidence": 0.95,
+            "source_text": "Send us any additional information that supports what you reported on your tax return by April 21, 2019"
+          },
+          "amount": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_cp05a__heading_aware_220_40__s0000__c0000__a109cc648ef1847c2b03709bc7cf802d267f4d2bce1002fe2b35baded9fc01ce",
+        "irs_cp05a__heading_aware_220_40__s0002__c0000__0c82a7ba1b0285aed2c890e6dbb6ae11389e0e66390d6797a042cc97df9f95ba",
+        "irs_cp05a__heading_aware_220_40__s0003__c0000__8eed0376a4fd3db2e513eafd69ef3e78f069550a24a8ada52ec456fb6862353a",
+        "irs_cp05a__heading_aware_220_40__s0010__c0000__714d8da6a3a08cde62c8e236e5bba1c800b342863a2e9ff87e659406f1a62962",
+        "irs_cp05a__heading_aware_220_40__s0012__c0000__5895214ad105dcb95ef43769e7bced1857b03c7bb635e9581c0fed7bcdeeaceb"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "A02:CL1",
+          "claim": "IRS guidance says: - Copies of at least 3 pay statements or check stubs, including the end of the year statement/check stub. (Don’t send a copy of Form W-2, Wage and Tax Statement.).",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp05a__heading_aware_220_40__s0003__c0000__8eed0376a4fd3db2e513eafd69ef3e78f069550a24a8ada52ec456fb6862353a",
+              "text": "Understanding your CP05A notice\n\nNotice: CP05A\n\nSection:\nWhat you need to do > Acceptable documentation includes:\n\n- Copies of at least 3 pay statements or check stubs, including the end of the year statement/check stub. (Don’t send a copy of Form W-2, Wage and Tax Statement.)\n- A letter on company letterhead from your employer, including your employer’s name, address, telephone and fax number.\n- A statement of benefits on retirement income"
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence from the official IRS guidance directly states that acceptable documentation includes copies of at least 3 pay statements or check stubs, including the end of the year statement/check stub, and explicitly advises not to send a copy of Form W-2. This matches the claim exactly."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.007485,
+        "embedding_seconds": 1.645804,
+        "pinecone_seconds": 0.287932,
+        "generation_seconds": 3.344582,
+        "validation_and_render_seconds": 0.002822,
+        "graph_end_to_end_seconds": 5.331383,
+        "pdf_extraction_seconds": 0.896256,
+        "request_end_to_end_seconds": 6.227685
+      }
+    },
+    {
+      "question_id": "A05",
+      "question": "What does CP523 say I should do to keep my installment agreement from being terminated?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_cp523",
+      "expected_notice_code": "CP523",
+      "expected_answer_facts": [
+        "Make the required payment before the termination date.",
+        "Contact the IRS promptly to discuss reinstating the agreement.",
+        "Reinstatement may require a fee or payment of a new tax liability.",
+        "No response can lead to termination and collection action, including a lien or levy."
+      ],
+      "sample_filename": "cp523h_english.pdf",
+      "detected_notice_code": "CP523H",
+      "retrieval_notice_code": "CP523",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "CP523H",
+        "answer": "IRS guidance says: - Make your payment before your termination date to prevent your installment agreement from being terminated. Go to the [payments](https://www.irs.gov/payments) page to make your payment or find out more about your payment options.",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "IRS guidance says: - Make your payment before your termination date to prevent your installment agreement from being terminated. Go to the [payments](https://www.irs.gov/payments) page to make your payment or find out more about your payment options.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "CP523",
+            "source_title": "Understanding your CP523 notice",
+            "heading": "What you need to do",
+            "heading_path": [
+              "What you need to do"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp523-notice",
+            "chunk_id": "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "CP523H",
+            "confidence": 0.99,
+            "source_text": "Notice CP523H"
+          },
+          "notice_date": {
+            "value": "January 30, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 30, 2019"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": "$9,533.53",
+            "confidence": 0.95,
+            "source_text": "Total amount due if we terminate your installment agreement and you exhaust your appeal rights $9,533.53"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4",
+        "irs_cp523__heading_aware_220_40__s0003__c0000__1edc58adcfcc110bc2994bb96759f53b0f276897d53dba702cab64e46980c56d",
+        "irs_cp523__heading_aware_220_40__s0000__c0000__04bc29ae4e947cbc0a80681a055939982cd42eee460d47b16a71d280f029559f",
+        "irs_cp523__heading_aware_220_40__s0007__c0000__53c3d9edcec260b13a9319c42cc84a44d3e5aa262da1417f7dcb8cb23fc4bef5",
+        "irs_cp523__heading_aware_220_40__s0008__c0000__083806e6326caccf02c90769e2923fab810d70ece3fb1dad9a7776e4eefa3b9d"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "A05:CL1",
+          "claim": "IRS guidance says: - Make your payment before your termination date to prevent your installment agreement from being terminated. Go to the [payments](https://www.irs.gov/payments) page to make your payment or find out more about your payment options.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4",
+              "text": "Understanding your CP523 notice\n\nNotice: CP523\n\nSection:\nWhat you need to do\n\n- Make your payment before your termination date to prevent your installment agreement from being terminated. Go to the [payments](https://www.irs.gov/payments) page to make your payment or find out more about your payment options.\n- Contact the IRS right away to see if you can reinstate your agreement. You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.\n- Read your notice carefully — it explains what to do now that you have defaulted on your installment agreement.\n- If you don't respond, we will terminate your installment agreement and begin taking collection action, which can include filing a federal tax lien or seizing (levying) your wages and/or bank accounts"
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The claim directly matches the text provided in the official IRS guidance, which states to make your payment before your termination date to prevent termination of the installment agreement and directs users to the payments page for more information."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.007593,
+        "embedding_seconds": 4.335315,
+        "pinecone_seconds": 0.442111,
+        "generation_seconds": 2.782454,
+        "validation_and_render_seconds": 0.000555,
+        "graph_end_to_end_seconds": 7.595152,
+        "pdf_extraction_seconds": 0.284537,
+        "request_end_to_end_seconds": 7.879714
+      }
+    },
+    {
+      "question_id": "A06",
+      "question": "For LT11 or Letter 1058, what does the IRS say to do if I cannot pay the full overdue balance?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_lt11_1058",
+      "expected_notice_code": "LT11 / Letter 1058",
+      "expected_answer_facts": [
+        "Paying part of the balance now reduces future interest and applicable penalties.",
+        "A taxpayer who is current on required filings may request an installment agreement.",
+        "A balance below $50,000 may qualify for the online installment-agreement process.",
+        "A taxpayer unable to pay should contact the telephone number on the notice or letter."
+      ],
+      "sample_filename": "lt11_english.pdf",
+      "detected_notice_code": "LT11",
+      "retrieval_notice_code": "LT11 / Letter 1058",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "LT11",
+        "answer": "IRS guidance says: If you can’t pay the full amount, pay what you can now; payments will reduce the amount of interest and applicable penalties added to the remaining balance in the future. IRS guidance says: If you’re current on your tax filings, you can request an [installment agreement](https://www.irs.gov/payments/payment-plans-installment-agreements) to pay the remaining balance on your account over time.<br> <br>Note: If you owe less than $50,000, you may be able to set up an installment agreement using the [Online Payment Agreement tool](https://www.irs.gov/payments/online-payment-agreement-application), which is the fastest way to get an installment agreement approved. IRS guidance says: If you can’t apply online, call us at the number on your notice or letter, or mail in an [installment agreement request PDF](https://www.irs.gov/pub/irs-dft/f9465--dft.pdf). IRS guidance says: If you’re unable to pay the balance due, contact the telephone number listed on the notice or letter.",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "IRS guidance says: If you can’t pay the full amount, pay what you can now; payments will reduce the amount of interest and applicable penalties added to the remaining balance in the future.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL2",
+            "text": "IRS guidance says: If you’re current on your tax filings, you can request an [installment agreement](https://www.irs.gov/payments/payment-plans-installment-agreements) to pay the remaining balance on your account over time.<br> <br>Note: If you owe less than $50,000, you may be able to set up an installment agreement using the [Online Payment Agreement tool](https://www.irs.gov/payments/online-payment-agreement-application), which is the fastest way to get an installment agreement approved.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL3",
+            "text": "IRS guidance says: If you can’t apply online, call us at the number on your notice or letter, or mail in an [installment agreement request PDF](https://www.irs.gov/pub/irs-dft/f9465--dft.pdf).",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C2"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL4",
+            "text": "IRS guidance says: If you’re unable to pay the balance due, contact the telephone number listed on the notice or letter.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C2"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "LT11 / Letter 1058",
+            "source_title": "Understanding your LT11 notice or letter 1058",
+            "heading": "What you need to do",
+            "heading_path": [
+              "What you need to do"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-lt11-notice-or-letter-1058",
+            "chunk_id": "irs_lt11_1058__heading_aware_220_40__s0001__c0000__bfc6c6d429af5ad6ecf45c13cc023738e79411dc8f7c39d90ca56cd956ab812d"
+          },
+          {
+            "citation_id": "C2",
+            "notice_code": "LT11 / Letter 1058",
+            "source_title": "Understanding your LT11 notice or letter 1058",
+            "heading": "What you need to do",
+            "heading_path": [
+              "What you need to do"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-lt11-notice-or-letter-1058",
+            "chunk_id": "irs_lt11_1058__heading_aware_220_40__s0001__c0001__0438a094dd843bb8a2b041c40b8925d145665d33e10badacdc51759925f1e10e"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "LT11",
+            "confidence": 0.99,
+            "source_text": "Notice LT11"
+          },
+          "notice_date": {
+            "value": "March 2, 2020",
+            "confidence": 0.98,
+            "source_text": "Notice date March 2, 2020"
+          },
+          "due_or_response_date": {
+            "value": "April 1, 2020",
+            "confidence": 0.95,
+            "source_text": "Hearing, by April 1, 2020"
+          },
+          "amount": {
+            "value": "$4,823.12",
+            "confidence": 0.95,
+            "source_text": "Amount due immediately $4,823.12"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_lt11_1058__heading_aware_220_40__s0001__c0000__bfc6c6d429af5ad6ecf45c13cc023738e79411dc8f7c39d90ca56cd956ab812d",
+        "irs_lt11_1058__heading_aware_220_40__s0001__c0001__0438a094dd843bb8a2b041c40b8925d145665d33e10badacdc51759925f1e10e",
+        "irs_lt11_1058__heading_aware_220_40__s0006__c0000__6efa12a58e2ac7cd17e13c023f46ded47e239853b290e3659f57cca58c62cdb3",
+        "irs_lt11_1058__heading_aware_220_40__s0000__c0000__b5c40631d7c31804c3a84fe9fe860967bec4d11e2a307c387b305f39381e77a0",
+        "irs_lt11_1058__heading_aware_220_40__s0007__c0000__e6e460ce5cfe9c923a369fd826682d132f3ade3750369ea74bace30f15922434"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "A06:CL1",
+          "claim": "IRS guidance says: If you can’t pay the full amount, pay what you can now; payments will reduce the amount of interest and applicable penalties added to the remaining balance in the future.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_lt11_1058__heading_aware_220_40__s0001__c0000__bfc6c6d429af5ad6ecf45c13cc023738e79411dc8f7c39d90ca56cd956ab812d",
+              "text": "Understanding your LT11 notice or letter 1058\n\nNotice: LT11 / Letter 1058\n\nSection:\nWhat you need to do\n\n- Pay your unpaid balance: When you pay your balance in full, we’ll stop adding interest and applicable penalties. You can quickly and easily, [pay your balance online](https://www.irs.gov/payments). Visit your [Online Account](https://www.irs.gov/payments/online-account-for-individuals) to determine your balance. If you can’t pay the full amount, pay what you can now; payments will reduce the amount of interest and applicable penalties added to the remaining balance in the future. If you’re current on your tax filings, you can request an [installment agreement](https://www.irs.gov/payments/payment-plans-installment-agreements) to pay the remaining balance on your account over time.<br> <br>Note: If you owe less than $50,000, you may be able to set up an installment agreement using the [Online Payment Agreement tool](https://www.irs.gov/payments/online-payment-agreement-application), which is the fastest way to get an installment agreement approved. If you can’t apply online"
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence directly states that if you can't pay the full amount, paying what you can now will reduce the amount of interest and applicable penalties added to the remaining balance in the future, which matches the claim exactly."
+          }
+        },
+        {
+          "claim_id": "A06:CL2",
+          "claim": "IRS guidance says: If you’re current on your tax filings, you can request an [installment agreement](https://www.irs.gov/payments/payment-plans-installment-agreements) to pay the remaining balance on your account over time.<br> <br>Note: If you owe less than $50,000, you may be able to set up an installment agreement using the [Online Payment Agreement tool](https://www.irs.gov/payments/online-payment-agreement-application), which is the fastest way to get an installment agreement approved.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_lt11_1058__heading_aware_220_40__s0001__c0000__bfc6c6d429af5ad6ecf45c13cc023738e79411dc8f7c39d90ca56cd956ab812d",
+              "text": "Understanding your LT11 notice or letter 1058\n\nNotice: LT11 / Letter 1058\n\nSection:\nWhat you need to do\n\n- Pay your unpaid balance: When you pay your balance in full, we’ll stop adding interest and applicable penalties. You can quickly and easily, [pay your balance online](https://www.irs.gov/payments). Visit your [Online Account](https://www.irs.gov/payments/online-account-for-individuals) to determine your balance. If you can’t pay the full amount, pay what you can now; payments will reduce the amount of interest and applicable penalties added to the remaining balance in the future. If you’re current on your tax filings, you can request an [installment agreement](https://www.irs.gov/payments/payment-plans-installment-agreements) to pay the remaining balance on your account over time.<br> <br>Note: If you owe less than $50,000, you may be able to set up an installment agreement using the [Online Payment Agreement tool](https://www.irs.gov/payments/online-payment-agreement-application), which is the fastest way to get an installment agreement approved. If you can’t apply online"
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence explicitly states that if you're current on your tax filings, you can request an installment agreement to pay the remaining balance over time, and provides details about the Online Payment Agreement tool for those owing less than $50,000, fully supporting the claim."
+          }
+        },
+        {
+          "claim_id": "A06:CL3",
+          "claim": "IRS guidance says: If you can’t apply online, call us at the number on your notice or letter, or mail in an [installment agreement request PDF](https://www.irs.gov/pub/irs-dft/f9465--dft.pdf).",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_lt11_1058__heading_aware_220_40__s0001__c0001__0438a094dd843bb8a2b041c40b8925d145665d33e10badacdc51759925f1e10e",
+              "text": "Understanding your LT11 notice or letter 1058\n\nNotice: LT11 / Letter 1058\n\nSection:\nWhat you need to do\n\n the [Online Payment Agreement tool](https://www.irs.gov/payments/online-payment-agreement-application), which is the fastest way to get an installment agreement approved. If you can’t apply online, call us at the number on your notice or letter, or mail in an [installment agreement request PDF](https://www.irs.gov/pub/irs-dft/f9465--dft.pdf).<br>\n- If you already paid in full or think we haven’t credited a payment, send proof of that payment to us using the address at the top of your notice or letter.\n- If you’re unable to pay the balance due, contact the telephone number listed on the notice or letter."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence states that if you can't apply online, you should call the number on your notice or mail in the installment agreement request PDF, which directly supports the claim."
+          }
+        },
+        {
+          "claim_id": "A06:CL4",
+          "claim": "IRS guidance says: If you’re unable to pay the balance due, contact the telephone number listed on the notice or letter.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_lt11_1058__heading_aware_220_40__s0001__c0001__0438a094dd843bb8a2b041c40b8925d145665d33e10badacdc51759925f1e10e",
+              "text": "Understanding your LT11 notice or letter 1058\n\nNotice: LT11 / Letter 1058\n\nSection:\nWhat you need to do\n\n the [Online Payment Agreement tool](https://www.irs.gov/payments/online-payment-agreement-application), which is the fastest way to get an installment agreement approved. If you can’t apply online, call us at the number on your notice or letter, or mail in an [installment agreement request PDF](https://www.irs.gov/pub/irs-dft/f9465--dft.pdf).<br>\n- If you already paid in full or think we haven’t credited a payment, send proof of that payment to us using the address at the top of your notice or letter.\n- If you’re unable to pay the balance due, contact the telephone number listed on the notice or letter."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence clearly states that if you're unable to pay the balance due, you should contact the telephone number listed on the notice or letter, which matches the claim exactly."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.009188,
+        "embedding_seconds": 1.113683,
+        "pinecone_seconds": 0.131943,
+        "generation_seconds": 14.431159,
+        "validation_and_render_seconds": 0.000457,
+        "graph_end_to_end_seconds": 15.722353,
+        "pdf_extraction_seconds": 0.444045,
+        "request_end_to_end_seconds": 16.166423
+      }
+    },
+    {
+      "question_id": "B04",
+      "question": "My refund is being held while the IRS checks whether I owe another federal balance. Do I need to respond, and what should happen next?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp44",
+      "expected_notice_code": "CP44",
+      "expected_answer_facts": [
+        "No action is currently required.",
+        "Within eight weeks, the IRS should either send the refund with applicable interest or send another notice explaining an offset.",
+        "If an offset occurs, any remaining refund is sent with applicable interest."
+      ],
+      "sample_filename": "cp44_english.pdf",
+      "detected_notice_code": "CP44",
+      "retrieval_notice_code": "CP44",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "CP44",
+        "answer": "IRS guidance says: - You don’t need to do anything. IRS guidance says: - Within 8 weeks, we’ll either: - Send your refund, including any applicable interest, or - Mail you another notice explaining how we applied your refund to other federal taxes you owe. IRS guidance says: We’ll send you any remaining amount, including any applicable interest. IRS guidance says: We may be applying your refund to a balance on another account for which you’re liable.",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "IRS guidance says: - You don’t need to do anything.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL2",
+            "text": "IRS guidance says: - Within 8 weeks, we’ll either: - Send your refund, including any applicable interest, or - Mail you another notice explaining how we applied your refund to other federal taxes you owe.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL3",
+            "text": "IRS guidance says: We’ll send you any remaining amount, including any applicable interest.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C2"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL4",
+            "text": "IRS guidance says: We may be applying your refund to a balance on another account for which you’re liable.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C3"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "CP44",
+            "source_title": "Understanding your CP44 notice",
+            "heading": "What you need to do",
+            "heading_path": [
+              "What you need to do"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp44-notice",
+            "chunk_id": "irs_cp44__heading_aware_220_40__s0001__c0000__df26789147cf35af160950960ea6cd43d8270ea00c2a03be490fc8c022b6ebb1"
+          },
+          {
+            "citation_id": "C2",
+            "notice_code": "CP44",
+            "source_title": "Understanding your CP44 notice",
+            "heading": "What happens after the refund is applied? (updated Nov. 24, 2025)",
+            "heading_path": [
+              "Frequently asked questions",
+              "What happens after the refund is applied? (updated Nov. 24, 2025)"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp44-notice",
+            "chunk_id": "irs_cp44__heading_aware_220_40__s0005__c0000__4c9f8f8acc8f36b7f1086ce4324ebd05e04f696eaac3b80d5db43f14db1dfa88"
+          },
+          {
+            "citation_id": "C3",
+            "notice_code": "CP44",
+            "source_title": "Understanding your CP44 notice",
+            "heading": "Why did I get this notice? (updated Jan. 14, 2025)",
+            "heading_path": [
+              "Frequently asked questions",
+              "Why did I get this notice? (updated Jan. 14, 2025)"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp44-notice",
+            "chunk_id": "irs_cp44__heading_aware_220_40__s0003__c0000__3ee0009d8f41dd9e53b1b977c1b120d99828e065301577cc3d704f5443e68616"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "CP44",
+            "confidence": 0.99,
+            "source_text": "Notice CP44"
+          },
+          "notice_date": {
+            "value": "October 10, 2013",
+            "confidence": 0.98,
+            "source_text": "Notice date October 10, 2013"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_cp44__heading_aware_220_40__s0000__c0000__3c32c6aad19a6dd179af31bfc35bfa8bca418d4e2a8024e443e69b6e704dcf6e",
+        "irs_cp44__heading_aware_220_40__s0001__c0000__df26789147cf35af160950960ea6cd43d8270ea00c2a03be490fc8c022b6ebb1",
+        "irs_cp44__heading_aware_220_40__s0005__c0000__4c9f8f8acc8f36b7f1086ce4324ebd05e04f696eaac3b80d5db43f14db1dfa88",
+        "irs_cp44__heading_aware_220_40__s0003__c0000__3ee0009d8f41dd9e53b1b977c1b120d99828e065301577cc3d704f5443e68616",
+        "irs_cp44__heading_aware_220_40__s0007__c0000__aad7749dbb73988e0a1f13cd985693038a86eeee71bdb50be7e6b7b49fee6358"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "B04:CL1",
+          "claim": "IRS guidance says: - You don’t need to do anything.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp44__heading_aware_220_40__s0001__c0000__df26789147cf35af160950960ea6cd43d8270ea00c2a03be490fc8c022b6ebb1",
+              "text": "Understanding your CP44 notice\n\nNotice: CP44\n\nSection:\nWhat you need to do\n\n- You don’t need to do anything.\n- Within 8 weeks, we’ll either:\n  - Send your refund, including any applicable interest, or\n  - Mail you another notice explaining how we applied your refund to other federal taxes you owe."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence directly states: 'You don’t need to do anything.' This matches the claim exactly."
+          }
+        },
+        {
+          "claim_id": "B04:CL2",
+          "claim": "IRS guidance says: - Within 8 weeks, we’ll either: - Send your refund, including any applicable interest, or - Mail you another notice explaining how we applied your refund to other federal taxes you owe.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp44__heading_aware_220_40__s0001__c0000__df26789147cf35af160950960ea6cd43d8270ea00c2a03be490fc8c022b6ebb1",
+              "text": "Understanding your CP44 notice\n\nNotice: CP44\n\nSection:\nWhat you need to do\n\n- You don’t need to do anything.\n- Within 8 weeks, we’ll either:\n  - Send your refund, including any applicable interest, or\n  - Mail you another notice explaining how we applied your refund to other federal taxes you owe."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence includes the exact text: 'Within 8 weeks, we’ll either: - Send your refund, including any applicable interest, or - Mail you another notice explaining how we applied your refund to other federal taxes you owe.' This matches the claim verbatim."
+          }
+        },
+        {
+          "claim_id": "B04:CL3",
+          "claim": "IRS guidance says: We’ll send you any remaining amount, including any applicable interest.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp44__heading_aware_220_40__s0005__c0000__4c9f8f8acc8f36b7f1086ce4324ebd05e04f696eaac3b80d5db43f14db1dfa88",
+              "text": "Understanding your CP44 notice\n\nNotice: CP44\n\nSection:\nFrequently asked questions > What happens after the refund is applied? (updated Nov. 24, 2025)\n\nWe’ll send you any remaining amount, including any applicable interest."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence states: 'We’ll send you any remaining amount, including any applicable interest.' This directly supports the claim."
+          }
+        },
+        {
+          "claim_id": "B04:CL4",
+          "claim": "IRS guidance says: We may be applying your refund to a balance on another account for which you’re liable.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp44__heading_aware_220_40__s0003__c0000__3ee0009d8f41dd9e53b1b977c1b120d99828e065301577cc3d704f5443e68616",
+              "text": "Understanding your CP44 notice\n\nNotice: CP44\n\nSection:\nFrequently asked questions > Why did I get this notice? (updated Jan. 14, 2025)\n\nWe may be applying your refund to a balance on another account for which you’re liable."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence states: 'We may be applying your refund to a balance on another account for which you’re liable.' This matches the claim exactly."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.001394,
+        "embedding_seconds": 7.308454,
+        "pinecone_seconds": 0.320347,
+        "generation_seconds": 11.557496,
+        "validation_and_render_seconds": 0.000889,
+        "graph_end_to_end_seconds": 19.19992,
+        "pdf_extraction_seconds": 0.047011,
+        "request_end_to_end_seconds": 19.246968
+      }
+    },
+    {
+      "question_id": "C01",
+      "question": "The IRS says it still hasn't heard from me and calls this my second reminder about an unpaid balance. What stage is this, and what could happen if I keep ignoring it?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp503",
+      "expected_notice_code": "CP503",
+      "expected_answer_facts": [
+        "The unpaid balance remains and the IRS has not received a payment or response.",
+        "This notice is the second reminder after earlier notice or notices.",
+        "The balance should be paid by the notice's due date to avoid additional penalties and interest.",
+        "Continued nonresponse may lead to a Notice of Federal Tax Lien."
+      ],
+      "sample_filename": "cp503c.pdf",
+      "detected_notice_code": "CP503C",
+      "retrieval_notice_code": "CP503",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "CP503C",
+        "answer": "IRS guidance says: This notice is your second reminder that you still owe a balance on one of your tax accounts. You received this notice because we haven’t received your payment or a response to previous notice(s) requesting you pay this balance. IRS guidance says: If you don't pay the amount due, make payment arrangements, or contact us at the toll-free number on your notice, we may file a Notice of Federal Tax Lien if we haven't already done so. IRS guidance says: A tax lien is a public notice to your creditors that the IRS has a right to your interests in your current assets and any assets you acquire after we file the lien; it can affect your ability to get credit.",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "IRS guidance says: This notice is your second reminder that you still owe a balance on one of your tax accounts. You received this notice because we haven’t received your payment or a response to previous notice(s) requesting you pay this balance.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL2",
+            "text": "IRS guidance says: If you don't pay the amount due, make payment arrangements, or contact us at the toll-free number on your notice, we may file a Notice of Federal Tax Lien if we haven't already done so.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C2"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL3",
+            "text": "IRS guidance says: A tax lien is a public notice to your creditors that the IRS has a right to your interests in your current assets and any assets you acquire after we file the lien; it can affect your ability to get credit.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C2"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "CP503",
+            "source_title": "Understanding your CP503 notice",
+            "heading": "What is the notice telling me?",
+            "heading_path": [
+              "Frequently asked questions",
+              "What is the notice telling me?"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp503-notice",
+            "chunk_id": "irs_cp503__heading_aware_220_40__s0004__c0000__e3fb23f9a20e6a36d090df0741444b0a8360e265082bb6963700faa0836c3ba4"
+          },
+          {
+            "citation_id": "C2",
+            "notice_code": "CP503",
+            "source_title": "Understanding your CP503 notice",
+            "heading": "What happens if I don't pay or respond to this notice?",
+            "heading_path": [
+              "Frequently asked questions",
+              "What happens if I don't pay or respond to this notice?"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp503-notice",
+            "chunk_id": "irs_cp503__heading_aware_220_40__s0007__c0000__6b22306e48851c167550273e03fdb29bb3ef80c78ec44482285ac71482a96be4"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "CP503C",
+            "confidence": 0.96,
+            "source_text": "CP503C"
+          },
+          "notice_date": {
+            "value": "August 10, 2018",
+            "confidence": 0.98,
+            "source_text": "Notice date: 08-10-18"
+          },
+          "due_or_response_date": {
+            "value": "August 20, 2018",
+            "confidence": 0.95,
+            "source_text": "must pay by August 20, 2018"
+          },
+          "amount": {
+            "value": "$9,533.53",
+            "confidence": 0.95,
+            "source_text": "Amount Due: $9,533.53"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_cp503__heading_aware_220_40__s0004__c0000__e3fb23f9a20e6a36d090df0741444b0a8360e265082bb6963700faa0836c3ba4",
+        "irs_cp503__heading_aware_220_40__s0000__c0000__f114b87cf1e66be3577dc5acf14bf00fcc53a9d0cf3a90bff393cec1c969d23c",
+        "irs_cp503__heading_aware_220_40__s0007__c0000__6b22306e48851c167550273e03fdb29bb3ef80c78ec44482285ac71482a96be4",
+        "irs_cp503__heading_aware_220_40__s0002__c0000__c815da2ff2e31f81a6f949a6c815862388acbb407fc92e8670f0295ef3306ba8",
+        "irs_cp503__heading_aware_220_40__s0001__c0000__7339a5f7270f3044fb70d525b582e604db0ebe655100f61811a818347a4a7ea3"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "C01:CL1",
+          "claim": "IRS guidance says: This notice is your second reminder that you still owe a balance on one of your tax accounts. You received this notice because we haven’t received your payment or a response to previous notice(s) requesting you pay this balance.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp503__heading_aware_220_40__s0004__c0000__e3fb23f9a20e6a36d090df0741444b0a8360e265082bb6963700faa0836c3ba4",
+              "text": "Understanding your CP503 notice\n\nNotice: CP503\n\nSection:\nFrequently asked questions > What is the notice telling me?\n\nThis notice is your second reminder that you still owe a balance on one of your tax accounts. You received this notice because we haven’t received your payment or a response to previous notice(s) requesting you pay this balance."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The claim directly matches the text provided in the official IRS guidance, which states that the CP503 notice is a second reminder of an outstanding balance due to non-payment or lack of response to prior notices."
+          }
+        },
+        {
+          "claim_id": "C01:CL2",
+          "claim": "IRS guidance says: If you don't pay the amount due, make payment arrangements, or contact us at the toll-free number on your notice, we may file a Notice of Federal Tax Lien if we haven't already done so.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp503__heading_aware_220_40__s0007__c0000__6b22306e48851c167550273e03fdb29bb3ef80c78ec44482285ac71482a96be4",
+              "text": "Understanding your CP503 notice\n\nNotice: CP503\n\nSection:\nFrequently asked questions > What happens if I don't pay or respond to this notice?\n\nIf you don't pay the amount due, make payment arrangements, or contact us at the toll-free number on your notice, we may file a Notice of Federal Tax Lien if we haven't already done so. A tax lien is a public notice to your creditors that the IRS has a right to your interests in your current assets and any assets you acquire after we file the lien; it can affect your ability to get credit."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The claim is fully supported by the evidence, which explicitly states that failure to pay, arrange payment, or contact the IRS may result in the filing of a Notice of Federal Tax Lien."
+          }
+        },
+        {
+          "claim_id": "C01:CL3",
+          "claim": "IRS guidance says: A tax lien is a public notice to your creditors that the IRS has a right to your interests in your current assets and any assets you acquire after we file the lien; it can affect your ability to get credit.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp503__heading_aware_220_40__s0007__c0000__6b22306e48851c167550273e03fdb29bb3ef80c78ec44482285ac71482a96be4",
+              "text": "Understanding your CP503 notice\n\nNotice: CP503\n\nSection:\nFrequently asked questions > What happens if I don't pay or respond to this notice?\n\nIf you don't pay the amount due, make payment arrangements, or contact us at the toll-free number on your notice, we may file a Notice of Federal Tax Lien if we haven't already done so. A tax lien is a public notice to your creditors that the IRS has a right to your interests in your current assets and any assets you acquire after we file the lien; it can affect your ability to get credit."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The claim is verbatim and fully supported by the evidence, which defines a tax lien as a public notice to creditors of the IRS's right to current and future assets, and notes its potential impact on credit."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.006298,
+        "embedding_seconds": 6.368997,
+        "pinecone_seconds": 0.378486,
+        "generation_seconds": 8.60845,
+        "validation_and_render_seconds": 0.000472,
+        "graph_end_to_end_seconds": 15.380877,
+        "pdf_extraction_seconds": 0.634627,
+        "request_end_to_end_seconds": 16.015528
+      }
+    },
+    {
+      "question_id": "C02",
+      "question": "The IRS says it plans to seize my property and the letter tells me I can request a Collection Due Process hearing. Which notice stage is this, and what appeal does the IRS page describe?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_lt11_1058",
+      "expected_notice_code": "LT11 / Letter 1058",
+      "expected_answer_facts": [
+        "The IRS says payment was not received and it intends to seize property or rights to property.",
+        "The page directs the taxpayer to appeal the proposed levy using the letter's instructions.",
+        "Nonresponse may lead to wage or bank levies and a federal tax lien.",
+        "The taxpayer may request a Collection Due Process hearing."
+      ],
+      "sample_filename": "lt11_english.pdf",
+      "detected_notice_code": "LT11",
+      "retrieval_notice_code": "LT11 / Letter 1058",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "LT11",
+        "answer": "Your notice states: Notice LT11. IRS guidance says: Request an appeal to the proposed levy action by following the instructions on the letter. See [Collection due process (CDP) FAQs](https://www.irs.gov/appeals/collection-due-process-cdp-faqs) page for more information.",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "Your notice states: Notice LT11.",
+            "evidence_type": "notice",
+            "citation_ids": [],
+            "notice_field_names": [
+              "notice_code"
+            ]
+          },
+          {
+            "claim_id": "CL2",
+            "text": "IRS guidance says: Request an appeal to the proposed levy action by following the instructions on the letter. See [Collection due process (CDP) FAQs](https://www.irs.gov/appeals/collection-due-process-cdp-faqs) page for more information.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "LT11 / Letter 1058",
+            "source_title": "Understanding your LT11 notice or letter 1058",
+            "heading": "You may want to",
+            "heading_path": [
+              "You may want to"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-lt11-notice-or-letter-1058",
+            "chunk_id": "irs_lt11_1058__heading_aware_220_40__s0002__c0000__25e5baa41f04fc0860eb62d78e193e592141a58d099eede0544dc07ce084f692"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "LT11",
+            "confidence": 0.99,
+            "source_text": "Notice LT11"
+          },
+          "notice_date": {
+            "value": "March 2, 2020",
+            "confidence": 0.98,
+            "source_text": "Notice date March 2, 2020"
+          },
+          "due_or_response_date": {
+            "value": "April 1, 2020",
+            "confidence": 0.95,
+            "source_text": "Hearing, by April 1, 2020"
+          },
+          "amount": {
+            "value": "$4,823.12",
+            "confidence": 0.95,
+            "source_text": "Amount due immediately $4,823.12"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_lt11_1058__heading_aware_220_40__s0006__c0000__6efa12a58e2ac7cd17e13c023f46ded47e239853b290e3659f57cca58c62cdb3",
+        "irs_lt11_1058__heading_aware_220_40__s0002__c0000__25e5baa41f04fc0860eb62d78e193e592141a58d099eede0544dc07ce084f692",
+        "irs_lt11_1058__heading_aware_220_40__s0007__c0000__e6e460ce5cfe9c923a369fd826682d132f3ade3750369ea74bace30f15922434",
+        "irs_lt11_1058__heading_aware_220_40__s0000__c0000__b5c40631d7c31804c3a84fe9fe860967bec4d11e2a307c387b305f39381e77a0",
+        "irs_lt11_1058__heading_aware_220_40__s0001__c0000__bfc6c6d429af5ad6ecf45c13cc023738e79411dc8f7c39d90ca56cd956ab812d"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "C02:CL1",
+          "claim": "Your notice states: Notice LT11.",
+          "evidence": [
+            {
+              "evidence_type": "uploaded_notice_field",
+              "source_id": "notice_code",
+              "text": "Notice LT11"
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence directly states 'Notice LT11' in the text, which matches the claim exactly."
+          }
+        },
+        {
+          "claim_id": "C02:CL2",
+          "claim": "IRS guidance says: Request an appeal to the proposed levy action by following the instructions on the letter. See [Collection due process (CDP) FAQs](https://www.irs.gov/appeals/collection-due-process-cdp-faqs) page for more information.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_lt11_1058__heading_aware_220_40__s0002__c0000__25e5baa41f04fc0860eb62d78e193e592141a58d099eede0544dc07ce084f692",
+              "text": "Understanding your LT11 notice or letter 1058\n\nNotice: LT11 / Letter 1058\n\nSection:\nYou may want to\n\nRequest an appeal to the proposed levy action by following the instructions on the letter. See [Collection due process (CDP) FAQs](https://www.irs.gov/appeals/collection-due-process-cdp-faqs) page for more information."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence includes the exact text from IRS guidance stating: 'Request an appeal to the proposed levy action by following the instructions on the letter. See [Collection due process (CDP) FAQs](https://www.irs.gov/appeals/collection-due-process-cdp-faqs) page for more information.', which fully supports the claim."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.009661,
+        "embedding_seconds": 1.511835,
+        "pinecone_seconds": 0.376045,
+        "generation_seconds": 4.419543,
+        "validation_and_render_seconds": 0.000601,
+        "graph_end_to_end_seconds": 6.34498,
+        "pdf_extraction_seconds": 0.467322,
+        "request_end_to_end_seconds": 6.812339
+      }
+    },
+    {
+      "question_id": "C05",
+      "question": "I already have an installment agreement, but the IRS says I defaulted and it plans to end the plan and levy my wages or bank account. How soon do I need to contact them?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp523",
+      "expected_notice_code": "CP523",
+      "expected_answer_facts": [
+        "The notice says the agreement is in default and the IRS intends to terminate it and levy assets.",
+        "Payment before the termination date may prevent termination.",
+        "No response can lead to termination, a lien or levy action.",
+        "The taxpayer should contact the IRS as soon as possible and no later than 30 days from the notice date."
+      ],
+      "sample_filename": "cp523h_english.pdf",
+      "detected_notice_code": "CP523H",
+      "retrieval_notice_code": "CP523",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "CP523H",
+        "answer": "IRS guidance says: Contact the IRS right away to see if you can reinstate your agreement. You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "IRS guidance says: Contact the IRS right away to see if you can reinstate your agreement. You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "CP523",
+            "source_title": "Understanding your CP523 notice",
+            "heading": "What you need to do",
+            "heading_path": [
+              "What you need to do"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp523-notice",
+            "chunk_id": "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "CP523H",
+            "confidence": 0.99,
+            "source_text": "Notice CP523H"
+          },
+          "notice_date": {
+            "value": "January 30, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 30, 2019"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": "$9,533.53",
+            "confidence": 0.95,
+            "source_text": "Total amount due if we terminate your installment agreement and you exhaust your appeal rights $9,533.53"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4",
+        "irs_cp523__heading_aware_220_40__s0007__c0000__53c3d9edcec260b13a9319c42cc84a44d3e5aa262da1417f7dcb8cb23fc4bef5",
+        "irs_cp523__heading_aware_220_40__s0000__c0000__04bc29ae4e947cbc0a80681a055939982cd42eee460d47b16a71d280f029559f",
+        "irs_cp523__heading_aware_220_40__s0003__c0000__1edc58adcfcc110bc2994bb96759f53b0f276897d53dba702cab64e46980c56d",
+        "irs_cp523__heading_aware_220_40__s0009__c0000__6d5b78707adad78082969f3720a9a19ef4f6b4e32eb1fdcf821a81d9d6a82542"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "C05:CL1",
+          "claim": "IRS guidance says: Contact the IRS right away to see if you can reinstate your agreement. You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4",
+              "text": "Understanding your CP523 notice\n\nNotice: CP523\n\nSection:\nWhat you need to do\n\n- Make your payment before your termination date to prevent your installment agreement from being terminated. Go to the [payments](https://www.irs.gov/payments) page to make your payment or find out more about your payment options.\n- Contact the IRS right away to see if you can reinstate your agreement. You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.\n- Read your notice carefully — it explains what to do now that you have defaulted on your installment agreement.\n- If you don't respond, we will terminate your installment agreement and begin taking collection action, which can include filing a federal tax lien or seizing (levying) your wages and/or bank accounts"
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence from the IRS guidance directly states that you should contact the IRS right away to see if you can reinstate your agreement, and that you may have to pay a fee to reinstate it or pay any new tax liability in full. All material details in the claim are supported by the evidence."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.004742,
+        "embedding_seconds": 13.40657,
+        "pinecone_seconds": 0.667211,
+        "generation_seconds": 3.16655,
+        "validation_and_render_seconds": 0.000739,
+        "graph_end_to_end_seconds": 17.26521,
+        "pdf_extraction_seconds": 0.351179,
+        "request_end_to_end_seconds": 17.616424
+      }
+    },
+    {
+      "question_id": "D01",
+      "question": "For CP501, what can the IRS do if I don't pay, arrange payments, or contact them—and what keeps increasing?",
+      "language_style": "expert",
+      "expected_doc_id": "irs_cp501",
+      "expected_notice_code": "CP501",
+      "expected_answer_facts": [
+        "The IRS can file a Notice of Federal Tax Lien.",
+        "The lien publicly asserts the government's interest in current and future assets and may affect credit.",
+        "Interest continues to accrue and additional penalties may apply."
+      ],
+      "sample_filename": "cp501_english.pdf",
+      "detected_notice_code": "CP501",
+      "retrieval_notice_code": "CP501",
+      "status": "refused",
+      "response": {
+        "status": "refused",
+        "notice_code": "CP501",
+        "answer": "I couldn't verify that from the available IRS guidance.",
+        "claims": [],
+        "citations": [],
+        "notice_fields": {
+          "notice_code": {
+            "value": "CP501",
+            "confidence": 0.99,
+            "source_text": "Notice CP501"
+          },
+          "notice_date": {
+            "value": "January 28, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 28, 2019"
+          },
+          "due_or_response_date": {
+            "value": "February 19, 2019",
+            "confidence": 0.95,
+            "source_text": "Amount due, to be received by February 19, 2019"
+          },
+          "amount": {
+            "value": "$9,533.53",
+            "confidence": 0.95,
+            "source_text": "Amount due, to be received by February 19, 2019 $9,533.53"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_cp501__heading_aware_220_40__s0007__c0000__b9e3d48252a82181f87726703fdc061e195263bf98f3f1e7c7f2c03ea1b59e6b",
+        "irs_cp501__heading_aware_220_40__s0009__c0000__556c43ca5dba14498298639f313d0b778d7d1e5e0e632deb19b98ab590cdf82e",
+        "irs_cp501__heading_aware_220_40__s0011__c0000__2615600639b88685d44552bbb6872465def91f66fcac432ff842072850f6526c",
+        "irs_cp501__heading_aware_220_40__s0008__c0000__ca672220e3978c76debddf6b35f0aa4681faf567d9d0201c7174ac9f327e4e0e",
+        "irs_cp501__heading_aware_220_40__s0001__c0000__324ea23b323dfb45606c37f090c13862d2fcecc2bbd6bc5c2a95454e60f4dcf5"
+      ],
+      "claim_evidence_review": [],
+      "timings": {
+        "identity_and_fields_seconds": 0.011766,
+        "embedding_seconds": 13.716735,
+        "pinecone_seconds": 0.323081,
+        "generation_seconds": 7.196443,
+        "validation_and_render_seconds": 0.000417,
+        "graph_end_to_end_seconds": 21.27319,
+        "pdf_extraction_seconds": 0.6288,
+        "request_end_to_end_seconds": 21.90202
+      }
+    },
+    {
+      "question_id": "D03",
+      "question": "I have CP523 and disagree with the reason for ending my installment agreement. What can I do, and what should I do if I already corrected the problem?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp523",
+      "expected_notice_code": "CP523",
+      "expected_answer_facts": [
+        "Call the number printed at the top of the notice to discuss the disagreement.",
+        "If disagreement remains, the taxpayer may appeal and request a hearing with the Independent Office of Appeals.",
+        "Even after correcting the problem, call so the IRS records the action and can reinstate the agreement."
+      ],
+      "sample_filename": "cp523h_english.pdf",
+      "detected_notice_code": "CP523H",
+      "retrieval_notice_code": "CP523",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "CP523H",
+        "answer": "IRS guidance says: If you don't agree with our reason for terminating your installment agreement, contact us at the number printed at the top of the notice. If after talking with us you still do not agree, you have the right to file an appeal and can request a hearing with the IRS Independent Office of Appeals. IRS guidance says: If you have already taken corrective action, you should still call us to make sure we have a record of your action so that we can reinstate your installment agreement. IRS guidance says: You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "IRS guidance says: If you don't agree with our reason for terminating your installment agreement, contact us at the number printed at the top of the notice. If after talking with us you still do not agree, you have the right to file an appeal and can request a hearing with the IRS Independent Office of Appeals.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL2",
+            "text": "IRS guidance says: If you have already taken corrective action, you should still call us to make sure we have a record of your action so that we can reinstate your installment agreement.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL3",
+            "text": "IRS guidance says: You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C2"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "CP523",
+            "source_title": "Understanding your CP523 notice",
+            "heading": "What if I don't agree with your action or have already taken corrective action?",
+            "heading_path": [
+              "Frequently asked questions",
+              "What if I don't agree with your action or have already taken corrective action?"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp523-notice",
+            "chunk_id": "irs_cp523__heading_aware_220_40__s0007__c0000__53c3d9edcec260b13a9319c42cc84a44d3e5aa262da1417f7dcb8cb23fc4bef5"
+          },
+          {
+            "citation_id": "C2",
+            "notice_code": "CP523",
+            "source_title": "Understanding your CP523 notice",
+            "heading": "What you need to do",
+            "heading_path": [
+              "What you need to do"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp523-notice",
+            "chunk_id": "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "CP523H",
+            "confidence": 0.99,
+            "source_text": "Notice CP523H"
+          },
+          "notice_date": {
+            "value": "January 30, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 30, 2019"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": "$9,533.53",
+            "confidence": 0.95,
+            "source_text": "Total amount due if we terminate your installment agreement and you exhaust your appeal rights $9,533.53"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_cp523__heading_aware_220_40__s0007__c0000__53c3d9edcec260b13a9319c42cc84a44d3e5aa262da1417f7dcb8cb23fc4bef5",
+        "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4",
+        "irs_cp523__heading_aware_220_40__s0008__c0000__083806e6326caccf02c90769e2923fab810d70ece3fb1dad9a7776e4eefa3b9d",
+        "irs_cp523__heading_aware_220_40__s0009__c0000__6d5b78707adad78082969f3720a9a19ef4f6b4e32eb1fdcf821a81d9d6a82542",
+        "irs_cp523__heading_aware_220_40__s0000__c0000__04bc29ae4e947cbc0a80681a055939982cd42eee460d47b16a71d280f029559f"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "D03:CL1",
+          "claim": "IRS guidance says: If you don't agree with our reason for terminating your installment agreement, contact us at the number printed at the top of the notice. If after talking with us you still do not agree, you have the right to file an appeal and can request a hearing with the IRS Independent Office of Appeals.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp523__heading_aware_220_40__s0007__c0000__53c3d9edcec260b13a9319c42cc84a44d3e5aa262da1417f7dcb8cb23fc4bef5",
+              "text": "Understanding your CP523 notice\n\nNotice: CP523\n\nSection:\nFrequently asked questions > What if I don't agree with your action or have already taken corrective action?\n\nIf you don't agree with our reason for terminating your installment agreement, contact us at the number printed at the top of the notice. If after talking with us you still do not agree, you have the right to file an appeal and can request a hearing with the IRS Independent Office of Appeals.\n\nIf you have already taken corrective action, you should still call us to make sure we have a record of your action so that we can reinstate your installment agreement."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence directly states that if you don't agree with the reason for terminating your installment agreement, you should contact the IRS at the number on the notice, and if you still disagree after talking, you have the right to file an appeal and request a hearing with the IRS Independent Office of Appeals. This matches the claim exactly."
+          }
+        },
+        {
+          "claim_id": "D03:CL2",
+          "claim": "IRS guidance says: If you have already taken corrective action, you should still call us to make sure we have a record of your action so that we can reinstate your installment agreement.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp523__heading_aware_220_40__s0007__c0000__53c3d9edcec260b13a9319c42cc84a44d3e5aa262da1417f7dcb8cb23fc4bef5",
+              "text": "Understanding your CP523 notice\n\nNotice: CP523\n\nSection:\nFrequently asked questions > What if I don't agree with your action or have already taken corrective action?\n\nIf you don't agree with our reason for terminating your installment agreement, contact us at the number printed at the top of the notice. If after talking with us you still do not agree, you have the right to file an appeal and can request a hearing with the IRS Independent Office of Appeals.\n\nIf you have already taken corrective action, you should still call us to make sure we have a record of your action so that we can reinstate your installment agreement."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence explicitly states that if you have already taken corrective action, you should still call the IRS to ensure they have a record of your action so they can reinstate your installment agreement. This matches the claim exactly."
+          }
+        },
+        {
+          "claim_id": "D03:CL3",
+          "claim": "IRS guidance says: You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp523__heading_aware_220_40__s0001__c0000__c5f8eeb1be4b4c8a29e1a5e3c205b0c56630aa806b80633a5a64df09b96e79e4",
+              "text": "Understanding your CP523 notice\n\nNotice: CP523\n\nSection:\nWhat you need to do\n\n- Make your payment before your termination date to prevent your installment agreement from being terminated. Go to the [payments](https://www.irs.gov/payments) page to make your payment or find out more about your payment options.\n- Contact the IRS right away to see if you can reinstate your agreement. You may have to pay a fee to reinstate it or you may have to pay any new tax liability in full.\n- Read your notice carefully — it explains what to do now that you have defaulted on your installment agreement.\n- If you don't respond, we will terminate your installment agreement and begin taking collection action, which can include filing a federal tax lien or seizing (levying) your wages and/or bank accounts"
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence states that you may have to pay a fee to reinstate your agreement or pay any new tax liability in full. This matches the claim exactly."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.012548,
+        "embedding_seconds": 3.342805,
+        "pinecone_seconds": 0.260821,
+        "generation_seconds": 7.976022,
+        "validation_and_render_seconds": 0.000895,
+        "graph_end_to_end_seconds": 11.617308,
+        "pdf_extraction_seconds": 0.367075,
+        "request_end_to_end_seconds": 11.984394
+      }
+    },
+    {
+      "question_id": "D04",
+      "question": "According to the CP59 FAQ, what can happen if I don't file?",
+      "language_style": "naive",
+      "expected_doc_id": "irs_cp59",
+      "expected_notice_code": "CP59",
+      "expected_answer_facts": [
+        "The taxpayer may lose a claim to a refund or certain credits because claim periods have strict time limits.",
+        "If money is owed, penalties and interest continue until the return is filed and the balance is paid in full."
+      ],
+      "sample_filename": "cp59_english.pdf",
+      "detected_notice_code": "CP59",
+      "retrieval_notice_code": "CP59",
+      "status": "answered",
+      "response": {
+        "status": "answered",
+        "notice_code": "CP59",
+        "answer": "IRS guidance says: If you don’t file, you may lose your claim to a refund or certain credits because the Internal Revenue Code sets [strict time limits](https://www.irs.gov/filing/time-you-can-claim-a-credit-or-refund) to claim those items. IRS guidance says: If you owe money, penalties and interest will continue to accrue until you file and pay in full.",
+        "claims": [
+          {
+            "claim_id": "CL1",
+            "text": "IRS guidance says: If you don’t file, you may lose your claim to a refund or certain credits because the Internal Revenue Code sets [strict time limits](https://www.irs.gov/filing/time-you-can-claim-a-credit-or-refund) to claim those items.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          },
+          {
+            "claim_id": "CL2",
+            "text": "IRS guidance says: If you owe money, penalties and interest will continue to accrue until you file and pay in full.",
+            "evidence_type": "guidance",
+            "citation_ids": [
+              "C1"
+            ],
+            "notice_field_names": []
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "C1",
+            "notice_code": "CP59",
+            "source_title": "Understanding your CP59 notice",
+            "heading": "What can happen if I don’t file? (added April 17, 2025)",
+            "heading_path": [
+              "Frequently asked questions",
+              "What can happen if I don’t file? (added April 17, 2025)"
+            ],
+            "source_url": "https://www.irs.gov/individuals/understanding-your-cp59-notice",
+            "chunk_id": "irs_cp59__heading_aware_220_40__s0005__c0000__a29c207b6562c29ade37760c0d21a5feb28de6de98064252e5cb6df46c016070"
+          }
+        ],
+        "notice_fields": {
+          "notice_code": {
+            "value": "CP59",
+            "confidence": 0.99,
+            "source_text": "Notice CP59"
+          },
+          "notice_date": {
+            "value": "January 28, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 28, 2019"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      "retrieved_chunk_ids": [
+        "irs_cp59__heading_aware_220_40__s0005__c0000__a29c207b6562c29ade37760c0d21a5feb28de6de98064252e5cb6df46c016070",
+        "irs_cp59__heading_aware_220_40__s0000__c0000__5133b3130ee6a572f8f630f1ef08c63ff4b3521de702fd34824f7500d9fad296",
+        "irs_cp59__heading_aware_220_40__s0008__c0000__b0d04a1ab6e26adfa6e23b3a18b1e8748ccb790f07d23bce618c55d715edb572",
+        "irs_cp59__heading_aware_220_40__s0011__c0000__8a03456aa1bca55252f33ece57f46ccf9c8526c9c9d3f4cb799c80d9a1e556dc",
+        "irs_cp59__heading_aware_220_40__s0006__c0000__4466e8a0021f1db929b7593fb487ae44823d92e590c573bac994373a66fecbda"
+      ],
+      "claim_evidence_review": [
+        {
+          "claim_id": "D04:CL1",
+          "claim": "IRS guidance says: If you don’t file, you may lose your claim to a refund or certain credits because the Internal Revenue Code sets [strict time limits](https://www.irs.gov/filing/time-you-can-claim-a-credit-or-refund) to claim those items.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp59__heading_aware_220_40__s0005__c0000__a29c207b6562c29ade37760c0d21a5feb28de6de98064252e5cb6df46c016070",
+              "text": "Understanding your CP59 notice\n\nNotice: CP59\n\nSection:\nFrequently asked questions > What can happen if I don’t file? (added April 17, 2025)\n\nIf you don’t file, you may lose your claim to a refund or certain credits because the Internal Revenue Code sets [strict time limits](https://www.irs.gov/filing/time-you-can-claim-a-credit-or-refund) to claim those items. If you owe money, penalties and interest will continue to accrue until you file and pay in full."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence directly states that if you don’t file, you may lose your claim to a refund or certain credits due to strict time limits set by the Internal Revenue Code, which matches the claim exactly."
+          }
+        },
+        {
+          "claim_id": "D04:CL2",
+          "claim": "IRS guidance says: If you owe money, penalties and interest will continue to accrue until you file and pay in full.",
+          "evidence": [
+            {
+              "evidence_type": "official_irs_guidance",
+              "source_id": "irs_cp59__heading_aware_220_40__s0005__c0000__a29c207b6562c29ade37760c0d21a5feb28de6de98064252e5cb6df46c016070",
+              "text": "Understanding your CP59 notice\n\nNotice: CP59\n\nSection:\nFrequently asked questions > What can happen if I don’t file? (added April 17, 2025)\n\nIf you don’t file, you may lose your claim to a refund or certain credits because the Internal Revenue Code sets [strict time limits](https://www.irs.gov/filing/time-you-can-claim-a-credit-or-refund) to claim those items. If you owe money, penalties and interest will continue to accrue until you file and pay in full."
+            }
+          ],
+          "deterministic_exact_source_supported": true,
+          "auxiliary_model_judgment": {
+            "status": "available",
+            "supported": true,
+            "explanation": "The evidence explicitly states that if you owe money, penalties and interest will continue to accrue until you file and pay in full, which directly supports the claim."
+          }
+        }
+      ],
+      "timings": {
+        "identity_and_fields_seconds": 0.009226,
+        "embedding_seconds": 2.409282,
+        "pinecone_seconds": 0.257192,
+        "generation_seconds": 4.49824,
+        "validation_and_render_seconds": 0.000384,
+        "graph_end_to_end_seconds": 7.197142,
+        "pdf_extraction_seconds": 0.580948,
+        "request_end_to_end_seconds": 7.778107
+      }
+    }
+  ],
+  "model_selection": {
+    "selected_model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+    "reason": "live catalog availability plus a successful strict structured-output probe; chosen as a latency-conscious instruction model for concise grounded RAG",
+    "checked_at_utc": "2026-08-22T22:00:51.815513Z",
+    "catalog_model_count": 30,
+    "catalog_id_set_sha256": "c4bbf56ef8b9dfb06866941e76ea72f686d88ff8c01f679bb43a7547c28b876d",
+    "structured_output_probe_success": true,
+    "structured_output_probe_seconds": 92.817536,
+    "probe_attempts": [
+      {
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "success": true
+      }
+    ]
+  },
+  "notice_input_evaluation": {
+    "sample_count": 8,
+    "identified_correctly": 8,
+    "notice_identity_accuracy": 1.0,
+    "ocr_requests": 0,
+    "ambiguous": 0,
+    "unidentified": 0,
+    "results": [
+      {
+        "filename": "cp501_english.pdf",
+        "expected_notice_code": "CP501",
+        "identified_notice_code": "CP501",
+        "retrieval_notice_code": "CP501",
+        "status": "identified",
+        "confidence": 0.99,
+        "correct": true,
+        "extraction_method": "pypdf_text_layer",
+        "page_count": 5,
+        "fields": {
+          "notice_code": {
+            "value": "CP501",
+            "confidence": 0.99,
+            "source_text": "Notice CP501"
+          },
+          "notice_date": {
+            "value": "January 28, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 28, 2019"
+          },
+          "due_or_response_date": {
+            "value": "February 19, 2019",
+            "confidence": 0.95,
+            "source_text": "Amount due, to be received by February 19, 2019"
+          },
+          "amount": {
+            "value": "$9,533.53",
+            "confidence": 0.95,
+            "source_text": "Amount due, to be received by February 19, 2019 $9,533.53"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      {
+        "filename": "cp59_english.pdf",
+        "expected_notice_code": "CP59",
+        "identified_notice_code": "CP59",
+        "retrieval_notice_code": "CP59",
+        "status": "identified",
+        "confidence": 0.99,
+        "correct": true,
+        "extraction_method": "pypdf_text_layer",
+        "page_count": 5,
+        "fields": {
+          "notice_code": {
+            "value": "CP59",
+            "confidence": 0.99,
+            "source_text": "Notice CP59"
+          },
+          "notice_date": {
+            "value": "January 28, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 28, 2019"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      {
+        "filename": "cp05a_english.pdf",
+        "expected_notice_code": "CP05A",
+        "identified_notice_code": "CP05A",
+        "retrieval_notice_code": "CP05A",
+        "status": "identified",
+        "confidence": 0.99,
+        "correct": true,
+        "extraction_method": "pypdf_text_layer",
+        "page_count": 2,
+        "fields": {
+          "notice_code": {
+            "value": "CP05A",
+            "confidence": 0.99,
+            "source_text": "Notice CP05A"
+          },
+          "notice_date": {
+            "value": "March 7, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date March 7, 2019"
+          },
+          "due_or_response_date": {
+            "value": "April 21, 2019",
+            "confidence": 0.95,
+            "source_text": "Send us any additional information that supports what you reported on your tax return by April 21, 2019"
+          },
+          "amount": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      {
+        "filename": "cp523h_english.pdf",
+        "expected_notice_code": "CP523H",
+        "identified_notice_code": "CP523H",
+        "retrieval_notice_code": "CP523",
+        "status": "identified",
+        "confidence": 0.99,
+        "correct": true,
+        "extraction_method": "pypdf_text_layer",
+        "page_count": 4,
+        "fields": {
+          "notice_code": {
+            "value": "CP523H",
+            "confidence": 0.99,
+            "source_text": "Notice CP523H"
+          },
+          "notice_date": {
+            "value": "January 30, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 30, 2019"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": "$9,533.53",
+            "confidence": 0.95,
+            "source_text": "Total amount due if we terminate your installment agreement and you exhaust your appeal rights $9,533.53"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      {
+        "filename": "cp503c.pdf",
+        "expected_notice_code": "CP503C",
+        "identified_notice_code": "CP503C",
+        "retrieval_notice_code": "CP503",
+        "status": "identified",
+        "confidence": 0.96,
+        "correct": true,
+        "extraction_method": "pypdf_text_layer",
+        "page_count": 4,
+        "fields": {
+          "notice_code": {
+            "value": "CP503C",
+            "confidence": 0.96,
+            "source_text": "CP503C"
+          },
+          "notice_date": {
+            "value": "August 10, 2018",
+            "confidence": 0.98,
+            "source_text": "Notice date: 08-10-18"
+          },
+          "due_or_response_date": {
+            "value": "August 20, 2018",
+            "confidence": 0.95,
+            "source_text": "must pay by August 20, 2018"
+          },
+          "amount": {
+            "value": "$9,533.53",
+            "confidence": 0.95,
+            "source_text": "Amount Due: $9,533.53"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      {
+        "filename": "lt11_english.pdf",
+        "expected_notice_code": "LT11",
+        "identified_notice_code": "LT11",
+        "retrieval_notice_code": "LT11 / Letter 1058",
+        "status": "identified",
+        "confidence": 0.99,
+        "correct": true,
+        "extraction_method": "pypdf_text_layer",
+        "page_count": 5,
+        "fields": {
+          "notice_code": {
+            "value": "LT11",
+            "confidence": 0.99,
+            "source_text": "Notice LT11"
+          },
+          "notice_date": {
+            "value": "March 2, 2020",
+            "confidence": 0.98,
+            "source_text": "Notice date March 2, 2020"
+          },
+          "due_or_response_date": {
+            "value": "April 1, 2020",
+            "confidence": 0.95,
+            "source_text": "Hearing, by April 1, 2020"
+          },
+          "amount": {
+            "value": "$4,823.12",
+            "confidence": 0.95,
+            "source_text": "Amount due immediately $4,823.12"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      {
+        "filename": "cp131_english.pdf",
+        "expected_notice_code": "CP131",
+        "identified_notice_code": "CP131",
+        "retrieval_notice_code": "CP131",
+        "status": "identified",
+        "confidence": 0.99,
+        "correct": true,
+        "extraction_method": "pypdf_text_layer",
+        "page_count": 5,
+        "fields": {
+          "notice_code": {
+            "value": "CP131",
+            "confidence": 0.99,
+            "source_text": "Notice CP131"
+          },
+          "notice_date": {
+            "value": "January 28, 2019",
+            "confidence": 0.98,
+            "source_text": "Notice date January 28, 2019"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": "$0.00",
+            "confidence": 0.95,
+            "source_text": "Amount due: $0.00"
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      },
+      {
+        "filename": "cp44_english.pdf",
+        "expected_notice_code": "CP44",
+        "identified_notice_code": "CP44",
+        "retrieval_notice_code": "CP44",
+        "status": "identified",
+        "confidence": 0.99,
+        "correct": true,
+        "extraction_method": "pypdf_text_layer",
+        "page_count": 1,
+        "fields": {
+          "notice_code": {
+            "value": "CP44",
+            "confidence": 0.99,
+            "source_text": "Notice CP44"
+          },
+          "notice_date": {
+            "value": "October 10, 2013",
+            "confidence": 0.98,
+            "source_text": "Notice date October 10, 2013"
+          },
+          "due_or_response_date": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "amount": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          },
+          "reference_number": {
+            "value": null,
+            "confidence": 0.0,
+            "source_text": null
+          }
+        }
+      }
+    ]
+  },
+  "frozen_inputs_before": {
+    "phase1_to_4a": {
+      "data/corpus_manifest.csv": "f3c7c2e257a6f1dc17bf8e55ab745702299f2af2a5faf9623d390778045ea1a1",
+      "data/sample_notice_manifest.csv": "0a92688fe008ee7fbc10fb5ec4b41733ecad250a47110335cc65e3d72dc99769",
+      "reports/phase1_acquisition_ledger.csv": "96ab9daf63a043052027f4af76ac7be625d6ceb025d2d81f0c99738e0c1c4cb8",
+      "reports/phase1_quality_report.json": "95aefed07a14fe75acfc4be45cb0335434efff5d55225e1d31481f43d025af3c",
+      "eval/golden_questions.json": "a5e12ae768b8d43250fac99198efba35bd2d7f5db640e3aba1e8d6958920f391",
+      "reports/phase2_eval_manifest.csv": "f73453102fbbe0cc2e18e214e2926b40c252830b9c4eed92792b2d01cca27ea9",
+      "reports/evaluation_plan.md": "5065857f4c568e6915ed186467d0c6e55442df2682ec8e3b9224e4eeb2dce52e",
+      "data/derived/phase3/fixed_220_40_chunks.jsonl": "4752049f3c435d79a83b5950d0882ce2ac61bb57a5e210d398b529306a9ab709",
+      "reports/phase3_chunk_audit.json": "dfe675d414c5e5e1fa0cdd4f25cb30b72cc7e985e03e383057b1e4cd91b95746",
+      "reports/phase3_indexing_stats.json": "329e4c0cfc569d5d13561e16f385ea82a512f8b44c98b6e5cc1806db7a5ffb7b",
+      "reports/phase3_baseline_results.json": "1af861aaa152f0cff7c87f7c3496bd825eb9e300b524aa1b5f0a5f4a4104d338",
+      "reports/phase3_baseline_summary.csv": "f5f5466b67d9912d37f647e1784a369eded30ca4ba77bad15c2b9e79cb2de5e1",
+      "reports/phase3_failure_analysis.md": "a508397e16192c7fb8e447f206018659c300d06cc93e84c6e448b74794255abd",
+      "eval/section_questions.json": "1090c8b41f0b007adfda1eb9882b0237d93416a3ce57857bc4da58a8947aafa8",
+      "reports/phase4_fixed_chunk_section_map.json": "ae919b13f37fbd6ba2a092d369bdfcf899a655f54c0c91ebd83c7b42eaf3f3d4",
+      "reports/phase4_fixed_section_results.json": "e3d86aa5390549da47e6b3dc1bf0ea220baa338b30353b8117d0b4743cc1df36",
+      "reports/phase4_fixed_section_summary.csv": "556e94fa1e957011efe08b34ac08ad94e2e5bb725be6c8c6a19726a7e225c322",
+      "reports/phase4_fixed_section_failures.md": "3022d0baf78c47cb5809c153a52a0efa9ea681afb210ce4a785562e3dbf13ee8",
+      "data/raw/guidance": {
+        "file_count": 50,
+        "tree_sha256": "53265c67d68fb34354ad186b6a7157093cfde6ea00ac491da2dab8618f2a2a65"
+      },
+      "data/raw/sample_notices": {
+        "file_count": 8,
+        "tree_sha256": "b4f901bd79e0d290ff6095ac2cdc2a0d6f3cb818aa5557edd14773809804106b"
+      },
+      "data/processed/guidance": {
+        "file_count": 50,
+        "tree_sha256": "36cf7f0c8a01879062a328dc009d6c6de0f4324f02f95450468b448e391ebac2"
+      },
+      "approved_composite_sha256": "2561f0d6d9b3f781b6f0a77007c36f7c642c50821ee8495a0cb4087b5e701f9c"
+    },
+    "phase4b_files": {
+      "data/derived/phase4b/heading_aware_220_40_chunks.jsonl": "3aecf5db7ee5fe857bdb99156c9bb5ba585f2e845aa6697cc4ece8902ac27572",
+      "reports/phase4b_chunk_audit.json": "88265f578c3f65b9eae8a42b2ab4c52e1e295f87c1f0f679c5169a427869cc4e",
+      "reports/phase4b_heading_results.json": "36188d2d9f273b0cbe81a77d59e980c11ae1bbdd7748797ee47f1b29a140d189",
+      "reports/phase4b_heading_summary.csv": "357b4dd9f930f210e4fc957fa339b6a180d44908bdcd9098efb1b8df14de8617",
+      "reports/phase4b_comparison.csv": "31541ba4c1533354f6c7631fa853c6a914fba247781655832c1462dbac10b3a2",
+      "reports/phase4b_failure_analysis.md": "049305e35ba8bc22dcedca21978d3f71e33e6c8b2755101157ebe9a25df0a516"
+    },
+    "approved_phase1_to_4b_composite_sha256": "5df91e5deaba6fb47b69e6227718956575eea3780c83dbf3df0843d747be95fa"
+  },
+  "frozen_inputs_after": {
+    "phase1_to_4a": {
+      "data/corpus_manifest.csv": "f3c7c2e257a6f1dc17bf8e55ab745702299f2af2a5faf9623d390778045ea1a1",
+      "data/sample_notice_manifest.csv": "0a92688fe008ee7fbc10fb5ec4b41733ecad250a47110335cc65e3d72dc99769",
+      "reports/phase1_acquisition_ledger.csv": "96ab9daf63a043052027f4af76ac7be625d6ceb025d2d81f0c99738e0c1c4cb8",
+      "reports/phase1_quality_report.json": "95aefed07a14fe75acfc4be45cb0335434efff5d55225e1d31481f43d025af3c",
+      "eval/golden_questions.json": "a5e12ae768b8d43250fac99198efba35bd2d7f5db640e3aba1e8d6958920f391",
+      "reports/phase2_eval_manifest.csv": "f73453102fbbe0cc2e18e214e2926b40c252830b9c4eed92792b2d01cca27ea9",
+      "reports/evaluation_plan.md": "5065857f4c568e6915ed186467d0c6e55442df2682ec8e3b9224e4eeb2dce52e",
+      "data/derived/phase3/fixed_220_40_chunks.jsonl": "4752049f3c435d79a83b5950d0882ce2ac61bb57a5e210d398b529306a9ab709",
+      "reports/phase3_chunk_audit.json": "dfe675d414c5e5e1fa0cdd4f25cb30b72cc7e985e03e383057b1e4cd91b95746",
+      "reports/phase3_indexing_stats.json": "329e4c0cfc569d5d13561e16f385ea82a512f8b44c98b6e5cc1806db7a5ffb7b",
+      "reports/phase3_baseline_results.json": "1af861aaa152f0cff7c87f7c3496bd825eb9e300b524aa1b5f0a5f4a4104d338",
+      "reports/phase3_baseline_summary.csv": "f5f5466b67d9912d37f647e1784a369eded30ca4ba77bad15c2b9e79cb2de5e1",
+      "reports/phase3_failure_analysis.md": "a508397e16192c7fb8e447f206018659c300d06cc93e84c6e448b74794255abd",
+      "eval/section_questions.json": "1090c8b41f0b007adfda1eb9882b0237d93416a3ce57857bc4da58a8947aafa8",
+      "reports/phase4_fixed_chunk_section_map.json": "ae919b13f37fbd6ba2a092d369bdfcf899a655f54c0c91ebd83c7b42eaf3f3d4",
+      "reports/phase4_fixed_section_results.json": "e3d86aa5390549da47e6b3dc1bf0ea220baa338b30353b8117d0b4743cc1df36",
+      "reports/phase4_fixed_section_summary.csv": "556e94fa1e957011efe08b34ac08ad94e2e5bb725be6c8c6a19726a7e225c322",
+      "reports/phase4_fixed_section_failures.md": "3022d0baf78c47cb5809c153a52a0efa9ea681afb210ce4a785562e3dbf13ee8",
+      "data/raw/guidance": {
+        "file_count": 50,
+        "tree_sha256": "53265c67d68fb34354ad186b6a7157093cfde6ea00ac491da2dab8618f2a2a65"
+      },
+      "data/raw/sample_notices": {
+        "file_count": 8,
+        "tree_sha256": "b4f901bd79e0d290ff6095ac2cdc2a0d6f3cb818aa5557edd14773809804106b"
+      },
+      "data/processed/guidance": {
+        "file_count": 50,
+        "tree_sha256": "36cf7f0c8a01879062a328dc009d6c6de0f4324f02f95450468b448e391ebac2"
+      },
+      "approved_composite_sha256": "2561f0d6d9b3f781b6f0a77007c36f7c642c50821ee8495a0cb4087b5e701f9c"
+    },
+    "phase4b_files": {
+      "data/derived/phase4b/heading_aware_220_40_chunks.jsonl": "3aecf5db7ee5fe857bdb99156c9bb5ba585f2e845aa6697cc4ece8902ac27572",
+      "reports/phase4b_chunk_audit.json": "88265f578c3f65b9eae8a42b2ab4c52e1e295f87c1f0f679c5169a427869cc4e",
+      "reports/phase4b_heading_results.json": "36188d2d9f273b0cbe81a77d59e980c11ae1bbdd7748797ee47f1b29a140d189",
+      "reports/phase4b_heading_summary.csv": "357b4dd9f930f210e4fc957fa339b6a180d44908bdcd9098efb1b8df14de8617",
+      "reports/phase4b_comparison.csv": "31541ba4c1533354f6c7631fa853c6a914fba247781655832c1462dbac10b3a2",
+      "reports/phase4b_failure_analysis.md": "049305e35ba8bc22dcedca21978d3f71e33e6c8b2755101157ebe9a25df0a516"
+    },
+    "approved_phase1_to_4b_composite_sha256": "5df91e5deaba6fb47b69e6227718956575eea3780c83dbf3df0843d747be95fa"
+  },
+  "offline_tests": {
+    "passed": 104,
+    "failed": 0,
+    "command": "python -B -m unittest discover -s tests -v"
+  }
+}

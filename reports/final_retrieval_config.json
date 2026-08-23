@@ -1,0 +1,14 @@
+{
+  "embedding_model": "Qwen/Qwen3-Embedding-8B",
+  "embedding_dimension": 4096,
+  "generation_model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+  "pinecone_index": "noticelens-rag",
+  "production_namespace": "heading-aware-dense",
+  "chunk_strategy": "heading_aware_220_40",
+  "top_k": 5,
+  "metadata_filter": "exact notice_code equality",
+  "bm25": false,
+  "hybrid_retrieval": false,
+  "reranking": false,
+  "decision_basis": "Frozen dense notice retrieval already achieved 100% Precision@1/MRR/Hit@5, and the heading-aware strategy exceeded the precommitted section gain threshold; added retrieval complexity is not justified by measured evidence."
+}
