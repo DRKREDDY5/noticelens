@@ -316,6 +316,9 @@ def _run_analysis(*, mode: str, sample: SampleNotice | None, upload: Any | None)
         st.session_state.latest_query = DEFAULT_ANALYSIS_QUESTION
         st.session_state.chat_messages = []
     except Exception as error:
+        import traceback
+
+        traceback.print_exc(file=sys.stderr)
         st.session_state.active_notice = None
         st.session_state.active_label = None
         st.session_state.analysis_run = None
