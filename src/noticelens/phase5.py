@@ -63,9 +63,10 @@ class Phase5GateError(RuntimeError):
 class Phase5Secrets:
     nebius_api_key: str = field(repr=False)
     pinecone_api_key: str = field(repr=False)
+    source: str = field(default="external_local_file", repr=False)
 
     def public_summary(self) -> dict[str, str]:
-        return {"secrets_source": "external_local_file"}
+        return {"secrets_source": self.source}
 
 
 def _within(path: Path, parent: Path) -> bool:
@@ -81,8 +82,18 @@ def load_phase5_secrets(
     project_root: Path,
     external_path: Path = DEFAULT_EXTERNAL_SECRETS_PATH,
     environ: MutableMapping[str, str] | None = None,
+    st_secrets: Mapping[str, str] | None = None,
 ) -> Phase5Secrets:
-    """Load only the explicit external dotenv, then access the two env names."""
+    """Prefer Streamlit-managed secrets (cloud deployment); else the explicit external dotenv."""
+
+    if st_secrets is not None:
+        missing = [name for name in REQUIRED_SECRET_NAMES if not str(st_secrets.get(name, "")).strip()]
+        if not missing:
+            return Phase5Secrets(
+                nebius_api_key=str(st_secrets["NEBIUS_API_KEY"]).strip(),
+                pinecone_api_key=str(st_secrets["PINECONE_API_KEY"]).strip(),
+                source="streamlit_secrets",
+            )
 
     candidate = external_path.expanduser().resolve()
     if _within(candidate, project_root.resolve()):

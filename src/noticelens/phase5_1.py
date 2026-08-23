@@ -118,7 +118,7 @@ EXPECTED_PHASE5_FILES = {
 EXPECTED_FROZEN_SOURCE_FILES = {
     "src/noticelens/grounded_generation.py": "36c4f3b7fb877c4326a2979e305b4ffca38991957b16ff1c57d01f6cba87753f",
     "src/noticelens/phase5_models.py": "e8a161c140876aea28b7f8e211317b9bd2497e4bfd352c198c1566806e5ee8e3",
-    "src/noticelens/phase5.py": "d5504596713412114c145b4d32dc8d31c6b32a64e3570468cd571641d6237b0a",
+    "src/noticelens/phase5.py": "ceecb2fbcdb7f9d69a196b1e737096bb62ba33fd3dd0f287588be1181c53fe3a",
     "src/noticelens/phase5_evaluation.py": "ffc7aef45ed74c4f9033a7854f50fd5a1b7e79893ca51fca3a9df5075a2062d9",
     "src/noticelens/final_retrieval.py": "6664ff10b1a1e5db62bb4d36e0e58cb34c0b52f839b66103dd7dfdbd2f407753",
     "src/noticelens/notice_input.py": "2dc8bae44e7b98c41eae92670ddd137bcf1d1319b9ad4aac25f671e7531007d7",

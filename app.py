@@ -158,7 +158,11 @@ def live_core() -> Any:
 
     verify_phase51_frozen_inputs(PROJECT_ROOT)
     snapshot = load_product_snapshot(PROJECT_ROOT)
-    secrets = load_phase5_secrets(project_root=PROJECT_ROOT)
+    try:
+        available_st_secrets = dict(st.secrets)
+    except Exception:
+        available_st_secrets = None
+    secrets = load_phase5_secrets(project_root=PROJECT_ROOT, st_secrets=available_st_secrets)
     core, selection = create_live_core(project_root=PROJECT_ROOT, secrets=secrets)
     if selection.selected_model != snapshot.final_config["generation_model"]:
         raise RuntimeError("The live generation model differs from the frozen product configuration")
