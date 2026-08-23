@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sys
+from html import escape
 from pathlib import Path
 from typing import Any
 
@@ -87,17 +88,44 @@ h1, h2, h3, h4, p, label, [data-testid="stCaptionContainer"] { color: var(--nl-t
 .nl-insufficient { color: var(--nl-warning); background: rgba(242,199,92,.12); border: 1px solid rgba(242,199,92,.28); }
 .nl-unclear { color: var(--nl-danger); background: rgba(255,115,115,.12); border: 1px solid rgba(255,115,115,.28); }
 .nl-section-label { color: var(--nl-primary); font-size: .75rem; font-weight: 850; letter-spacing: .12em; margin-top: 1.2rem; }
+.nl-ask-heading { color: var(--nl-text) !important; margin: .2rem 0 .35rem; }
+.nl-ask-subtitle { color: var(--nl-text) !important; margin: 0 0 1rem; opacity: .88; }
+.nl-ask-label { color: var(--nl-text); font-weight: 750; margin: .9rem 0 .45rem; }
 .nl-architecture { padding: 1rem; border-radius: 14px; background: var(--nl-card); border: 1px solid #203746; color: var(--nl-muted); line-height: 1.8; text-align: center; overflow-wrap: anywhere; }
 .nl-architecture strong { color: var(--nl-text); }
 [data-testid="stMetric"] { background: var(--nl-card); border: 1px solid #203746; padding: .85rem 1rem; border-radius: 14px; min-width: 0; }
-[data-testid="stMetricValue"] { color: var(--nl-text); }
+[data-testid="stMetricValue"], [data-testid="stMetricValue"] > div {
+  color: var(--nl-text);
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  overflow-wrap: anywhere;
+}
+[data-testid="stSidebar"] [data-testid="stMetricValue"],
+[data-testid="stSidebar"] [data-testid="stMetricValue"] > div,
+[data-testid="stSidebar"] [data-testid="stMetricValue"] p {
+  font-size: 1.15rem !important;
+  line-height: 1.25 !important;
+  max-width: 100%;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
 [data-testid="stFileUploader"] { background: var(--nl-card); border-radius: 16px; padding: .4rem; }
 [data-testid="stDataFrame"] { border: 1px solid #203746; border-radius: 14px; overflow: auto; max-width: 100%; }
 [data-testid="stChatMessage"] { background: rgba(17,29,40,.74); border: 1px solid #203746; border-radius: 16px; padding: .35rem .65rem; }
+[data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] p { color: var(--nl-text) !important; }
+[data-testid="stChatMessageAvatarUser"], [data-testid="stChatMessageAvatarAssistant"] { color: var(--nl-text); }
+[data-testid="stChatInputTextArea"] textarea,
+textarea[data-testid="stChatInputTextArea"] { color: var(--nl-text) !important; caret-color: var(--nl-primary); }
+[data-testid="stChatInputTextArea"] textarea::placeholder,
+textarea[data-testid="stChatInputTextArea"]::placeholder { color: var(--nl-muted) !important; opacity: 1; }
 [data-baseweb="tab-list"] { gap: .5rem; }
 [data-baseweb="tab"] { background: var(--nl-card); border-radius: 12px 12px 0 0; padding-inline: 1rem; }
+[data-baseweb="tab"] p { color: inherit !important; }
 [data-baseweb="tab"][aria-selected="true"] { color: var(--nl-primary); border-bottom-color: var(--nl-primary); }
+[data-baseweb="tab"][aria-selected="true"] p { color: var(--nl-primary) !important; }
 .stButton > button, .stLinkButton > a { border-radius: 12px; border-color: rgba(73,215,199,.5); }
+.stButton > button[kind="secondary"], .stButton > button[kind="secondary"] p { color: var(--nl-text) !important; }
 .stButton > button[kind="primary"] { background: var(--nl-primary); color: #041313; font-weight: 800; border: 0; }
 a { color: var(--nl-secondary) !important; }
 @media (max-width: 640px) {
@@ -161,6 +189,50 @@ def _status_badge(status: str) -> None:
     st.markdown(f'<span class="nl-status {css_class}">{status}</span>', unsafe_allow_html=True)
 
 
+def _presentation_claim_text(claim: Any) -> str:
+    """Remove only the repeated UI label while preserving the grounded claim text."""
+
+    prefixes = {
+        "notice": "Your notice states: ",
+        "guidance": "IRS guidance says: ",
+    }
+    text = str(claim.text)
+    prefix = prefixes.get(str(claim.evidence_type), "")
+    return text[len(prefix) :].strip() if prefix and text.startswith(prefix) else text
+
+
+def _render_claim_group(label: str, claims: list[Any]) -> None:
+    if not claims:
+        return
+    st.markdown(f"**{label}:**")
+    presented = [_presentation_claim_text(claim) for claim in claims]
+    if len(presented) == 1:
+        st.write(presented[0])
+    else:
+        st.markdown("\n".join(f"- {text}" for text in presented))
+
+
+def _render_grounded_answer(run: Any, *, bordered: bool) -> None:
+    """Group display labels without changing response claims, facts, or citations."""
+
+    notice_claims = [claim for claim in run.response.claims if claim.evidence_type == "notice"]
+    guidance_claims = [claim for claim in run.response.claims if claim.evidence_type == "guidance"]
+
+    def render_contents() -> None:
+        if not notice_claims and not guidance_claims:
+            st.write(run.response.answer)
+            return
+        _render_claim_group("Your notice states", notice_claims)
+        _render_claim_group("IRS guidance says", guidance_claims)
+
+    if bordered:
+        with st.container(border=True):
+            st.markdown("#### Grounded answer")
+            render_contents()
+    else:
+        render_contents()
+
+
 def _render_notice_details(run: Any) -> None:
     st.markdown('<div class="nl-section-label">NOTICE DETAILS</div>', unsafe_allow_html=True)
     columns = st.columns(4)
@@ -196,24 +268,7 @@ def _render_response(run: Any) -> None:
     st.markdown(f"### {run.identity.notice_code or 'Not confidently identified'}")
 
     st.markdown('<div class="nl-section-label">WHAT THIS NOTICE IS ABOUT</div>', unsafe_allow_html=True)
-    st.write(run.response.answer)
-
-    notice_claims = [claim.text for claim in run.response.claims if claim.evidence_type == "notice"]
-    guidance_claims = [claim.text for claim in run.response.claims if claim.evidence_type == "guidance"]
-
-    st.markdown('<div class="nl-section-label">WHAT YOUR NOTICE STATES</div>', unsafe_allow_html=True)
-    if notice_claims:
-        for claim in notice_claims:
-            st.write(claim)
-    else:
-        st.caption("No additional notice-specific field was needed for this explanation.")
-
-    st.markdown('<div class="nl-section-label">WHAT IRS GUIDANCE SAYS</div>', unsafe_allow_html=True)
-    if guidance_claims:
-        for claim in guidance_claims:
-            st.write(claim)
-    else:
-        st.caption("No supported IRS guidance claim was available for this response.")
+    _render_grounded_answer(run, bordered=True)
 
     _render_notice_details(run)
     _render_evidence(run)
@@ -290,7 +345,7 @@ def _render_sidebar(snapshot: ProductSnapshot) -> None:
         st.markdown('<div class="nl-kicker">NOTICELENS</div>', unsafe_allow_html=True)
         st.caption("Evidence-grounded IRS notice intelligence")
         st.divider()
-        st.metric("Corpus", f"{snapshot.corpus_documents} IRS guidance documents")
+        st.metric("Corpus", f"{snapshot.corpus_documents} IRS guidance docs")
         st.metric("Sample notices", snapshot.sample_notices)
         st.metric("Final chunking", "Heading-aware")
         st.metric("Faithfulness", f"{snapshot.faithfulness:.0%}")
@@ -349,10 +404,12 @@ def _render_analyze_tab(samples: tuple[SampleNotice, ...]) -> None:
 def _render_chat_history() -> None:
     for message in st.session_state.chat_messages:
         with st.chat_message(message["role"]):
-            st.write(message["content"])
             if message["role"] == "assistant" and message.get("run") is not None:
+                _render_grounded_answer(message["run"], bordered=False)
                 _status_badge(evidence_status(message["run"]))
                 _render_evidence(message["run"], compact=True)
+            else:
+                st.write(message["content"])
 
 
 def _render_chat_tab() -> None:
@@ -362,11 +419,15 @@ def _render_chat_tab() -> None:
     if st.session_state.analysis_run.identity.status != "identified":
         st.warning("Notice identity must be clear before evidence-grounded questions can be asked.")
         return
-    st.markdown(f"### Ask about {st.session_state.analysis_run.identity.notice_code or 'this notice'}")
-    st.caption("Every answer runs through the same notice-filtered retrieval and grounded-generation graph.")
+    notice_code = escape(st.session_state.analysis_run.identity.notice_code or "this notice")
+    st.markdown(f'<h3 class="nl-ask-heading">Ask about {notice_code}</h3>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="nl-ask-subtitle">Every answer runs through the same notice-filtered retrieval and grounded-generation graph.</p>',
+        unsafe_allow_html=True,
+    )
     _render_chat_history()
 
-    st.markdown("**Suggested questions**")
+    st.markdown('<div class="nl-ask-label">Suggested questions</div>', unsafe_allow_html=True)
     columns = st.columns(2)
     pending: str | None = None
     for index, question in enumerate(SUGGESTED_QUESTIONS):
